@@ -27,8 +27,8 @@ instance.interceptors.response.use(
     // Do something with response data
     //TODO:need to console.log(response)
     const responseData: ISuccessResponse = {
-      data: response.data.data,
-      meta: response.data.meta,
+      data: response?.data?.data,
+      meta: response?.data?.meta,
     };
     return responseData;
   },

@@ -1,12 +1,14 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 "use client";
-import Header from "@/components/ui/Header";
+import Contents from "@/components/ui/Contents";
+import SideBar from "@/components/ui/SideBar";
 import { isLogIn } from "@/service/authentication.service";
+
 import { Layout, Row, Space, Spin } from "antd";
+
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-
-const PublicLayout = ({ children }: { children: React.ReactNode }) => {
+const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
   const userLoggedIn = isLogIn();
   const router = useRouter();
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -35,14 +37,13 @@ const PublicLayout = ({ children }: { children: React.ReactNode }) => {
       </Row>
     );
   }
+
   return (
-    <div className="w-[1400px] mx-auto">
-      <Layout>
-        <Header />
-        {children}
-      </Layout>
-    </div>
+    <Layout hasSider>
+      <SideBar />
+      <Contents>{children}</Contents>
+    </Layout>
   );
 };
 
-export default PublicLayout;
+export default DashboardLayout;

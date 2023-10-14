@@ -18,3 +18,34 @@ export type IGenericErrorResponse = {
   message: string;
   errorMessages: IGenericErrorMessages[];
 };
+
+export type ICommonDataType = {
+  id?: string;
+  createdAt?: Date;
+  updatedAt?: Date;
+};
+
+export type ICategory = {
+  title: string;
+} & ICommonDataType;
+
+export type IService = {
+  name: string;
+  description: string;
+  categoryId: string;
+  status: string;
+  warranty?: number | null | string;
+  imageUrl: string;
+  durationInMinutes: number;
+  takenBookingCount: number;
+  fee: number | string;
+} & ICategory;
+
+export type IUser = {
+  email: string;
+  id: string;
+  name: string;
+  password: string;
+  profile?: null | any;
+  role: string;
+} & ICommonDataType;

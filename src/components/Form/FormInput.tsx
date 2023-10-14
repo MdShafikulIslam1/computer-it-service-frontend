@@ -31,7 +31,11 @@ const FormInput = ({
   return (
     <>
       {label ? label : null}
-      {required ? <span className="text-green-500"> * </span> : null}
+      {required ? (
+        <span className="text-green-500"> * </span>
+      ) : (
+        <span className="text-green-500">(optional)</span>
+      )}
       <Controller
         control={control}
         name={name}

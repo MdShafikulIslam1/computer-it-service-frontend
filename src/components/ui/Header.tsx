@@ -1,38 +1,39 @@
 "use client";
+import logo from "../../assests/images/logo.png";
 import { MenuItem, getItem } from "@/utils/getMenuItems";
 import {
   Avatar,
   Button,
-  Col,
   Dropdown,
   Layout,
   Menu,
   Row,
   Space,
-  message,
 } from "antd";
 import { HomeOutlined, UserOutlined } from "@ant-design/icons";
 import Link from "next/link";
 import type { MenuProps } from "antd";
+import {
+  getUserInfo,
+  isLogIn,
+  removeUserInfo,
+} from "@/service/authentication.service";
+import { authKey } from "@/constant/keys/authKey";
+import { useRouter } from "next/navigation";
+import Image from "next/image";
 const { Header: AntHeader } = Layout;
-const menuItems: MenuItem[] = [
-  getItem(<Link href="/home">Home</Link>, "home", <HomeOutlined />),
-  getItem(<Link href="/about">About</Link>, "about"),
-  getItem(<Link href="/contact-us">Contact us</Link>, "contact-us"),
-  getItem(<Link href="/blog">Blog</Link>, "blog"),
-  getItem(<Link href="/faq">FAQ</Link>, "faq"),
-  getItem(<Link href="/sign-up">Register</Link>, "sign-up"),
-];
 
 const Header = () => {
+  const { role } = getUserInfo() as any;
+  const router = useRouter();
   const handleLogOut = () => {
-    console.log(message.error("pore implement korbo"));
+    removeUserInfo(authKey);
+    router.push("/login");
   };
-  const isLoggedIn = false;
   const items: MenuProps["items"] = [
     {
       key: "0",
-      label: isLoggedIn ? (
+      label: !!role ? (
         <Button onClick={handleLogOut} type="text" danger>
           logout
         </Button>
@@ -41,28 +42,49 @@ const Header = () => {
       ),
     },
   ];
+
+  const menuItems: MenuItem[] = [
+    getItem(<Link href="/home">Home</Link>, "home", <HomeOutlined />),
+    getItem(<Link href="/service">Services</Link>, "service"),
+    getItem(<Link href="/about">About</Link>, "about"),
+    getItem(<Link href="/contact-us">Contact us</Link>, "contact-us"),
+    getItem(<Link href="/blog">Blog</Link>, "blog"),
+    getItem(<Link href="/faq">FAQ</Link>, "faq"),
+    getItem(<Link href="/sign-up">Register</Link>, "sign-up"),
+  ];
+
   return (
-    <AntHeader className="bg-white">
-      <Row className="w-full h-full" justify={"space-evenly"} align={"middle"}>
-        <Col span={6}>CIMS</Col>
-        <Col span={8}>
-          <Menu
-            className="bg-white"
-            mode="horizontal"
-            defaultSelectedKeys={["2"]}
-            items={menuItems}
-          />
-        </Col>
-        <Col span={8}>
-          <div className="flex justify-end items-center">
-            <Dropdown menu={{ items }}>
-              <Space wrap size={16}>
-                <Avatar size="large" icon={<UserOutlined />} />
-              </Space>
-            </Dropdown>
-          </div>
-        </Col>
-      </Row>
+    <AntHeader className="w-full bg-gray-200 h-24 flex justify-around items-center">
+      <div>
+        <Image
+          className="mt-4"
+          src={logo}
+          width={170}
+          height={170}
+          alt="logo image"
+          objectFit="contain"
+        />
+      </div>
+      <div>
+        <Menu
+          className="bg-gray-200"
+          mode="horizontal"
+          defaultSelectedKeys={["0"]}
+          items={menuItems}
+        />
+      </div>
+
+      <div>
+        <Row justify={"end"} align={"middle"}>
+          <p>{role}</p>
+
+          <Dropdown menu={{ items }}>
+            <Space wrap size={16}>
+              <Avatar size="large" icon={<UserOutlined />} />
+            </Space>
+          </Dropdown>
+        </Row>
+      </div>
     </AntHeader>
   );
 };

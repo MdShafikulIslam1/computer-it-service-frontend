@@ -34,6 +34,7 @@ const axiosBaseQuery =
       });
       //   return { data: result.data };
       //TODO: check result by console when start coding
+      // console.log("axiosBaw", result);
       return result;
     } catch (axiosError) {
       const err = axiosError as AxiosError;
