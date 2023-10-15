@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Image from "next/image";
-import { IReviewData, IService } from "@/types/globalType";
+import { ICart, IReviewData, IService } from "@/types/globalType";
 import { Button, Col, Row, message, Rate, Avatar, Empty } from "antd";
 import { ShoppingCartOutlined, UserOutlined } from "@ant-design/icons";
 import Form from "../Form/Form";
@@ -12,13 +12,17 @@ import {
 } from "@/redux/api/reviewApi";
 import { getUserInfo } from "@/service/authentication.service";
 import { useGetSingleUserQuery } from "@/redux/api/userApi";
+import { useAppDispatch, useAppSelector } from "@/redux/hook";
+import { decrement, increment } from "@/redux/feature/counter/counterSlice";
+import { useCreateCartMutation } from "@/redux/api/cartApi";
 interface IProps {
   item: IService;
-  params: any;
 }
 
 const ServiceDetails = ({ item: service }: IProps) => {
   const [value, setValue] = useState<number>(0);
+  const count = useAppSelector((state) => state.counter.count)
+  const dispatch = useAppDispatch()
   const { email } = getUserInfo() as any;
   const { data } = useGetSingleUserQuery(email);
   const { data: reviewAndRatingData } = useGetAllReviewsQuery({
@@ -47,7 +51,27 @@ const ServiceDetails = ({ item: service }: IProps) => {
     }
   };
   const desc = ["terrible", "bad", "normal", "good", "wonderful"];
-  const user = false;
+
+  // add to cart handler
+  const [createCart] = useCreateCartMutation()
+ const handleAddToCart = async() => {
+  const cartData:ICart = {
+    userId: data?.id,
+    serviceId: service?.id!,
+    quantity:count,
+    price: Number(service.fee) * count,
+  }
+  try {
+    const res = await createCart(cartData).unwrap();
+    if (res?.id) {
+      message.success(`${cartData.quantity} x ${service.name} has been added your cart`);
+    }
+  } catch (error: any) {
+    message.error(error.message);
+  }
+ 
+ }
+  
   return (
     <div className="my-8  bg-white">
       {/* service details start */}
@@ -80,13 +104,13 @@ const ServiceDetails = ({ item: service }: IProps) => {
               Repair Time : <span>{service?.durationInMinutes} Minutes</span>{" "}
             </p>
             <p className="font-medium">{service?.description}</p>
-            <div className="flex my-10 gap-4">
-              <div className="flex gap-3">
-                <Button className="outline-none border-none">-</Button>
-                <h1>1</h1>
-                <Button className="outline-none border-none">+</Button>
+            <div className="flex mt-16 gap-4 items-center">
+              <div className="flex gap-3 bg-gray-100 border py-1 px-2 rounded justify-center items-center">
+                <Button onClick={() => dispatch(decrement())} className="outline-none border-none">-</Button>
+                <h1 className="text-center">{count}</h1>
+                <Button onClick={() => dispatch(increment())} className="outline-none border-none">+</Button>
               </div>
-              <Button type="primary" className="text-white">
+              <Button onClick={() => handleAddToCart()} type="primary" className="text-white">
                 <ShoppingCartOutlined className="text-white" /> Add to cart
               </Button>
             </div>

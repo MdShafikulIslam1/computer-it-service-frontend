@@ -56,3 +56,12 @@ export interface IReviewData {
   rating: number;
   comments: string;
 }
+
+export interface ICart {
+  userId: string;
+  user?: IUser; // Assuming you have an IUser interface for the User model
+  serviceId: string;
+  service?: IService; // Assuming you have an IService interface for the Service model
+  quantity: number;
+  price: number;
+}
