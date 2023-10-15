@@ -1,53 +1,57 @@
-import { ChangeEvent, FormEvent, useState } from "react";
-import Swal from "sweetalert2";
+import { useState } from "react";
 import Image from "next/image";
-import { IService } from "@/types/globalType";
-import Link from "next/link";
-import { Button } from "antd";
+import { IReviewData, IService } from "@/types/globalType";
+import { Button, Col, Row, message, Rate, Avatar, Empty } from "antd";
+import { ShoppingCartOutlined, UserOutlined } from "@ant-design/icons";
+import Form from "../Form/Form";
+import { SubmitHandler } from "react-hook-form";
+import FormTextArea from "../Form/FormTextArea";
+import {
+  useCreateReviewMutation,
+  useGetAllReviewsQuery,
+} from "@/redux/api/reviewApi";
+import { getUserInfo } from "@/service/authentication.service";
+import { useGetSingleUserQuery } from "@/redux/api/userApi";
 interface IProps {
   item: IService;
+  params: any;
 }
-const ServiceDetails = ({ item: service }: IProps) => {
-  const [inputValue, setInputValue] = useState<string>("");
-  //   const handleReviewSubmit = (event: FormEvent<HTMLFormElement>) => {
-  //     event.preventDefault();
-  //     const reviewData = {
-  //       id: id,
-  //       data: { reviews: inputValue },
-  //     };
-  //     createReviews(reviewData);
-  //     setInputValue("");
-  //   };
-  const handleChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
-    event.preventDefault();
-    setInputValue(event.target.value);
-  };
 
-  const handleserviceDelete = () => {
-    // if (!user) {
-    //   return navigate("/auth/login");
-    // }
-    // Swal.fire({
-    //   title: "Are you sure?",
-    //   text: "You won't be able to revert this!",
-    //   icon: "warning",
-    //   showCancelButton: true,
-    //   confirmButtonColor: "#3085d6",
-    //   cancelButtonColor: "#d33",
-    //   confirmButtonText: "Yes, delete it!",
-    // }).then((result) => {
-    //   if (result.isConfirmed) {
-    //     deleteservice(data.data._id);
-    //     if (deletedData?.data?.success) {
-    //       Swal.fire("Deleted!", "Your file has been deleted.", "success");
-    //       navigate("/all-service");
-    //     }
-    //   }
-    // });
+const ServiceDetails = ({ item: service }: IProps) => {
+  const [value, setValue] = useState<number>(0);
+  const { email } = getUserInfo() as any;
+  const { data } = useGetSingleUserQuery(email);
+  const { data: reviewAndRatingData } = useGetAllReviewsQuery({
+    limit: 100,
+    page: 1,
+    serviceId: service?.id,
+  });
+  const reviews = reviewAndRatingData?.reviews;
+  const [createReview] = useCreateReviewMutation();
+  const onSubmit: SubmitHandler<any> = async (values: any) => {
+    message.loading("Posting ....");
+    const reviewData: IReviewData = {
+      userId: data?.id,
+      serviceId: service?.id!,
+      rating: value,
+      comments: values.comments,
+    };
+    try {
+      const res = await createReview(reviewData).unwrap();
+      if (res?.id) {
+        message.success("your review is done");
+        setValue(0);
+      }
+    } catch (error: any) {
+      message.error(error.message);
+    }
   };
+  const desc = ["terrible", "bad", "normal", "good", "wonderful"];
+  const user = false;
   return (
-    <div className="my-8">
-      <div className="flex items-center gap-10 justify-evenly">
+    <div className="my-8  bg-white">
+      {/* service details start */}
+      <div className="flex gap-10 justify-evenly">
         <div className="w-full p-4 h-96 lg:w-1/2">
           <Image
             src={service?.imageUrl}
@@ -58,60 +62,143 @@ const ServiceDetails = ({ item: service }: IProps) => {
           />
         </div>
         <div className="w-full lg:w-1/2 ">
-          <div className="border border-green-700">
+          <div className="border border-green-700 space-y-2">
             <h2 className="text-3xl font-bold">{service?.name}</h2>
-            <p>5 star review</p>
+            {/* TODO:REVIEW dynamically  */}
+            <p>5 star (1 user review)</p>
             <p className="font-bold text-[#0F67F6] text-xl">
               $ {service?.fee}{" "}
             </p>
+            {/* @ts-ignore */}
+            <p>Category:{service?.category?.title}</p>
+            {service?.warranty && (
+              <p className="font-bold">
+                warranty: <span>{service.warranty}</span>{" "}
+              </p>
+            )}
+            <p className="font-bold">
+              Repair Time : <span>{service?.durationInMinutes} Minutes</span>{" "}
+            </p>
             <p className="font-medium">{service?.description}</p>
-            <div className="flex items-center justify-start gap-10 my-2">
-              <Link href={`/service/edit`}>
-                <Button className="bg-[#7F54B3] text-white btn btn-primary btn-outline">
-                  Edit
-                </Button>
-              </Link>
-
-              <Button
-                danger
-                onClick={() => handleserviceDelete()}
-                className="bg-green-100 btn btn-warning btn-outline"
-              >
-                Delete
+            <div className="flex my-10 gap-4">
+              <div className="flex gap-3">
+                <Button className="outline-none border-none">-</Button>
+                <h1>1</h1>
+                <Button className="outline-none border-none">+</Button>
+              </div>
+              <Button type="primary" className="text-white">
+                <ShoppingCartOutlined className="text-white" /> Add to cart
               </Button>
             </div>
           </div>
         </div>
       </div>
-      {/* <div className="my-8">
-        <h1 className="text-3xl font-semibold tracking-widest text-center text-gray-400">
-          service Reviews:
-        </h1>
-        {service?.reviews?.map((review: string) => (
-          <li key={service._id} className="text-xl font-medium">
-            {review}
-          </li>
-        ))}
+      {/* service details end */}
+
+      <div className="grid gap-4 grid-cols-12 mt-12 items-center">
+        <div className="col-span-7 min-h-screen">
+          {reviews?.length > 0 ? (
+            <div>
+              {reviews?.map((review: any) => (
+                <div
+                  className="flex justify-between my-4 bg-gray-50 p-4 rounded "
+                  key={review.id}
+                >
+                  {/* image(user) */}
+                  <div className="h-20 w-20 rounded-full bg-gray-400">
+                    <Image
+                      src={review?.user?.profileImage}
+                      alt="User image"
+                      width={500}
+                      height={500}
+                      className="object-center w-full h-full rounded-full"
+                      priority
+                    />
+                  </div>
+                  {/* review information */}
+                  <div>
+                    <h3>{review?.user?.name}</h3>
+                    <small>{review?.createdAt}</small>
+                    <p className="w-full">{review?.comments}</p>
+                  </div>
+                  {/* rating */}
+                  <div>
+                    <Rate disabled value={review?.rating} />
+                  </div>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <Empty
+              style={{
+                margin: "20px",
+              }}
+              description="No review found yet!!"
+            />
+          )}
+        </div>
+
+        <div className="col-span-5 shadow-xl min-h-screen">
+          <div className="mt-4">
+            <Form submitHandler={onSubmit}>
+              <div
+                style={{
+                  padding: "15px",
+                }}
+              >
+                <p
+                  style={{
+                    fontSize: "20px",
+                    marginBottom: "10px",
+                  }}
+                >
+                  Your Review Information
+                </p>
+                <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
+                  <Col
+                    className="gutter-row"
+                    span={24}
+                    style={{
+                      marginBottom: "10px",
+                    }}
+                  >
+                    <div className="my-2">
+                      <p className="text-lg my-1">
+                        Your review <span className="text-red-500">*</span>{" "}
+                      </p>
+                      <span>
+                        <Rate
+                          tooltips={desc}
+                          onChange={setValue}
+                          value={value}
+                        />
+                        {value ? (
+                          <span className="ant-rate-text">
+                            {desc[value - 1]}
+                          </span>
+                        ) : (
+                          ""
+                        )}
+                      </span>
+                    </div>
+                    <div>
+                      <FormTextArea
+                        name="comments"
+                        label="Your review"
+                        placeHolder="write your comment"
+                        required={true}
+                      />
+                    </div>
+                  </Col>
+                </Row>
+                <Button htmlType="submit" type="primary">
+                  Create
+                </Button>
+              </div>
+            </Form>
+          </div>
+        </div>
       </div>
-      {user && (
-        <form
-          onSubmit={handleReviewSubmit}
-          className="flex w-3/4 gap-10 mt-12 text-center "
-        >
-          <textarea
-            placeholder="Bio"
-            className="w-full textarea textarea-bordered textarea-sm "
-            onChange={handleChange}
-            value={inputValue}
-          ></textarea>
-          <button
-            type="submit"
-            className="btn btn-outline btn-primary btn-xs sm:btn-sm md:btn-md lg:btn-lg"
-          >
-            Post Review
-          </button>
-        </form>
-      )} */}
     </div>
   );
 };

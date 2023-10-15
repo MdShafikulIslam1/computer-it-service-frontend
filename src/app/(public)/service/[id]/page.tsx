@@ -6,7 +6,6 @@ import { useGetSingleServiceQuery } from "@/redux/api/servicesApi";
 const ServiceDetailsPage = ({ params }: any) => {
   const { id } = params;
   const { data } = useGetSingleServiceQuery(id);
-  console.log("single data", data);
   return (
     <div>
       <ServiceDetails item={data} />

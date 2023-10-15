@@ -49,3 +49,10 @@ export type IUser = {
   profile?: null | any;
   role: string;
 } & ICommonDataType;
+
+export interface IReviewData {
+  userId: string;
+  serviceId: string;
+  rating: number;
+  comments: string;
+}

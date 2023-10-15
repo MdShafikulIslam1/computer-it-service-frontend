@@ -30,7 +30,7 @@ const FormDatePicker = ({
   // }, []);
   const handleOnChange: DatePickerProps["onChange"] = (date, dateString) => {
     onChange ? onChange(date, dateString) : "";
-    setValue(name, date);
+    setValue(name, dateString);
   };
   return (
     <>
