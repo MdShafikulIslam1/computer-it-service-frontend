@@ -47,6 +47,7 @@ const cartApi = baseApi.injectEndpoints({
         url: `${CART_URL}/${id}`,
         method: "DELETE",
       }),
+      invalidatesTags: [tagTypes.CART],
     }),
   }),
 });

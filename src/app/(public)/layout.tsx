@@ -36,10 +36,12 @@ const PublicLayout = ({ children }: { children: React.ReactNode }) => {
     );
   }
   return (
-    <div className="w-[1400px] mx-auto">
+    <div  className="w-[1400px] mx-auto">
       <Layout>
         <Header />
-        {children}
+       <div style={{background:"white"}}>
+       {children}
+       </div>
       </Layout>
     </div>
   );

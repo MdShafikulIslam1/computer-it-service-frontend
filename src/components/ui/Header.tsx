@@ -51,10 +51,11 @@ const Header = () => {
     getItem(<Link href="/blog">Blog</Link>, "blog"),
     getItem(<Link href="/faq">FAQ</Link>, "faq"),
     getItem(<Link href="/sign-up">Register</Link>, "sign-up"),
+    getItem(<Link href="/cart">Cart</Link>, "cart"),
   ];
 
   return (
-    <AntHeader className="w-full bg-gray-200 h-24 flex justify-around items-center">
+    <AntHeader className="w-full bg-white h-24 flex justify-between items-center">
       <div>
         <Image
           className="mt-4"
@@ -67,7 +68,7 @@ const Header = () => {
       </div>
       <div>
         <Menu
-          className="bg-gray-200"
+          className="bg-gray-50 w-full"
           mode="horizontal"
           defaultSelectedKeys={["0"]}
           items={menuItems}

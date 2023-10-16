@@ -15,6 +15,7 @@ import { useGetSingleUserQuery } from "@/redux/api/userApi";
 import { useAppDispatch, useAppSelector } from "@/redux/hook";
 import { decrement, increment } from "@/redux/feature/counter/counterSlice";
 import { useCreateCartMutation } from "@/redux/api/cartApi";
+import ServicePage from "../Service/ServicePage";
 interface IProps {
   item: IService;
 }
@@ -223,6 +224,10 @@ const ServiceDetails = ({ item: service }: IProps) => {
           </div>
         </div>
       </div>
+      {/* Related products show */}
+      {/* <div>
+      <ServicePage data={services} />
+    </div> */}
     </div>
   );
 };

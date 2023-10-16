@@ -7,7 +7,7 @@ const ServiceDetailsPage = ({ params }: any) => {
   const { id } = params;
   const { data } = useGetSingleServiceQuery(id);
   return (
-    <div>
+    <div style={{background:"white"}}>
       <ServiceDetails item={data} />
     </div>
   );
