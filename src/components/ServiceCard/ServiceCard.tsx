@@ -6,7 +6,6 @@ interface IProps {
   item: IService;
 }
 const ServiceCard = ({ item }: IProps) => {
-  console.log("from sersvice card", item);
   return (
     <div className="relative p-2 m-2 overflow-hidden rounded-lg shadow-xl h-96">
       <div className="flex items-center justify-center h-52">
@@ -41,6 +40,7 @@ const ServiceCard = ({ item }: IProps) => {
           </Button>
         </div>
       </Link>
+     
     </div>
   );
 };

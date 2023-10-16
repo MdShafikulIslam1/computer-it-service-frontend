@@ -47,6 +47,10 @@ const SideBarItems = (role: string) => {
         <Link href={`/${role}/manage-category`}>Category</Link>,
         `/${role}/manage-category`
       ),
+      getItem(
+        <Link href={`/${role}/manage-booking`}>Booking</Link>,
+        `/${role}/manage-booking`
+      ),
     ]),
   ];
 

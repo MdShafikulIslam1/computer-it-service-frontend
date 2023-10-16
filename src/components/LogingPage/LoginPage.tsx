@@ -55,6 +55,7 @@ const LoginPage = () => {
                 placeHolder="Enter User Email"
                 prefix=<UserOutlined />
                 allowClear={true}
+                required={true}
               />
             </div>
 
@@ -69,6 +70,7 @@ const LoginPage = () => {
                 label="User Password"
                 placeHolder="Enter Correct Password"
                 size="large"
+                required={true}
               />
             </div>
 

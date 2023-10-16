@@ -14,3 +14,22 @@ export const serviceStatusOptions: ISelectOptions[] = [
     value: "NOT_AVAILABLE",
   },
 ];
+
+export const bookingOptions: ISelectOptions[] = [
+  {
+    label: "PENDING",
+    value: "PENDING",
+  },
+  {
+    label: "ACCEPT",
+    value: "ACCEPT",
+  },
+  {
+    label: "REJECT",
+    value: "REJECT",
+  },
+  {
+    label: "CANCEL",
+    value: "CANCEL",
+  },
+];
