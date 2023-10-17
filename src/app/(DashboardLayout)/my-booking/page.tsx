@@ -16,13 +16,11 @@ import React, { useState } from "react";
 import { useDebounced } from "@/hooks/useDebounced";
 import { useDeleteServiceMutation } from "@/redux/api/servicesApi";
 
-import { useGetAllBookingsQuery } from "@/redux/api/bookingApi";
+import { useGetAllBookingsQuery, useUpdateBookingMutation } from "@/redux/api/bookingApi";
 import { getUserInfo } from "@/service/authentication.service";
 import { useGetSingleUserQuery } from "@/redux/api/userApi";
 
 const MyBookingPage = () => {
-    const {email} = getUserInfo() as any;
-    const {data:user} = useGetSingleUserQuery(email)
   const query: Record<string, unknown> = {};
   const [size, setSize] = useState<number>(10);
   const [page, setPage] = useState<number>(1);
@@ -53,11 +51,14 @@ const MyBookingPage = () => {
     setSortOrder(order === "ascend" ? "asc" : "desc");
   };
   //common code for filtering(END)
-
+  const { email } = getUserInfo() as any;
+  const { data: user } = useGetSingleUserQuery(email);
   const { data, isLoading } = useGetAllBookingsQuery({
     ...query,
+    userId: user?.id,
   });
   const bookings = data?.bookings;
+  console.log("my-booking", bookings);
   const meta = data?.meta;
   const [deleteService] = useDeleteServiceMutation();
 
@@ -71,22 +72,47 @@ const MyBookingPage = () => {
       message.error(error?.message);
     }
   };
+  //cancel my booking
+  const [updateBooking] = useUpdateBookingMutation();
+
+  const cancelBooking = async (id:string) => {
+    try {
+      const res = await updateBooking({
+        id,
+        data: { status: "CANCEL" },
+      }).unwrap();
+      if (res.id) {
+        message.success("Your booking has been canceled");
+      }
+    } catch (error:any) {
+      message.error(error?.message);
+    }
+  };
 
   const columns = [
     {
       title: "Name",
-      dataIndex: "name",
+      dataIndex: "user",
       key: "name",
+      render: function (params: any) {
+        return params && params?.name;
+      },
     },
     {
       title: "Email",
-      dataIndex: "email",
+      dataIndex: "user",
       key: "email",
+      render: function (params: any) {
+        return params && params?.email;
+      },
     },
     {
       title: "ContactNo",
-      dataIndex: "contactNo",
+      dataIndex: "user",
       key: "contactNo",
+      render: function (params: any) {
+        return params && params?.contactNo;
+      },
     },
     {
       title: "Price($)",
@@ -97,6 +123,16 @@ const MyBookingPage = () => {
       title: "Status",
       dataIndex: "status",
       key: "status",
+    },
+    {
+      title: "Booking Cancel",
+      render: function (params: any) {
+        return (
+          <div>
+            <Button onClick = {() => cancelBooking(params?.id)} disabled={params?.status === "CANCEL"}>Cancel</Button>
+          </div>
+        );
+      },
     },
     {
       title: "CreatedAt",
@@ -125,20 +161,7 @@ const MyBookingPage = () => {
                 </Button>
               </Link>
             </Tooltip>
-            <Tooltip title="Update Status" placement="top" color={"#0496ff"}>
-              <Link href={`/admin/manage-booking/update/${data?.id}`}>
-                <Button
-                  style={{
-                    margin: "0px 5px",
-                  }}
-                  onClick={() => console.log(data)}
-                  type="primary"
-                >
-                  <EditOutlined />
-                </Button>
-              </Link>
-            </Tooltip>
-          </>
+                      </>
         );
       },
     },
@@ -146,7 +169,7 @@ const MyBookingPage = () => {
 
   return (
     <div>
-      <h1>Service List</h1>
+      <h1>My booking List</h1>
       <div
         style={{
           display: "flex",
@@ -186,12 +209,7 @@ const MyBookingPage = () => {
             )}
           </div>
         </div>
-        <div>
-          <Link href={"/admin/manage-service/create"}>
-            <Button type="primary">Create Service</Button>
-          </Link>
-        </div>
-      </div>
+            </div>
       <UMTable
         columns={columns}
         dataSource={bookings}

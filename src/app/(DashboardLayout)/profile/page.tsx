@@ -13,6 +13,7 @@ import { SubmitHandler } from "react-hook-form";
 import { Avatar, Button, Col, Row, message } from "antd";
 import FormDatePicker from "@/components/Form/FormDatePicker";
 import { useState } from "react";
+import dayjs from "dayjs";
 const ProfilePage = () => {
   const [photoUrl, setPhotoUrl] = useState();
   const user = getUserInfo() as any;
@@ -69,23 +70,20 @@ const ProfilePage = () => {
       >
         <Col
           style={{
-            border: "1px solid #d9d9d9",
-            height: "100vh",
+            height: "100%",
           }}
+          className="shadow-md"
           span={6}
         >
-          <p className="text-center font-bold text-2xl text-orange-400 my-4">
-            {data?.name}
-          </p>
-          <div className="flex flex-col mx-auto items-center justify-center h-48 w-48 border my-10">
+          <div className="flex flex-col mx-auto items-center justify-center h-48 w-48   my-10">
             <div>
               {!!data?.profileImage ? (
                 <Image
                   src={data?.profileImage || ""}
                   alt="service image"
-                  width={500}
-                  height={500}
-                  className="object-center w-full h-full "
+                  width={192}
+                  height={192}
+                  className="object-center w-full h-full rounded-2xl"
                   priority
                 />
               ) : (
@@ -97,20 +95,22 @@ const ProfilePage = () => {
                 </Avatar>
               )}
             </div>
+            <p className=" pl-6 font-bold text-xl text-green-500 my-2 ">
+              {data?.name}
+            </p>
           </div>
-          <Button className="mx-auto w-1/2" type="primary">
+          {/* <Button className="mx-auto w-1/2" type="primary">
             Upload New Photo
-          </Button>
+          </Button> */}
           <p>
-            Member since: <span>{data?.createdAt}</span>
+            Member since:{" "}
+            <span className="text-blue-400 text-md">
+              {" "}
+              {dayjs(`${data?.createdAt}`).format("MMM D, YYYY")}
+            </span>
           </p>
         </Col>
-        <Col
-          style={{
-            border: "1px solid #d9d9d9",
-          }}
-          span={18}
-        >
+        <Col span={18}>
           <div>
             <Form submitHandler={onSubmit} defaultValues={defaultValues}>
               <div

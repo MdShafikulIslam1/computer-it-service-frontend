@@ -1,16 +1,13 @@
 "use client";
 import logo from "../../assests/images/logo.png";
 import { MenuItem, getItem } from "@/utils/getMenuItems";
+import { Avatar, Button, Dropdown, Layout, Menu, Row, Space } from "antd";
 import {
-  Avatar,
-  Button,
-  Dropdown,
-  Layout,
-  Menu,
-  Row,
-  Space,
-} from "antd";
-import { HomeOutlined, UserOutlined } from "@ant-design/icons";
+  DashboardOutlined,
+  HomeOutlined,
+  ShoppingCartOutlined,
+  UserOutlined,
+} from "@ant-design/icons";
 import Link from "next/link";
 import type { MenuProps } from "antd";
 import {
@@ -21,10 +18,12 @@ import {
 import { authKey } from "@/constant/keys/authKey";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
+import { useGetSingleUserQuery } from "@/redux/api/userApi";
 const { Header: AntHeader } = Layout;
 
 const Header = () => {
-  const { role } = getUserInfo() as any;
+  const { role, email } = getUserInfo() as any;
+  const { data: loginUser } = useGetSingleUserQuery(email);
   const router = useRouter();
   const handleLogOut = () => {
     removeUserInfo(authKey);
@@ -51,11 +50,16 @@ const Header = () => {
     getItem(<Link href="/blog">Blog</Link>, "blog"),
     getItem(<Link href="/faq">FAQ</Link>, "faq"),
     getItem(<Link href="/sign-up">Register</Link>, "sign-up"),
-    getItem(<Link href="/cart">Cart</Link>, "cart"),
+    getItem(<Link href="/cart">Cart</Link>, "cart", <ShoppingCartOutlined />),
+    getItem(
+      <Link href="/profile">Dashboard</Link>,
+      "profile",
+      <DashboardOutlined />
+    ),
   ];
 
   return (
-    <AntHeader className="w-full bg-white h-24 flex justify-between items-center">
+    <AntHeader className="w-full bg-white h-24 flex  justify-between items-center">
       <div>
         <Image
           className="mt-4"
@@ -63,25 +67,32 @@ const Header = () => {
           width={170}
           height={170}
           alt="logo image"
-          objectFit="contain"
+          // objectFit="contain"
         />
       </div>
-      <div>
+      <div className="w-3/5 mx-auto">
         <Menu
-          className="bg-gray-50 w-full"
+          // className="w-full"
           mode="horizontal"
-          defaultSelectedKeys={["0"]}
           items={menuItems}
         />
       </div>
 
       <div>
         <Row justify={"end"} align={"middle"}>
-          <p>{role}</p>
+          <p className="text-black mr-2">{loginUser?.name}</p>
 
           <Dropdown menu={{ items }}>
             <Space wrap size={16}>
-              <Avatar size="large" icon={<UserOutlined />} />
+              {/* <Avatar size="large" icon={<UserOutlined />} /> */}
+              <div className="flex justify-center items-center">
+                               <Avatar
+                  size={35}               
+
+                  src={loginUser?.profileImage}
+                  icon={<UserOutlined className="text-center" />}
+                />
+              </div>
             </Space>
           </Dropdown>
         </Row>

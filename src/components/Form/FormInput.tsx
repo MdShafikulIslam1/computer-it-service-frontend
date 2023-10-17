@@ -14,6 +14,7 @@ interface IInput {
   prefix?: ReactNode;
   allowClear?: boolean;
   required?: boolean;
+  disabled?: boolean;
 }
 
 const FormInput = ({
@@ -26,6 +27,7 @@ const FormInput = ({
   prefix,
   allowClear,
   required = false,
+  disabled=false
 }: IInput) => {
   const { control } = useFormContext();
   return (
@@ -59,6 +61,7 @@ const FormInput = ({
               prefix={prefix}
               placeholder={placeHolder}
               allowClear={allowClear}
+              disabled={disabled}
             />
           )
         }

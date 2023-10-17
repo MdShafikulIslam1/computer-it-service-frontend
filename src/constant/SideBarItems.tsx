@@ -1,62 +1,61 @@
 import { MenuItem, getItem } from "@/utils/getMenuItems";
 import {
-  FileTextOutlined,
-  CreditCardOutlined,
-  ThunderboltOutlined,
-  ScheduleOutlined,
   AppstoreOutlined,
   TableOutlined,
   ProfileOutlined,
+  ShoppingCartOutlined,
+  HomeOutlined,
 } from "@ant-design/icons";
 import Link from "next/link";
 import { USER_ROLE } from "./role";
 const SideBarItems = (role: string) => {
   const defaultSidebarItems: MenuItem[] = [
+    getItem(<Link href="/home">Home</Link>, "home", <HomeOutlined />),
     getItem("Profile", "profile", <ProfileOutlined />, [
       getItem(
         <Link href={`/profile`}>Account Profile</Link>,
         `/${role}/profile`
       ),
-      getItem(
-        <Link href={`/${role}/change-password`}>Change Password</Link>,
-        `/${role}/change-password`
-      ),
+      // getItem(
+      //   <Link href={`/${role}/change-password`}>Change Password</Link>,
+      //   `/${role}/change-password`
+      // ),
     ]),
   ];
-  const commonAdminSidebarItems: MenuItem[] = [
-    getItem(
-      <Link href={`/${role}/manage-student`}>Manage Students</Link>,
-      `/${role}/manage-student`,
-      <TableOutlined />
-    ),
-    getItem(
-      <Link href={`/${role}/manage-faculty`}>Manage Faculty</Link>,
-      `/${role}/manage-faculty`,
-      <TableOutlined />
-    ),
-  ];
+  // const commonAdminSidebarItems: MenuItem[] = [
+  //   getItem(
+  //     <Link href={`/${role}/manage-student`}>Manage Students</Link>,
+  //     `/${role}/manage-student`,
+  //     <TableOutlined />
+  //   ),
+  //   getItem(
+  //     <Link href={`/${role}/manage-faculty`}>Manage Faculty</Link>,
+  //     `/${role}/manage-faculty`,
+  //     <TableOutlined />
+  //   ),
+  // ];
   const adminSidebarItems: MenuItem[] = [
     ...defaultSidebarItems,
-    ...commonAdminSidebarItems,
-    getItem("Management", `/${role}/management`, <AppstoreOutlined />, [
-      getItem(
-        <Link href={`/${role}/manage-service`}>Service</Link>,
-        `/${role}/manage-service`
-      ),
-      getItem(
-        <Link href={`/${role}/manage-category`}>Category</Link>,
-        `/${role}/manage-category`
-      ),
-      getItem(
-        <Link href={`/${role}/manage-booking`}>Booking</Link>,
-        `/${role}/manage-booking`
-      ),
-    ]),
+
+    getItem(
+      <Link href={`/${role}/manage-service`}>Manage Services</Link>,
+      `/${role}/manage-service`,
+      <AppstoreOutlined />
+    ),
+    getItem(
+      <Link href={`/${role}/manage-category`}>Manage Category</Link>,
+      `/${role}/manage-category`,
+      <AppstoreOutlined />
+    ),
+    getItem(
+      <Link href={`/${role}/manage-booking`}>Manage Booking</Link>,
+      `/${role}/manage-booking`,
+      <AppstoreOutlined />
+    ),
   ];
 
   const superAdminSidebarItems: MenuItem[] = [
     ...defaultSidebarItems,
-    ...commonAdminSidebarItems,
     getItem(
       <Link href={`/${role}/manage-admin`}>Manage Admin</Link>,
       `/${role}/admin`,
@@ -72,29 +71,14 @@ const SideBarItems = (role: string) => {
   const userSidebarItems: MenuItem[] = [
     ...defaultSidebarItems,
     getItem(
-      <Link href={`/${role}/courses`}>Courses</Link>,
-      `/${role}/courses`,
+      <Link href="/my-booking">My Bookings</Link>,
+      "my-booking",
       <TableOutlined />
     ),
     getItem(
-      <Link href={`/${role}/course-schedule`}>Course Schedules</Link>,
-      `/${role}/course-schedule`,
-      <ScheduleOutlined />
-    ),
-    getItem(
-      <Link href={`/${role}/registration`}>Registration</Link>,
-      `/${role}/registration`,
-      <ThunderboltOutlined />
-    ),
-    getItem(
-      <Link href={`/${role}/payment`}>Payment</Link>,
-      `/${role}/payment`,
-      <CreditCardOutlined />
-    ),
-    getItem(
-      <Link href={`/${role}/academic-report`}>Academic Report</Link>,
-      `/${role}/academic-report`,
-      <FileTextOutlined />
+      <Link href="/cart">Cart Items</Link>,
+      "cart",
+      <ShoppingCartOutlined />
     ),
   ];
   if (role === USER_ROLE.SUPER_ADMIN) return superAdminSidebarItems;

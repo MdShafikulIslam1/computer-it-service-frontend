@@ -22,10 +22,10 @@ const CheckOutPage = () => {
     userId: currentUserData?.id,
   });
   const carts = cartData?.carts;
- const totalPrice = carts?.reduce(
+  const totalPrice = carts?.reduce(
     (total: number, item: Record<string, any>) => total + item?.price,
     0
-  )
+  );
   const router = useRouter();
   const [createBooking] = useCreateBookingMutation();
   const onSubmit: SubmitHandler<any> = async (values: any) => {
@@ -48,13 +48,11 @@ const CheckOutPage = () => {
       );
     }
     const bookingData = {
-      name: values?.name,
+      userId: currentUserData.id,
       address: values?.address,
-      email: values?.email,
-      contactNo: values?.contactNo,
       emergencyContactNo: values?.emergencyContactNo,
       additionalInfo: values?.additionalInfo,
-      price:totalPrice,
+      price: totalPrice,
       bookingItems: carts?.map((cart: any) => {
         return {
           cartId: cart?.id,
@@ -63,6 +61,9 @@ const CheckOutPage = () => {
         };
       }),
     };
+    if (bookingData?.bookingItems?.length < 1) {
+      return message.error("Add at least one booking item in your cart");
+    }
     message.loading("Creating ....");
     try {
       const res = await createBooking(bookingData).unwrap();
@@ -133,6 +134,7 @@ const CheckOutPage = () => {
                         label="Full name"
                         placeHolder="Your full name"
                         required={true}
+                        disabled={true}
                       />
                     </div>
                   </Col>
@@ -169,6 +171,7 @@ const CheckOutPage = () => {
                         label="Email"
                         placeHolder="Enter your Email"
                         required={true}
+                        disabled={true}
                       />
                     </div>
                   </Col>
@@ -187,6 +190,7 @@ const CheckOutPage = () => {
                         label="Phone Number"
                         placeHolder="Enter your contactNo"
                         required={true}
+                        disabled={true}
                       />
                     </div>
                   </Col>
@@ -248,8 +252,16 @@ const CheckOutPage = () => {
               Your order
             </p>
             <hr />
-            <UMTable columns={columns} dataSource={carts} loading={isLoading} showPagination={false} showSizeChanger={false}/>
-            <h2 className="text-2xl font-bold my-4 ml-2">Total Price :$ <span className="text-blue-800">{totalPrice}</span> </h2>
+            <UMTable
+              columns={columns}
+              dataSource={carts}
+              loading={isLoading}
+              showPagination={false}
+              showSizeChanger={false}
+            />
+            <h2 className="text-2xl font-bold my-4 ml-2">
+              Total Price :$ <span className="text-blue-800">{totalPrice}</span>{" "}
+            </h2>
           </div>
         </Col>
       </Row>

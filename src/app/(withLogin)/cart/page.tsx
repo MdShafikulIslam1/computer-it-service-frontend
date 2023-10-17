@@ -206,11 +206,11 @@ const CartPage = () => {
           </div>
         </div>
         {/* cart details (amount) */}
-        <div className="col-span-4 shadow-2xl min-h-full rounded-xl">
+        <div className="col-span-4 shadow-xl min-h-full rounded-xl">
           <div className="border p-10 space-y-5">
             <h1 className="text-center text-2xl font-bold">Cart Totals</h1>
             <hr />
-            <div className="">
+            <div >
               <p className="text-xl font-medium text-gray-500">
                 Subtotal : <span className="ml-8">$ {totalPrice}</span>
               </p>
@@ -218,11 +218,13 @@ const CartPage = () => {
                 Total :<span className="ml-8">$ {totalPrice}</span>
               </p>
             </div>
-           <Link href="/checkout">
+           <div className="mt-12">
+           <Link href="/checkout" style={{margin:"10px 0"}}>
            <Button block type="primary">
               Proceed to checkout
             </Button>
            </Link>
+           </div>
           </div>
         </div>
       </div>

@@ -78,18 +78,27 @@ const ManageBookingPage = () => {
   const columns = [
     {
       title: "Name",
-      dataIndex: "name",
+      dataIndex: "user",
       key: "name",
+      render:function(params:any) {
+        return params && params?.name
+      }
     },
     {
       title: "Email",
-      dataIndex: "email",
+      dataIndex: "user",
       key: "email",
+      render:function(params:any) {
+        return params && params?.email
+      }
     },
     {
       title: "ContactNo",
-      dataIndex: "contactNo",
+      dataIndex: "user",
       key: "contactNo",
+      render:function(params:any) {
+        return params && params?.contactNo
+      }
     },
     {
       title: "Price($)",
@@ -150,7 +159,7 @@ const ManageBookingPage = () => {
 
   return (
     <div>
-      <h1>Service List</h1>
+      <h1>Booking List</h1>
       <div
         style={{
           display: "flex",
@@ -189,11 +198,6 @@ const ManageBookingPage = () => {
               </Button>
             )}
           </div>
-        </div>
-        <div>
-          <Link href={"/admin/manage-service/create"}>
-            <Button type="primary">Create Service</Button>
-          </Link>
         </div>
       </div>
       <UMTable

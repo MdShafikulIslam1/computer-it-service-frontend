@@ -33,8 +33,8 @@ const SideBar = () => {
           marginBottom: "1rem",
         }}
       >
-        <p className="text-orange-400 text-xl mt-4 -mb-4 md:tracking-widest">
-          CRIS
+        <p className="text-green-300 text-md mt-4 -mb-4 md:tracking-widest">
+          C R I S
         </p>
         <span className="w-full text-xs">Computer Repair And IT Service</span>
       </div>

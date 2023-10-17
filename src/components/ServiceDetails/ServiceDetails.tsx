@@ -34,14 +34,19 @@ const ServiceDetails = ({ item: service }: IProps) => {
   const reviews = reviewAndRatingData?.reviews;
   const [createReview] = useCreateReviewMutation();
   const onSubmit: SubmitHandler<any> = async (values: any) => {
-    message.loading("Posting ....");
+    if (!email) {
+      return message.error("Login First to leave your comment")
+    }
     const reviewData: IReviewData = {
       userId: data?.id,
       serviceId: service?.id!,
       rating: value,
       comments: values.comments,
     };
+    message.loading("Posting ....");
+
     try {
+      
       const res = await createReview(reviewData).unwrap();
       if (res?.id) {
         message.success("your review is done");
@@ -63,6 +68,9 @@ const ServiceDetails = ({ item: service }: IProps) => {
     price: Number(service.fee) * count,
   }
   try {
+    if (!email) {
+      return message.error("Login First to add to card service")
+    }
     const res = await createCart(cartData).unwrap();
     if (res?.id) {
       message.success(`${cartData.quantity} x ${service.name} has been added your cart`);
