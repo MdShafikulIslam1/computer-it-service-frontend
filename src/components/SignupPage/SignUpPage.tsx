@@ -34,12 +34,11 @@ const SignUpPage = () => {
     }
   };
   return (
-    <Row className="min-h-[90vh] md:flex gap-2 md:gap-4 lg:gap-10 justify-center items-center  w-full p-2 lg:4">
-      <Col sm={24} md={16} lg={6}>
+    <Row className="min-h-[90vh] md:flex gap-2 md:gap-6 lg:gap-12 justify-center items-center  w-full p-2 lg:4">
+      <Col sm={24} md={16} lg={8}>
         <Image
           src={signupImage}
           alt="login image"
-          layout="responsive"
           width={400}
           priority
         />

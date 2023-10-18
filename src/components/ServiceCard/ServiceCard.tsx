@@ -15,7 +15,7 @@ const ServiceCard = ({ item }: IProps) => {
           width={500}
           height={500}
           className="object-center w-full h-full rounded-xl"
-          priority
+       
         />
       </div>
       <h2 className="my-2 text-xl font-medium text-center ">{item?.name}</h2>

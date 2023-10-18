@@ -75,7 +75,7 @@ const ProfilePage = () => {
           className="shadow-md"
           span={6}
         >
-          <div className="flex flex-col mx-auto items-center justify-center h-48 w-48   my-10">
+          <div className="flex flex-col mx-auto items-center justify-center h-48 w-48  my-10">
             <div>
               {!!data?.profileImage ? (
                 <Image
@@ -95,18 +95,15 @@ const ProfilePage = () => {
                 </Avatar>
               )}
             </div>
-            <p className=" pl-6 font-bold text-xl text-green-500 my-2 ">
+            <p className="font-bold text-xl text-green-500 my-2 ">
               {data?.name}
             </p>
           </div>
           {/* <Button className="mx-auto w-1/2" type="primary">
             Upload New Photo
           </Button> */}
-          <p>
-            Member since:{" "}
-            <span className="text-blue-400 text-md">
-              {" "}
-              {dayjs(`${data?.createdAt}`).format("MMM D, YYYY")}
+          <p className="mt-4">
+            Member since: <span className="text-blue-400 text-md">{dayjs(`${data?.createdAt}`).format("MMM D, YYYY")}
             </span>
           </p>
         </Col>

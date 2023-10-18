@@ -86,7 +86,6 @@ const CloudinaryUploadImage = ({ name }: ImageUploadProps) => {
           <Image
             src={imageUrl}
             alt="avatar"
-            style={{ width: "100%" }}
             width={100}
             height={100}
           />

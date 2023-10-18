@@ -31,15 +31,9 @@ const LoginPage = () => {
     }
   };
   return (
-    <Row className="min-h-[90vh] md:flex gap-2 md:gap-4 lg:gap-10 justify-center items-center  w-full p-2 lg:4">
-      <Col sm={24} md={16} lg={6}>
-        <Image
-          src={loginImage}
-          alt="login image"
-          layout="responsive"
-          width={400}
-          priority
-        />
+    <Row className="min-h-[90vh] md:flex gap-2 md:gap-4 lg:gap-12 justify-center items-center  w-full p-2 lg:4">
+      <Col sm={24} md={16} lg={8}>
+        <Image src={loginImage} alt="login image" width={400} priority />
       </Col>
       <Col sm={24} md={8} lg={6}>
         <h1 className=" text-sm my-2 md:my-4 md:text-2xl tracking-normal md:tracking-wide lg:text-center lg:tracking-widest">

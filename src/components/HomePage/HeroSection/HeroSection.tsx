@@ -31,7 +31,6 @@ const HeroSection = () => {
                 className="w-full h-full rounded-lg"
                 width={600}
                 height={600}
-                layout="responsive"
               />
               </div>            
             <div className="w-full p-4 h-96">
@@ -41,7 +40,6 @@ const HeroSection = () => {
                 className="w-full h-full rounded-lg"
                 width={600}
                 height={600}
-                layout="responsive"
               />
               </div>            
             <div className="w-full p-4 h-96">
@@ -51,7 +49,6 @@ const HeroSection = () => {
                 className="w-full h-full rounded-lg"
                 width={600}
                 height={600}
-                layout="responsive"
               />
               </div>            
           </Carousel>

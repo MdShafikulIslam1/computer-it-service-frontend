@@ -3,6 +3,7 @@ import HeroSection from "@/components/HomePage/HeroSection/HeroSection";
 import SectionTitle from "@/components/SectionTitle/SectionTitle";
 import ServicePage from "@/components/Service/ServicePage";
 import { useGetAllServicesQuery } from "@/redux/api/servicesApi";
+import {FloatButton} from 'antd'
 
 const HomePage = () => {
   const { data } = useGetAllServicesQuery({ limit: 4, page: 1 });
@@ -13,6 +14,7 @@ const HomePage = () => {
       <HeroSection/>
       <SectionTitle/>
       <ServicePage data={services} />
+      <FloatButton.BackTop />
     </div>
   );
 };

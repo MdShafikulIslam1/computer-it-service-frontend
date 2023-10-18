@@ -76,8 +76,8 @@ const SideBarItems = (role: string) => {
       <TableOutlined />
     ),
     getItem(
-      <Link href="/cart">Cart Items</Link>,
-      "cart",
+      <Link href="/my-cart">Cart Items</Link>,
+      "my-cart",
       <ShoppingCartOutlined />
     ),
   ];

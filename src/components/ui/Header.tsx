@@ -67,7 +67,6 @@ const Header = () => {
           width={170}
           height={170}
           alt="logo image"
-          // objectFit="contain"
         />
       </div>
       <div className="w-3/5 mx-auto">
