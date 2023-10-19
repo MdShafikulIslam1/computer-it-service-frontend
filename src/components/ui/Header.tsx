@@ -33,7 +33,7 @@ const Header = () => {
     {
       key: "0",
       label: !!role ? (
-        <Button onClick={handleLogOut} type="text" danger>
+        <Button style={{ fontWeight: "bold" }} onClick={handleLogOut} type="text" danger>
           logout
         </Button>
       ) : (

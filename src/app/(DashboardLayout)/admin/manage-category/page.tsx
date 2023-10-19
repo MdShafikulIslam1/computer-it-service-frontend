@@ -94,9 +94,7 @@ const ManageCategoryPage = () => {
             <Tooltip title="Update" placement="left" color={"#0496ff"}>
               <Link href={`/admin/manage-category/edit/${data?.id}`}>
                 <Button
-                  style={{
-                    margin: "0px 5px",
-                  }}
+                  style={{ fontWeight: "bold", margin: "0px 5px" }}
                   onClick={() => console.log(data)}
                   type="primary"
                 >
@@ -146,7 +144,11 @@ const ManageCategoryPage = () => {
             }}
           >
             {(!!sortBy || !!sortOrder || !!searchTerm) && (
-              <Button onClick={filterReset} type="primary">
+              <Button
+                style={{ fontWeight: "bold" }}
+                onClick={filterReset}
+                type="primary"
+              >
                 Reset
                 <ReloadOutlined />
               </Button>
@@ -155,7 +157,9 @@ const ManageCategoryPage = () => {
         </div>
         <div>
           <Link href={"/admin/manage-category/create"}>
-            <Button type="primary">Create Category</Button>
+            <Button style={{ fontWeight: "bold" }} type="primary">
+              Create Category
+            </Button>
           </Link>
         </div>
       </div>

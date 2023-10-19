@@ -68,7 +68,7 @@ const LoginPage = () => {
               />
             </div>
 
-            <Button block type="primary" htmlType="submit">
+            <Button style={{ fontWeight: "bold" }} block type="primary" htmlType="submit">
               Login
             </Button>
             <div className="my-1 md:my-4 text-start font-lg">
@@ -77,7 +77,7 @@ const LoginPage = () => {
             <hr />
             <div className="my-1 md:my-4">
               <Link href="/sign-up">
-                <Button block>Create An Account</Button>
+                <Button style={{ fontWeight: "bold" }} block>Create An Account</Button>
               </Link>
             </div>
           </Form>

@@ -36,7 +36,7 @@ const WithLoginLayout = ({ children }: { children: React.ReactNode }) => {
     );
   }
   return (
-    <div  className="w-[1400px] mx-auto">
+    <div  className="w-[1400px] mx-auto bg-white">
       <Layout>
         <Header  />
        <div style={{background:"white"}}>

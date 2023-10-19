@@ -16,7 +16,10 @@ import React, { useState } from "react";
 import { useDebounced } from "@/hooks/useDebounced";
 import { useDeleteServiceMutation } from "@/redux/api/servicesApi";
 
-import { useGetAllBookingsQuery, useUpdateBookingMutation } from "@/redux/api/bookingApi";
+import {
+  useGetAllBookingsQuery,
+  useUpdateBookingMutation,
+} from "@/redux/api/bookingApi";
 import { getUserInfo } from "@/service/authentication.service";
 import { useGetSingleUserQuery } from "@/redux/api/userApi";
 
@@ -57,8 +60,7 @@ const MyBookingPage = () => {
     ...query,
     userId: user?.id,
   });
-  const bookings = data?.bookings;
-  console.log("my-booking", bookings);
+  const bookings = data?.bookings
   const meta = data?.meta;
   const [deleteService] = useDeleteServiceMutation();
 
@@ -75,7 +77,7 @@ const MyBookingPage = () => {
   //cancel my booking
   const [updateBooking] = useUpdateBookingMutation();
 
-  const cancelBooking = async (id:string) => {
+  const cancelBooking = async (id: string) => {
     try {
       const res = await updateBooking({
         id,
@@ -84,7 +86,7 @@ const MyBookingPage = () => {
       if (res.id) {
         message.success("Your booking has been canceled");
       }
-    } catch (error:any) {
+    } catch (error: any) {
       message.error(error?.message);
     }
   };
@@ -129,7 +131,13 @@ const MyBookingPage = () => {
       render: function (params: any) {
         return (
           <div>
-            <Button onClick = {() => cancelBooking(params?.id)} disabled={params?.status === "CANCEL"}>Cancel</Button>
+            <Button
+              style={{ fontWeight: "bold" }}
+              onClick={() => cancelBooking(params?.id)}
+              disabled={params?.status === "CANCEL"}
+            >
+              Cancel
+            </Button>
           </div>
         );
       },
@@ -151,9 +159,7 @@ const MyBookingPage = () => {
             <Tooltip title="View Details" placement="top" color={"#0496ff"}>
               <Link href={`/admin/manage-booking/view/${data?.id}`}>
                 <Button
-                  style={{
-                    margin: "0px 5px",
-                  }}
+                  style={{ fontWeight: "bold", margin: "0px 5px" }}
                   onClick={() => console.log(data)}
                   type="primary"
                 >
@@ -161,7 +167,7 @@ const MyBookingPage = () => {
                 </Button>
               </Link>
             </Tooltip>
-                      </>
+          </>
         );
       },
     },
@@ -202,14 +208,18 @@ const MyBookingPage = () => {
             }}
           >
             {(!!sortBy || !!sortOrder || !!searchTerm) && (
-              <Button onClick={filterReset} type="primary">
+              <Button
+                style={{ fontWeight: "bold" }}
+                onClick={filterReset}
+                type="primary"
+              >
                 Reset
                 <ReloadOutlined />
               </Button>
             )}
           </div>
         </div>
-            </div>
+      </div>
       <UMTable
         columns={columns}
         dataSource={bookings}

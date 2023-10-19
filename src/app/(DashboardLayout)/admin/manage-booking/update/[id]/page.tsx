@@ -61,7 +61,7 @@ const EditBookingPage = ({ params }: { params: any }) => {
           </Col>
         </Row>
 
-        <Button type="primary" htmlType="submit" style={{ marginTop: "10px" }}>
+        <Button style={{ fontWeight: "bold" ,marginTop: "10px"}} type="primary" htmlType="submit">
           Update
         </Button>
       </Form>

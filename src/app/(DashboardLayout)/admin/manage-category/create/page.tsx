@@ -62,7 +62,7 @@ const CreateCategoryPage = () => {
               </div>
             </Col>
           </Row>
-          <Button htmlType="submit" type="primary">
+          <Button style={{ fontWeight: "bold" }} htmlType="submit" type="primary">
             Create
           </Button>
         </div>

@@ -18,9 +18,9 @@ import {
   useGetAllUsersQuery,
 } from "@/redux/api/userApi";
 
-const ManageAdminPage = () => {
+const ManageUserPage = () => {
   const query: Record<string, unknown> = {};
-  const [size, setSize] = useState<number>(2);
+  const [size, setSize] = useState<number>(10);
   const [page, setPage] = useState<number>(1);
   const [sortBy, setSortBy] = useState<string>("");
   const [sortOrder, setSortOrder] = useState<string>("");
@@ -34,7 +34,7 @@ const ManageAdminPage = () => {
   if (!!debounceValue) {
     query["searchTerm"] = searchTerm;
   }
-  const { data, isLoading } = useGetAllUsersQuery({ role: "admin", ...query });
+  const { data, isLoading } = useGetAllUsersQuery({ role: "user", ...query });
   const users = data?.users;
   const meta = data?.meta;
   const [deleteUser] = useDeleteUserMutation();
@@ -112,7 +112,7 @@ const ManageAdminPage = () => {
   };
   return (
     <div>
-      <h1>Admin List</h1>
+      <h1>User List</h1>
       <div
         style={{
           display: "flex",
@@ -156,13 +156,6 @@ const ManageAdminPage = () => {
             )}
           </div>
         </div>
-        <div>
-          <Link href={"/super_admin/manage-admin/create"}>
-            <Button style={{ fontWeight: "bold" }} type="primary">
-              Create Admin
-            </Button>
-          </Link>
-        </div>
       </div>
       <UMTable
         columns={columns}
@@ -178,4 +171,4 @@ const ManageAdminPage = () => {
   );
 };
 
-export default ManageAdminPage;
+export default ManageUserPage;

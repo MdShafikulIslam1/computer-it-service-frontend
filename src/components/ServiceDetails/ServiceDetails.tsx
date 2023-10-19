@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import { ICart, IReviewData, IService } from "@/types/globalType";
-import { Button, Col, Row, message, Rate, Avatar, Empty } from "antd";
+import { Button, Col, Row, message, Rate, Avatar, Empty, Space } from "antd";
 import { ShoppingCartOutlined, UserOutlined } from "@ant-design/icons";
 import Form from "../Form/Form";
 import { SubmitHandler } from "react-hook-form";
@@ -16,26 +16,29 @@ import { useAppDispatch, useAppSelector } from "@/redux/hook";
 import { decrement, increment } from "@/redux/feature/counter/counterSlice";
 import { useCreateCartMutation } from "@/redux/api/cartApi";
 import ServicePage from "../Service/ServicePage";
+import dayjs from "dayjs";
+import Loading from "../LoadingComponent/LoadingComponent";
 interface IProps {
   item: IService;
 }
 
 const ServiceDetails = ({ item: service }: IProps) => {
   const [value, setValue] = useState<number>(0);
-  const count = useAppSelector((state) => state.counter.count)
-  const dispatch = useAppDispatch()
+  const count = useAppSelector((state) => state?.counter?.count);
+  const dispatch = useAppDispatch();
   const { email } = getUserInfo() as any;
   const { data } = useGetSingleUserQuery(email);
-  const { data: reviewAndRatingData } = useGetAllReviewsQuery({
+  const { data: reviewAndRatingData, isLoading } = useGetAllReviewsQuery({
     limit: 100,
     page: 1,
     serviceId: service?.id,
   });
+  <Loading isLoading={isLoading} />;
   const reviews = reviewAndRatingData?.reviews;
   const [createReview] = useCreateReviewMutation();
   const onSubmit: SubmitHandler<any> = async (values: any) => {
     if (!email) {
-      return message.error("Login First to leave your comment")
+      return message.error("Login First to leave your comment");
     }
     const reviewData: IReviewData = {
       userId: data?.id,
@@ -46,7 +49,6 @@ const ServiceDetails = ({ item: service }: IProps) => {
     message.loading("Posting ....");
 
     try {
-      
       const res = await createReview(reviewData).unwrap();
       if (res?.id) {
         message.success("your review is done");
@@ -59,28 +61,29 @@ const ServiceDetails = ({ item: service }: IProps) => {
   const desc = ["terrible", "bad", "normal", "good", "wonderful"];
 
   // add to cart handler
-  const [createCart] = useCreateCartMutation()
- const handleAddToCart = async() => {
-  const cartData:ICart = {
-    userId: data?.id,
-    serviceId: service?.id!,
-    quantity:count,
-    price: Number(service.fee) * count,
-  }
-  try {
-    if (!email) {
-      return message.error("Login First to add to card service")
+  const [createCart] = useCreateCartMutation();
+  const handleAddToCart = async () => {
+    const cartData: ICart = {
+      userId: data?.id,
+      serviceId: service?.id!,
+      quantity: count || 1,
+      price: Number(service.fee) * count,
+    };
+    try {
+      if (!email) {
+        return message.error("Login First to add to card service");
+      }
+      const res = await createCart(cartData).unwrap();
+      if (res?.id) {
+        message.success(
+          `${cartData.quantity} x ${service.name} has been added your cart`
+        );
+      }
+    } catch (error: any) {
+      message.error(error.message);
     }
-    const res = await createCart(cartData).unwrap();
-    if (res?.id) {
-      message.success(`${cartData.quantity} x ${service.name} has been added your cart`);
-    }
-  } catch (error: any) {
-    message.error(error.message);
-  }
- 
- }
-  
+  };
+
   return (
     <div className="my-8  bg-white">
       {/* service details start */}
@@ -89,7 +92,7 @@ const ServiceDetails = ({ item: service }: IProps) => {
           <Image
             src={service?.imageUrl}
             alt="Shoes"
-            className="w-full h-full rounded-lg"
+            className="w-full h-full rounded-lg bg-green-500"
             width={600}
             height={600}
           />
@@ -106,20 +109,37 @@ const ServiceDetails = ({ item: service }: IProps) => {
             <p>Category:{service?.category?.title}</p>
             {service?.warranty && (
               <p className="font-bold">
-                warranty: <span>{service.warranty}</span>{" "}
+                warranty: <span>{service?.warranty}</span>{" "}
               </p>
             )}
             <p className="font-bold">
               Repair Time : <span>{service?.durationInMinutes} Minutes</span>{" "}
             </p>
-            <p className="font-medium">{service?.description}</p>
+            <p className="font-medium w-4/5 mb-8">{service?.description}</p>
             <div className="flex mt-16 gap-4 items-center">
               <div className="flex gap-3 bg-gray-100 border py-1 px-2 rounded justify-center items-center">
-                <Button onClick={() => dispatch(decrement())} className="outline-none border-none">-</Button>
+                <Button
+                  style={{ fontWeight: "bold" }}
+                  onClick={() => dispatch(decrement())}
+                  className="outline-none border-none"
+                >
+                  -
+                </Button>
                 <h1 className="text-center">{count}</h1>
-                <Button onClick={() => dispatch(increment())} className="outline-none border-none">+</Button>
+                <Button
+                  style={{ fontWeight: "bold" }}
+                  onClick={() => dispatch(increment())}
+                  className="outline-none border-none"
+                >
+                  +
+                </Button>
               </div>
-              <Button onClick={() => handleAddToCart()} type="primary" className="text-white">
+              <Button
+                style={{ fontWeight: "bold" }}
+                onClick={() => handleAddToCart()}
+                type="primary"
+                className="text-white"
+              >
                 <ShoppingCartOutlined className="text-white" /> Add to cart
               </Button>
             </div>
@@ -135,7 +155,7 @@ const ServiceDetails = ({ item: service }: IProps) => {
               {reviews?.map((review: any) => (
                 <div
                   className="flex justify-between my-4 bg-gray-50 p-4 rounded "
-                  key={review.id}
+                  key={review?.id}
                 >
                   {/* image(user) */}
                   <div className="h-20 w-20 rounded-full bg-gray-400">
@@ -149,11 +169,16 @@ const ServiceDetails = ({ item: service }: IProps) => {
                     />
                   </div>
                   {/* review information */}
-                  <div>
+                  <Space direction="vertical">
                     <h3>{review?.user?.name}</h3>
-                    <small>{review?.createdAt}</small>
+                    <small>
+                      {" "}
+                      {dayjs(`${data?.createdAt}`).format(
+                        "MMM D, YYYY hh:mm A"
+                      )}
+                    </small>
                     <p className="w-full">{review?.comments}</p>
-                  </div>
+                  </Space>
                   {/* rating */}
                   <div>
                     <Rate disabled value={review?.rating} />
@@ -224,18 +249,18 @@ const ServiceDetails = ({ item: service }: IProps) => {
                     </div>
                   </Col>
                 </Row>
-                <Button htmlType="submit" type="primary">
-                  Create
+                <Button
+                  style={{ fontWeight: "bold" }}
+                  htmlType="submit"
+                  type="primary"
+                >
+                  Comment
                 </Button>
               </div>
             </Form>
           </div>
         </div>
       </div>
-      {/* Related products show */}
-      {/* <div>
-      <ServicePage data={services} />
-    </div> */}
     </div>
   );
 };

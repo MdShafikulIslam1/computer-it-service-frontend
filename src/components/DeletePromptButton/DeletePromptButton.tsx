@@ -19,7 +19,7 @@ const DeletePromptButton = ({ data, deleteHandler }: any) => {
       cancelText="No"
     >
       <Tooltip title="Delete" color="#ab3428" placement="top">
-        <Button type="primary" danger>
+        <Button style={{ fontWeight: "bold" }} type="primary" danger>
           <DeleteOutlined />
         </Button>
       </Tooltip>

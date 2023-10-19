@@ -119,9 +119,7 @@ const ManageServicePage = () => {
             <Tooltip title="Update" placement="left" color={"#0496ff"}>
               <Link href={`/super_admin/manage-department/edit/${data?._id}`}>
                 <Button
-                  style={{
-                    margin: "0px 5px",
-                  }}
+                  style={{ fontWeight: "bold", margin: "0px 5px" }}
                   onClick={() => console.log(data)}
                   type="primary"
                 >
@@ -171,7 +169,11 @@ const ManageServicePage = () => {
             }}
           >
             {(!!sortBy || !!sortOrder || !!searchTerm) && (
-              <Button onClick={filterReset} type="primary">
+              <Button
+                style={{ fontWeight: "bold" }}
+                onClick={filterReset}
+                type="primary"
+              >
                 Reset
                 <ReloadOutlined />
               </Button>
@@ -180,7 +182,9 @@ const ManageServicePage = () => {
         </div>
         <div>
           <Link href={"/admin/manage-service/create"}>
-            <Button type="primary">Create Service</Button>
+            <Button style={{ fontWeight: "bold" }} type="primary">
+              Create Service
+            </Button>
           </Link>
         </div>
       </div>

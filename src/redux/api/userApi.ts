@@ -47,6 +47,7 @@ const userApi = baseApi.injectEndpoints({
         url: `${USER_URL}/${id}`,
         method: "DELETE",
       }),
+      invalidatesTags: [tagTypes.USER],
     }),
   }),
 });

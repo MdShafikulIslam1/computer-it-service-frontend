@@ -99,7 +99,7 @@ const ProfilePage = () => {
               {data?.name}
             </p>
           </div>
-          {/* <Button className="mx-auto w-1/2" type="primary">
+          {/* <Button style={{ fontWeight: "bold" }} className="mx-auto w-1/2" type="primary">
             Upload New Photo
           </Button> */}
           <p className="mt-4">
@@ -248,7 +248,7 @@ const ProfilePage = () => {
                     </div>
                   </Col>
                 </Row>
-                <Button htmlType="submit" type="primary">
+                <Button style={{ fontWeight: "bold" }} htmlType="submit" type="primary">
                   Changes Save
                 </Button>
               </div>

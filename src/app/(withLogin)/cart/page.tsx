@@ -91,20 +91,7 @@ const CartPage = () => {
       render: function (data: any) {
         return (
           <>
-            {/* <Tooltip title="Update" placement="left" color={"#0496ff"}>
-              <Link href={`/super_admin/manage-department/edit/${data?._id}`}>
-                <Button
-                  style={{
-                    margin: "0px 5px",
-                  }}
-                  onClick={() => console.log(data)}
-                  type="primary"
-                >
-                  <EditOutlined />
-                </Button>
-              </Link>
-            </Tooltip> */}
-            <DeletePromptButton data={data} deleteHandler={deleteHandler} />
+                       <DeletePromptButton data={data} deleteHandler={deleteHandler} />
           </>
         );
       },
@@ -179,7 +166,7 @@ const CartPage = () => {
                   }}
                 >
                   {(!!sortBy || !!sortOrder || !!searchTerm) && (
-                    <Button onClick={filterReset} type="primary">
+                    <Button style={{ fontWeight: "bold" }} onClick={filterReset} type="primary">
                       Reset
                       <ReloadOutlined />
                     </Button>
@@ -188,7 +175,7 @@ const CartPage = () => {
               </div>
               <div>
                 <Link href={"/service"}>
-                  <Button type="primary">See Service</Button>
+                  <Button style={{ fontWeight: "bold" }} type="primary">See Service</Button>
                 </Link>
               </div>
             </div>
@@ -219,7 +206,7 @@ const CartPage = () => {
             </div>
            <div className="mt-12">
            <Link href="/checkout" style={{margin:"10px 0"}}>
-           <Button block type="primary">
+           <Button style={{ fontWeight: "bold" }} block type="primary">
               Proceed to checkout
             </Button>
            </Link>

@@ -16,7 +16,6 @@ type ImageUploadProps = {
 const CloudinaryUploadImage = ({ name }: ImageUploadProps) => {
   const [loading, setLoading] = useState(false);
   const [imageUrl, setImageUrl] = useState<string>();
-  console.log("imageUrl", imageUrl);
   const { setValue } = useFormContext();
   const beforeUpload = (file: RcFile) => {
     const isJpgOrPng = file.type === "image/jpeg" || file.type === "image/png";

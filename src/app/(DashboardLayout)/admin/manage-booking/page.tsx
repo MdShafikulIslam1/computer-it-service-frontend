@@ -126,10 +126,8 @@ const ManageBookingPage = () => {
           <>
           <Tooltip title="View Details" placement="top" color={"#0496ff"}>
               <Link href={`/admin/manage-booking/view/${data?.id}`}>
-                <Button
-                  style={{
-                    margin: "0px 5px",
-                  }}
+                <Button style={{ fontWeight: "bold",margin: "0px 5px" }}
+                 
                   onClick={() => console.log(data)}
                   type="primary"
                 >
@@ -139,10 +137,8 @@ const ManageBookingPage = () => {
             </Tooltip>
             <Tooltip title="Update Status" placement="top" color={"#0496ff"}>
               <Link href={`/admin/manage-booking/update/${data?.id}`}>
-                <Button
-                  style={{
-                    margin: "0px 5px",
-                  }}
+                <Button style={{ fontWeight: "bold" ,margin: "0px 5px"}}
+                 
                   onClick={() => console.log(data)}
                   type="primary"
                 >
@@ -192,7 +188,7 @@ const ManageBookingPage = () => {
             }}
           >
             {(!!sortBy || !!sortOrder || !!searchTerm) && (
-              <Button onClick={filterReset} type="primary">
+              <Button style={{ fontWeight: "bold" }} onClick={filterReset} type="primary">
                 Reset
                 <ReloadOutlined />
               </Button>

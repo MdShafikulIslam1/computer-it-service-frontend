@@ -21,7 +21,6 @@ const CreateAdminPage = () => {
     message.loading("Creating ....");
     try {
       const res = await createUser(values).unwrap();
-      console.log(res);
       if (res?.id) {
         message.success("Admin Created successfully");
         router.push("/super_admin/manage-admin");
@@ -86,7 +85,7 @@ const CreateAdminPage = () => {
               </Space>
             </Col>
           </Row>
-          <Button htmlType="submit" type="primary">
+          <Button style={{ fontWeight: "bold" }} htmlType="submit" type="primary">
             Create
           </Button>
         </div>

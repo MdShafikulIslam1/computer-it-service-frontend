@@ -3,7 +3,7 @@ import { UserOutlined } from "@ant-design/icons";
 import { SubmitHandler } from "react-hook-form";
 import { Row, Col, Button, message } from "antd";
 import Image from "next/image";
-import signupImage from "../../assests/images/Signup-image.png";
+import signupImage from "../../assests/images/signup-image.png";
 import Form from "@/components/Form/Form";
 import FormInput from "@/components/Form/FormInput";
 import { useRouter } from "next/navigation";
@@ -87,7 +87,7 @@ const SignUpPage = () => {
               />
             </div>
 
-            <Button block type="primary" htmlType="submit">
+            <Button style={{ fontWeight: "bold" }} block type="primary" htmlType="submit">
               Create an Account
             </Button>
             <div className="my-1 md:my-4 text-start font-lg">

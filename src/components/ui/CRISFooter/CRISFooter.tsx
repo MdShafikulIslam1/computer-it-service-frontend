@@ -23,18 +23,18 @@ const CRISFooter = () => {
           </h4>
           <div className="mt-8">
             <Space>
-              <Button
+              <Button style={{ fontWeight: "bold" }}
                 href="https://www.facebook.com/profile.php?id=100013695768823"
                 shape="circle"
                 type="primary"
                 icon={<FacebookFilled />}
               />
-              <Button
+              <Button style={{ fontWeight: "bold" }}
                 shape="circle"
                 type="primary"
                 icon={<TwitterCircleFilled />}
               />
-              <Button
+              <Button style={{ fontWeight: "bold" }}
                 href="https://www.youtube.com/channel/UCQPoKuyEOG6t2WJJHtz74Rg"
                 shape="circle"
                 type="primary"
