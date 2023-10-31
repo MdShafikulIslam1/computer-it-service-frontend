@@ -15,7 +15,6 @@ import { useGetSingleUserQuery } from "@/redux/api/userApi";
 import { useAppDispatch, useAppSelector } from "@/redux/hook";
 import { decrement, increment } from "@/redux/feature/counter/counterSlice";
 import { useCreateCartMutation } from "@/redux/api/cartApi";
-import ServicePage from "../Service/ServicePage";
 import dayjs from "dayjs";
 import Loading from "../LoadingComponent/LoadingComponent";
 interface IProps {

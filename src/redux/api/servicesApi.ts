@@ -2,11 +2,12 @@ import { IMeta } from "@/types/globalType";
 import baseApi from "./baseApi";
 import { tagTypes } from "../tagTypes/tagTypes";
 
+const SERVICE_URL = "/services";
 const serviceApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
     getAllServices: build.query({
-      query: (arg: Record<string, any>) => ({
-        url: "/services",
+      query: (arg: Record<string, any> = {}) => ({
+        url: SERVICE_URL,
         method: "GET",
         params: arg,
       }),
@@ -20,14 +21,14 @@ const serviceApi = baseApi.injectEndpoints({
     }),
     getSingleService: build.query({
       query: (id: string) => ({
-        url: `/services/${id}`,
+        url: `${SERVICE_URL}/${id}`,
         method: "GET",
       }),
       providesTags: [tagTypes.SERVICE],
     }),
     createService: build.mutation({
       query: (data: any) => ({
-        url: "/services/create-service",
+        url: `${SERVICE_URL}/'create-service'`,
         method: "POST",
         data,
       }),
@@ -35,7 +36,7 @@ const serviceApi = baseApi.injectEndpoints({
     }),
     updateService: build.mutation({
       query: ({ id, data }) => ({
-        url: `/services/${id}`,
+        url: `${SERVICE_URL}/${id}`,
         method: "PATCH",
         data,
       }),
@@ -43,7 +44,7 @@ const serviceApi = baseApi.injectEndpoints({
     }),
     deleteService: build.mutation({
       query: (id: string) => ({
-        url: `/services/${id}`,
+        url: `${SERVICE_URL}/${id}`,
         method: "DELETE",
       }),
       invalidatesTags: [tagTypes.SERVICE],

@@ -59,8 +59,8 @@ const Header = () => {
   ];
 
   return (
-    <AntHeader className="w-full bg-white h-24 flex  justify-between items-center">
-      <div>
+    <AntHeader className="w-full bg-primary h-24 flex  justify-between items-center rounded rounded-t-none">
+      <div className="text-white">
         <Image
           className="mt-4"
           src={logo}
@@ -71,7 +71,8 @@ const Header = () => {
       </div>
       <div className="w-3/5 mx-auto">
         <Menu
-          // className="w-full"
+       
+          className="font-semibold font-2xl bg-primary text-white rounded active:text-secondary"
           mode="horizontal"
           items={menuItems}
         />

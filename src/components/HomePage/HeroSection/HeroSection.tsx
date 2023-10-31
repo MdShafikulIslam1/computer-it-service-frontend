@@ -6,7 +6,7 @@ import slider3 from "../../../assests/images/slider3.jpg";
 
 const HeroSection = () => {
   return (
-    <div className="p-2 flex mb-16 ">
+    <div className="p-2 flex my-16 bg-white">
       <div className="w-1\2 lg:w-1/2 py-8 px-6">
         <div className="space-y-10">
           <h5 className="text-3xl font-semibold text-blue-600">
@@ -15,7 +15,7 @@ const HeroSection = () => {
           <div className="text-5xl font-bold">
             <p>Best Computer Repair</p>
             <p>
-              And <span className="text-blue-800">IT Solution</span>
+              And <span className="text-primary">IT Solution</span>
             </p>
             <p>Company</p>
           </div>

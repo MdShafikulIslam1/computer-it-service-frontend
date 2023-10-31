@@ -29,7 +29,7 @@ const HomePage = () => {
 
   const meta = data?.meta;
   return (
-    <div className="bg-gray-50">
+    <div className="bg-white">
       <HeroSection />
       <AboutUs />
       {/* it services */}

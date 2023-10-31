@@ -13,7 +13,7 @@ const AboutUs = () => {
           <h2 className="w-1/2 text-2xl">
             We Team of Experience
             <br />
-            <span className="text-blue-600"> IT Specialties</span>
+            <span className=""> IT Specialties</span>
           </h2>
           <p>
             Over 39,000 people work for us in more than 70 countries all This
@@ -21,7 +21,7 @@ const AboutUs = () => {
           </p>
           <div className="flex gap-16 mt-4">
             <div>
-              <BsCloudArrowDownFill className="text-center text-orange-500 text-7xl" />
+              <BsCloudArrowDownFill className="text-center text-secondary text-7xl" />
             </div>
             <Space direction="vertical">
               <h1>Cloud Based Services Free Spaces</h1>
@@ -33,7 +33,7 @@ const AboutUs = () => {
           </div>
           <div className="flex gap-16 mt-4">
             <div>
-              <GiTeamIdea className="text-center text-orange-500 text-7xl" />
+              <GiTeamIdea className="text-center text-secondary text-7xl" />
             </div>
             <Space direction="vertical">
               <h1>Expert Team Member</h1>

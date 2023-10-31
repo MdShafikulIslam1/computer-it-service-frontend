@@ -9,10 +9,10 @@ const PublicLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <div className="w-[1400px] mx-auto">
       <Layout>
-        <Content>
+        <Content className="bg-white">
           <Header />
           <div style={{ background: "white" }}>{children}</div>
-          <Footer className="bg-slate-600 rounded-xl py-10">
+          <Footer className="bg-primary rounded-xl py-10">
             <CRISFooter/>
              </Footer>
         </Content>
