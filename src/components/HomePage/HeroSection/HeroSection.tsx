@@ -3,16 +3,17 @@ import Image from "next/image";
 import slider1 from "../../../assests/images/slider1.jpg";
 import slider2 from "../../../assests/images/slider2.jpg";
 import slider3 from "../../../assests/images/slider3.jpg";
+import PrimaryButton from "@/components/PrimaryButton/PrimaryButton";
 
 const HeroSection = () => {
   return (
-    <div className="p-2 flex my-16 bg-white">
+    <div className="p-2 flex my-16 bg-white group">
       <div className="w-1\2 lg:w-1/2 py-8 px-6">
         <div className="space-y-10">
-          <h5 className="text-3xl font-semibold text-blue-600">
+          <h5 className="text-xl md:text-2xl lg:text-3xl font-medium text-primary group-hover:tracking-widest ease-linear duration-500">
             We are creative
           </h5>
-          <div className="text-5xl font-bold">
+          <div className="text-3xl md:text-4xl lg:text-5xl font-bold">
             <p>Best Computer Repair</p>
             <p>
               And <span className="text-primary">IT Solution</span>
@@ -20,16 +21,8 @@ const HeroSection = () => {
             <p>Company</p>
           </div>
           <div className="flex gap-10">
-            <Button style={{ fontWeight: "bold" }} type="primary">
-              About +
-            </Button>
-            <Button
-              href="/service"
-              style={{ fontWeight: "bold" }}
-              type="primary"
-            >
-              Our Service +
-            </Button>
+            <PrimaryButton href="/about us" title="About Us " size="large" />
+            <PrimaryButton href="/service" title="Our Services " size="large" />
           </div>
         </div>
       </div>

@@ -3,13 +3,14 @@ import aboutUs from "../../../assests/images/about.jpg";
 import { Button, Space } from "antd";
 import { BsCloudArrowDownFill } from "react-icons/bs";
 import { GiTeamIdea } from "react-icons/gi";
+import TextWithUnderLine from "@/components/Divider/Divider";
 
 const AboutUs = () => {
   return (
-    <div className="flex justify-evenly my-24">
+    <div className="flex group justify-evenly my-24">
       <div className="w-full lg:w-1/2  px-8 py-10">
         <Space direction="vertical">
-          <h3 className="text-blue-500 font-medium text-4xl">About us ----</h3>
+       <TextWithUnderLine title="About Us"/>        
           <h2 className="w-1/2 text-2xl">
             We Team of Experience
             <br />
@@ -57,7 +58,7 @@ const AboutUs = () => {
           </div>
         </Space>
       </div>
-      <div className="w-4/5 p-4 h-96 lg:w-1/2 relative">
+      <div className="w-4/5 p-4 h-96 lg:w-1/2 relative mt-16">
         <Image
           src={aboutUs}
           alt="Shoes"
@@ -65,7 +66,7 @@ const AboutUs = () => {
           width={600}
           height={600}
         />
-        <div className="w-36 flex justify-center items-center h-36 rounded-full text-white bg-blue-700 absolute -top-8 -left-8">
+        <div className="w-36 flex justify-center items-center h-36 rounded-full text-white bg-primary absolute -top-8 -left-8">
           <p className="w-full text-center text-xl font-bold p-4">
             10
             <br />

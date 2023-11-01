@@ -35,7 +35,7 @@ const FormTextArea = ({
             {...field}
             name={name}
             showCount
-            maxLength={100}
+            maxLength={250}
             style={{ height: 120, marginBottom: 24 }}
             // onChange={onChange}
             placeholder={placeHolder}

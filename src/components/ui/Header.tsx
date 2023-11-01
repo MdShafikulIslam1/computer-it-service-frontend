@@ -80,15 +80,15 @@ const Header = () => {
 
       <div>
         <Row justify={"end"} align={"middle"}>
-          <p className="text-black mr-2">{loginUser?.name}</p>
+          <small className= " text-secondary mr-2">{loginUser?.name}</small>
+          {/* <p className="text-secondary mr-2">{loginUser?.email}</p> */}
 
           <Dropdown menu={{ items }}>
             <Space wrap size={16}>
               {/* <Avatar size="large" icon={<UserOutlined />} /> */}
               <div className="flex justify-center items-center">
-                               <Avatar
-                  size={35}               
-
+                  <Avatar
+                  size={35}  
                   src={loginUser?.profileImage}
                   icon={<UserOutlined className="text-center" />}
                 />

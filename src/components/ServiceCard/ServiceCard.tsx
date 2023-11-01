@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 // import Tilt from "react-parallax-tilt";
 import PrimaryButton from "../PrimaryButton/PrimaryButton";
-import {RightCircleFilled } from "@ant-design/icons";
+import { RightCircleFilled } from "@ant-design/icons";
 interface IProps {
   item: IService;
 }
@@ -44,6 +44,7 @@ const ServiceCard = ({ item }: IProps) => {
       <Link href={`/service/${item?.id}`}>
         <div className="text-center">
           <PrimaryButton
+            className="absolute bottom-0 left-0"
             title="Read more"
             icon={<RightCircleFilled />}
             isBlock={true}

@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import { authKey } from "@/constant/keys/authKey";
 import { useGetSingleUserQuery } from "@/redux/api/userApi";
 import { getUserInfo, removeUserInfo } from "@/service/authentication.service";
@@ -8,8 +8,8 @@ import type { MenuProps } from "antd";
 import { useRouter } from "next/navigation";
 const { Header: AntHeader } = Layout;
 const Header = () => {
-  const { role ,email} = getUserInfo() as any;
-  const {data:loginUser} = useGetSingleUserQuery(email)
+  const { role, email } = getUserInfo() as any;
+  const { data: loginUser } = useGetSingleUserQuery(email);
   const router = useRouter();
   const handleLogOut = () => {
     removeUserInfo(authKey);
@@ -19,7 +19,12 @@ const Header = () => {
     {
       key: "0",
       label: (
-        <Button style={{ fontWeight: "bold" }} onClick={handleLogOut} type="text" danger>
+        <Button
+          style={{ fontWeight: "bold" }}
+          onClick={handleLogOut}
+          type="text"
+          danger
+        >
           logout
         </Button>
       ),
@@ -38,17 +43,20 @@ const Header = () => {
         justify={"end"}
         align={"middle"}
       >
-        <p className="text-black mr-2">{loginUser?.name}</p>
+  
+          <span className="text-primary mr-2">{loginUser?.name}</span>
+          {/* <span className="text-secondary mr-2">{loginUser?.email}</span> */}
+       
 
         <Dropdown menu={{ items }}>
           <Space wrap size={16}>
-          <div className="flex justify-center items-center">
-                               <Avatar                  size={35}               
-
-                  src={loginUser?.profileImage}
-                  icon={<UserOutlined className="text-center" />}
-                />
-              </div>
+            <div className="flex justify-center items-center">
+              <Avatar
+                size={35}
+                src={loginUser?.profileImage}
+                icon={<UserOutlined className="text-center" />}
+              />
+            </div>
           </Space>
         </Dropdown>
       </Row>

@@ -1,3 +1,4 @@
+import { RightCircleFilled } from "@ant-design/icons";
 import { Button } from "antd";
 import { ReactNode } from "react";
 
@@ -7,21 +8,26 @@ type IButtonProps = {
   type?: "primary" | "dashed" | "link" | "text" | "default";
   isBlock?: boolean;
   size?: "large" | "middle" | "small";
+  href?: string;
+  className?: string;
 };
 const PrimaryButton = ({
   type = "primary",
   isBlock = false,
   size = "large",
   title,
-  icon,
+  icon = <RightCircleFilled />,
+  href,
+  className,
 }: IButtonProps) => {
   return (
     <Button
+      href={href}
       style={{ fontWeight: "bold" }}
       type={type}
       block={isBlock}
       size={size}
-      className="absolute bottom-0 left-0"
+      className={`${className}`}
     >
       {title} {icon}
     </Button>
