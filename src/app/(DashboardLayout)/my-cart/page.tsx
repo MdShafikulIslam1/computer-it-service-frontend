@@ -61,13 +61,15 @@ const CartPage = () => {
         return (
           data && (
             <div className="h-20 w-20 rounded-full bg-gray-400">
-              <Image
-                src={data?.imageUrl}
-                alt="Service Image"
-                width={500}
-                height={500}
-                className="object-center w-full h-full rounded-full"
-                       />
+              {!!data?.imageUrl && (
+                <Image
+                  src={data?.imageUrl}
+                  alt="Service Image"
+                  width={500}
+                  height={500}
+                  className="object-center w-full h-full rounded-full"
+                />
+              )}
             </div>
           )
         );
@@ -91,7 +93,7 @@ const CartPage = () => {
       render: function (data: any) {
         return (
           <>
-                      <DeletePromptButton data={data} deleteHandler={deleteHandler} />
+            <DeletePromptButton data={data} deleteHandler={deleteHandler} />
           </>
         );
       },
@@ -166,7 +168,11 @@ const CartPage = () => {
                   }}
                 >
                   {(!!sortBy || !!sortOrder || !!searchTerm) && (
-                    <Button style={{ fontWeight: "bold" }} onClick={filterReset} type="primary">
+                    <Button
+                      style={{ fontWeight: "bold" }}
+                      onClick={filterReset}
+                      type="primary"
+                    >
                       Reset
                       <ReloadOutlined />
                     </Button>
@@ -175,7 +181,9 @@ const CartPage = () => {
               </div>
               <div>
                 <Link href={"/service"}>
-                  <Button style={{ fontWeight: "bold" }} type="primary">See Service</Button>
+                  <Button style={{ fontWeight: "bold" }} type="primary">
+                    See Service
+                  </Button>
                 </Link>
               </div>
             </div>
@@ -196,7 +204,7 @@ const CartPage = () => {
           <div className="border p-10 space-y-5">
             <h1 className="text-center text-2xl font-bold">Cart Totals</h1>
             <hr />
-            <div >
+            <div>
               <p className="text-xl font-medium text-gray-500">
                 Subtotal : <span className="ml-8">$ {totalPrice}</span>
               </p>
@@ -204,13 +212,13 @@ const CartPage = () => {
                 Total :<span className="ml-8">$ {totalPrice}</span>
               </p>
             </div>
-           <div className="mt-12">
-           <Link href="/booking-checkout" style={{margin:"10px 0"}}>
-           <Button style={{ fontWeight: "bold" }} block type="primary">
-              Proceed to checkout
-            </Button>
-           </Link>
-           </div>
+            <div className="mt-12">
+              <Link href="/booking-checkout" style={{ margin: "10px 0" }}>
+                <Button style={{ fontWeight: "bold" }} block type="primary">
+                  Proceed to checkout
+                </Button>
+              </Link>
+            </div>
           </div>
         </div>
       </div>

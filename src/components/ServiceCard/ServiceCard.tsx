@@ -12,13 +12,13 @@ const ServiceCard = ({ item }: IProps) => {
   return (
     <div className="relative p-2 m-2 overflow-hidden rounded-lg  w-72 h-96 shadow-xl hover:shadow-primary transition-all duration-500 ease-in-out">
       <div className="flex items-center justify-center h-44">
-        <Image
+       {item?.imageUrl && <Image
           src={item?.imageUrl}
           alt="service image"
           width={500}
           height={500}
           className="object-center w-full h-full rounded-xl"
-        />
+        />}
       </div>
       <h2 className="my-1 text-xl font-medium text-center ">{item?.name}</h2>
 

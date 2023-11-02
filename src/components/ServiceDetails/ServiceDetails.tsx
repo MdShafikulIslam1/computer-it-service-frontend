@@ -88,13 +88,15 @@ const ServiceDetails = ({ item: service }: IProps) => {
       {/* service details start */}
       <div className="flex gap-10 justify-evenly">
         <div className="w-full p-4 h-96 lg:w-1/2">
-          <Image
-            src={service?.imageUrl}
-            alt="Shoes"
-            className="w-full h-full rounded-lg bg-green-500"
-            width={600}
-            height={600}
-          />
+          {service?.imageUrl && (
+            <Image
+              src={service?.imageUrl}
+              alt="Shoes"
+              className="w-full h-full rounded-lg bg-green-500"
+              width={600}
+              height={600}
+            />
+          )}
         </div>
         <div className="w-full lg:w-1/2 ">
           <div className="border border-green-700 space-y-2">
@@ -158,14 +160,16 @@ const ServiceDetails = ({ item: service }: IProps) => {
                 >
                   {/* image(user) */}
                   <div className="h-20 w-20 rounded-full bg-gray-400">
-                    <Image
-                      src={review?.user?.profileImage}
-                      alt="User image"
-                      width={500}
-                      height={500}
-                      className="object-center w-full h-full rounded-full"
-                      priority
-                    />
+                    {!!review?.user?.profileImage && (
+                      <Image
+                        src={review?.user?.profileImage}
+                        alt="User image"
+                        width={500}
+                        height={500}
+                        className="object-center w-full h-full rounded-full"
+                        priority
+                      />
+                    )}
                   </div>
                   {/* review information */}
                   <Space direction="vertical">

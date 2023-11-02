@@ -16,35 +16,36 @@ interface IFormValues {
 
 const CreateCategoryPage = () => {
   const [photoUrl, setPhotoUrl] = useState();
+  console.log(photoUrl);
   const router = useRouter();
   const [createCategory] = useCreateCategoryMutation();
   const onSubmit: SubmitHandler<IFormValues> = async (values: IFormValues) => {
-    const formData = new FormData();
-    formData.append("file", photoUrl as unknown as Blob);
-    formData.append("upload_preset", "hsde6mhe");
-    const response = await fetch(
-      "https://api.cloudinary.com/v1_1/dr8smmidd/image/upload",
-      {
-        method: "POST",
-        body: formData,
-      }
-    );
+    // const formData = new FormData();
+    // formData.append("file", photoUrl as unknown as Blob);
+    // formData.append("upload_preset", "hsde6mhe");
+    // const response = await fetch(
+    //   "https://api.cloudinary.com/v1_1/dr8smmidd/image/upload",
+    //   {
+    //     method: "POST",
+    //     body: formData,
+    //   }
+    // );
 
-    if (response.ok) {
-      const data = await response.json();
-      const imageUrl = data.secure_url;
-      values.logo = imageUrl;
-    } else {
-      message.error("Image upload failed.");
-    }
+    // if (response.ok) {
+    //   const data = await response.json();
+    //   const imageUrl = data.secure_url;
+    //   values.logo = imageUrl;
+    // } else {
+    //   message.error("Image upload failed.");
+    // }
 
     message.loading("Creating ....");
     try {
-      const res = await createCategory(values).unwrap();
-      if (res?.id) {
-        message.success("Category Created successfully");
-        router.push("/admin/manage-category");
-      }
+      // const res = await createCategory(values).unwrap();
+      // if (res?.id) {
+      //   message.success("Category Created successfully");
+      //   router.push("/admin/manage-category");
+      // }
     } catch (error: any) {
       message.error(error.message);
     }

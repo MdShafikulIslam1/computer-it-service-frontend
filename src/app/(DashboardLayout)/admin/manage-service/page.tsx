@@ -14,14 +14,11 @@ import Link from "next/link";
 import React, { useState } from "react";
 import { useDebounced } from "@/hooks/useDebounced";
 import {
-  useDeleteUserMutation,
-  useGetAllUsersQuery,
-} from "@/redux/api/userApi";
-import {
   useDeleteServiceMutation,
   useGetAllServicesQuery,
 } from "@/redux/api/servicesApi";
 import { ICategory } from "@/types/globalType";
+import Loading from "@/components/LoadingComponent/LoadingComponent";
 
 const ManageServicePage = () => {
   const query: Record<string, unknown> = {};
@@ -55,11 +52,11 @@ const ManageServicePage = () => {
   };
   //common code for filtering(END)
 
-  const { data, isLoading } = useGetAllServicesQuery({
-    role: "admin",
-    ...query,
-  });
+  const { data, isLoading } = useGetAllServicesQuery({ ...query });
+  <Loading isLoading={isLoading} />;
+
   const services = data?.services;
+  console.log(services);
   const meta = data?.meta;
   const [deleteService] = useDeleteServiceMutation();
 
@@ -94,7 +91,7 @@ const ManageServicePage = () => {
       title: "Category",
       dataIndex: "category",
       render: function (data: ICategory) {
-        return data && data.title;
+        return data && data?.title;
       },
     },
     {
@@ -107,7 +104,7 @@ const ManageServicePage = () => {
       dataIndex: "createdAt",
       key: "createdAt",
       render: function (data: any) {
-        return data && dayjs(data).format("MMM D, YYYY hh:mm A");
+        return data && dayjs(data).format("MMM D, YYYY ");
       },
       sorter: true,
     },
@@ -117,7 +114,7 @@ const ManageServicePage = () => {
         return (
           <>
             <Tooltip title="Update" placement="left" color={"#0496ff"}>
-              <Link href={`/super_admin/manage-department/edit/${data?._id}`}>
+              <Link href={`/admin/manage-service/update/${data?.id}`}>
                 <Button
                   style={{ fontWeight: "bold", margin: "0px 5px" }}
                   onClick={() => console.log(data)}

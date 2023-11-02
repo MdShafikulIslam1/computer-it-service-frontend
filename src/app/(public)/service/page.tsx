@@ -9,14 +9,17 @@ import { Button, Col, Row, Space, Spin } from "antd";
 import FormSelectField from "@/components/Form/FormSelectField";
 import { useGetAllCategoriesQuery } from "@/redux/api/categoryApi";
 import Loading from "@/components/LoadingComponent/LoadingComponent";
+import Overlay from "@/components/Overlay/Overlay";
 
 const AllServicePage = () => {
   const query: Record<string, unknown> = {};
-  const [id,setId] = useState<string>('')
+  const [id, setId] = useState<string>("");
   const [filtering, setFiltering] = useState({});
   const [isFilterShow, setIsFilterShow] = useState(false);
-  const { data,isLoading } = useGetAllServicesQuery({ limit: 10, page: 1, ...query });
+  const { data, isLoading } = useGetAllServicesQuery({...query  });
+  <Loading isLoading= {isLoading}/>
   const services = data?.services;
+  console.log(services);
   const { data: categoryData } = useGetAllCategoriesQuery({
     limit: 10,
     page: 1,
@@ -37,11 +40,13 @@ const AllServicePage = () => {
   };
   const onSubmit: SubmitHandler<any> = async (values: any) => {
     query["categoryId"] = values?.category;
-    setId(values?.category)
+    setId(values?.category);
   };
 
- <Loading isLoading={isLoading}/>
+  <Loading isLoading={isLoading} />;
   return (
+    <>
+    <Overlay heading="Services" currentPageTitle="services"/>
     <div className="grid grid-cols-12 gap-6 mt-2 ">
       <div
         onClick={handleFilter}
@@ -52,7 +57,7 @@ const AllServicePage = () => {
         </p>
         <span className="text-xl font-medium text-zinc-500">Filter</span>
       </div>
-      {isFilterShow && (
+      {/* {isFilterShow && (
         <div className="col-span-12 pl-4 border">
           <div className="flex items-start  w-full h-full justify-start">
             <Form submitHandler={onSubmit}>
@@ -65,21 +70,26 @@ const AllServicePage = () => {
                   options={categoriesOptions}
                 />
               </div>
-              <Button style={{ fontWeight: "bold" }} htmlType="submit" type="primary">
+              <Button
+                style={{ fontWeight: "bold" }}
+                htmlType="submit"
+                type="primary"
+              >
                 Filter
               </Button>
             </Form>
           </div>
         </div>
-      )}
+      )} */}
       <div className="col-span-12 lg:col-span-12 my-8">
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-3 lg:grid-cols-4">
           {services?.map((item: any, index: number) => (
             <ServiceCard key={index} item={item} />
           ))}
         </div>
       </div>
     </div>
+    </>
   );
 };
 

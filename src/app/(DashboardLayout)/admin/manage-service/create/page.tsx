@@ -14,13 +14,6 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { SubmitHandler } from "react-hook-form";
 
-// interface IFormValues {
-//   name: string;
-//   email: string;
-//   password: string;
-//   role?: string;
-// }
-
 const CreateServicePage = () => {
   const router = useRouter();
   const [photoUrl, setPhotoUrl] = useState();
@@ -58,6 +51,7 @@ const CreateServicePage = () => {
 
     message.loading("Creating ....");
     try {
+      console.log(values)
       const res = await createService(values).unwrap();
       if (res?.id) {
         message.success("Service Created successfully");

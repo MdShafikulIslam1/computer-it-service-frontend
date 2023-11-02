@@ -5,6 +5,7 @@ import { SubmitHandler } from "react-hook-form";
 import { Button, Col, Row, Space, message } from "antd";
 import FormInput from "@/components/Form/FormInput";
 import { useCreateFeedbackMutation } from "@/redux/api/feedbackApi";
+import TextWithUnderLine from "@/components/Divider/Divider";
 
 const FAQPage = () => {
   const [createFeedback] = useCreateFeedbackMutation();
@@ -20,9 +21,9 @@ const FAQPage = () => {
     }
   };
   return (
-    <div className="flex justify-between items-start gap-4 my-24">
+    <div className="flex group justify-between items-start gap-4 my-24">
       <div className="w-full lg:w-1/2 py-2 px-6">
-        <h3 className="text-blue-700 font-semibold text-2xl my-2">FAQs ----</h3>
+        <TextWithUnderLine title="FAQs"/> 
         <h1>Frequently Asked Question</h1>
         <div>
           <FAQPart />

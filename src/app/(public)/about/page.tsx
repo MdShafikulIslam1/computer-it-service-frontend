@@ -46,13 +46,15 @@ const AboutPage = () => {
         </Space>
       </div>
       <div className="w-4/5 p-4 h-96 lg:w-1/2 relative">
-        <Image
-          src={aboutUs}
-          alt="Shoes"
-          className="w-full h-full rounded-lg"
-          width={600}
-          height={600}
-        />
+        {!!aboutUs && (
+          <Image
+            src={aboutUs}
+            alt="Shoes"
+            className="w-full h-full rounded-lg"
+            width={600}
+            height={600}
+          />
+        )}
         <div className="w-36 flex justify-center items-center h-36 rounded-full text-white bg-blue-700 absolute -top-8 -left-8">
           <p className="w-full text-center text-xl font-bold p-4">
             10

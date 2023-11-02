@@ -6,7 +6,7 @@ const SERVICE_URL = "/services";
 const serviceApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
     getAllServices: build.query({
-      query: (arg: Record<string, any> = {}) => ({
+      query: (arg: Record<string, any>) => ({
         url: SERVICE_URL,
         method: "GET",
         params: arg,
@@ -28,7 +28,7 @@ const serviceApi = baseApi.injectEndpoints({
     }),
     createService: build.mutation({
       query: (data: any) => ({
-        url: `${SERVICE_URL}/'create-service'`,
+        url: `${SERVICE_URL}/create-service`,
         method: "POST",
         data,
       }),
