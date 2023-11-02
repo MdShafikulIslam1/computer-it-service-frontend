@@ -4,6 +4,7 @@ import { Button, Space } from "antd";
 import { BsCloudArrowDownFill } from "react-icons/bs";
 import { GiTeamIdea } from "react-icons/gi";
 import TextWithUnderLine from "@/components/Divider/Divider";
+import PrimaryButton from "@/components/PrimaryButton/PrimaryButton";
 
 const AboutUs = () => {
   return (
@@ -44,17 +45,8 @@ const AboutUs = () => {
               </p>
             </Space>
           </div>
-          <div>
-            <Button
-              style={{
-                fontWeight: "bold",
-                marginTop: "20px",
-                color: "white",
-              }}
-              type="primary"
-            >
-              Explore More <span className="font-bold">+</span>{" "}
-            </Button>
+          <div >
+            <PrimaryButton title="Explore More" type="primary" size="large" href="/about" className="mt-4 md:mt-8"/>
           </div>
         </Space>
       </div>
