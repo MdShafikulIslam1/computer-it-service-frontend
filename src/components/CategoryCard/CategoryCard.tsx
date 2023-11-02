@@ -7,7 +7,7 @@ const CategoryCard = ({ category }: any) => {
     <div className="mt-12">
       <div className="relative p-2  rounded-lg  w-96 h-72 shadow-lg hover:text-white hover:bg-primary  hover:shadow-primary transition-all duration-500 ease-in-out">
         <div className="flex items-center justify-center h-24 rounded-full relative ">
-          {!!category?.log && (
+          {!!category?.logo && (
             <Image
               src={category?.logo}
               alt="service image"

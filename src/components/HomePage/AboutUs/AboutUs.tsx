@@ -1,12 +1,14 @@
 import Image from "next/image";
 import aboutUs from "../../../assests/images/about.jpg";
-import { Button, Space } from "antd";
+import {  Space } from "antd";
 import { BsCloudArrowDownFill } from "react-icons/bs";
 import { GiTeamIdea } from "react-icons/gi";
 import TextWithUnderLine from "@/components/Divider/Divider";
 import PrimaryButton from "@/components/PrimaryButton/PrimaryButton";
+import { usePathname } from "next/navigation";
 
 const AboutUs = () => {
+  const pathname = usePathname();
   return (
     <div className="flex group justify-evenly my-24">
       <div className="w-full lg:w-1/2  px-8 py-10">
@@ -45,8 +47,16 @@ const AboutUs = () => {
               </p>
             </Space>
           </div>
-          <div >
-            <PrimaryButton title="Explore More" type="primary" size="large" href="/about" className="mt-4 md:mt-8"/>
+          <div>
+            {pathname !== "/about" && (
+              <PrimaryButton
+                title="Explore More"
+                type="primary"
+                size="large"
+                href="/about"
+                className="mt-4 md:mt-8"
+              />
+            )}
           </div>
         </Space>
       </div>

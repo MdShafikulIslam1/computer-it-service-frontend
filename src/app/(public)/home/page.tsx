@@ -8,6 +8,7 @@ import { useGetAllCategoriesQuery } from "@/redux/api/categoryApi";
 import Loading from "@/app/loading";
 import CategoryCard from "@/components/CategoryCard/CategoryCard";
 import PrimaryButton from "@/components/PrimaryButton/PrimaryButton";
+import TextWithUnderLine from "@/components/Divider/Divider";
 
 const HomePage = () => {
   const { data, isLoading } = useGetAllCategoriesQuery({ limit: 100, page: 1 });
@@ -96,6 +97,17 @@ const HomePage = () => {
         /> */}
       {/* </div> */}
       <FAQPage />
+      <div className="group my-12 text-white bg-black rounded py-12 px-4">
+        <TextWithUnderLine title="Testimonials" />
+        <div className="flex justify-evenly gap-10 my-4">
+          <h5 className="w-1/2 text-4xl font-semibold">What Says Our Happy Clients About us</h5>
+          <p className="w-auto text-xl font-normal">
+            We value the experimentation, the reformation of the message, and
+            the smart incentives. We offer a variety of services and solutions
+            Worldwide and this is at the heart of how we approach our.
+          </p>
+        </div>
+      </div>
       <FloatButton.BackTop style={{ color: "blue" }} />
     </div>
   );

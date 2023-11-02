@@ -17,6 +17,7 @@ import { decrement, increment } from "@/redux/feature/counter/counterSlice";
 import { useCreateCartMutation } from "@/redux/api/cartApi";
 import dayjs from "dayjs";
 import Loading from "../LoadingComponent/LoadingComponent";
+import TestimonialCard from "../TestimonialCard/TestimonialCard";
 interface IProps {
   item: IService;
 }
@@ -118,11 +119,11 @@ const ServiceDetails = ({ item: service }: IProps) => {
             </p>
             <p className="font-medium w-4/5 mb-8">{service?.description}</p>
             <div className="flex mt-16 gap-4 items-center">
-              <div className="flex gap-3 bg-gray-100 border py-1 px-2 rounded justify-center items-center">
+              <div className="flex gap-3 bg-gray-100 border py-1 rounded justify-center items-center">
                 <Button
                   style={{ fontWeight: "bold" }}
                   onClick={() => dispatch(decrement())}
-                  className="outline-none border-none"
+          
                 >
                   -
                 </Button>
@@ -130,7 +131,6 @@ const ServiceDetails = ({ item: service }: IProps) => {
                 <Button
                   style={{ fontWeight: "bold" }}
                   onClick={() => dispatch(increment())}
-                  className="outline-none border-none"
                 >
                   +
                 </Button>
@@ -149,62 +149,21 @@ const ServiceDetails = ({ item: service }: IProps) => {
       </div>
       {/* service details end */}
 
-      <div className="grid gap-4 grid-cols-12 mt-12 items-center">
-        <div className="col-span-7 min-h-screen">
-          {reviews?.length > 0 ? (
-            <div>
-              {reviews?.map((review: any) => (
-                <div
-                  className="flex justify-between my-4 bg-gray-50 p-4 rounded "
-                  key={review?.id}
-                >
-                  {/* image(user) */}
-                  <div className="h-20 w-20 rounded-full bg-gray-400">
-                    {!!review?.user?.profileImage && (
-                      <Image
-                        src={review?.user?.profileImage}
-                        alt="User image"
-                        width={500}
-                        height={500}
-                        className="object-center w-full h-full rounded-full"
-                        priority
-                      />
-                    )}
-                  </div>
-                  {/* review information */}
-                  <Space direction="vertical">
-                    <h3>{review?.user?.name}</h3>
-                    <small>
-                      {" "}
-                      {dayjs(`${data?.createdAt}`).format(
-                        "MMM D, YYYY hh:mm A"
-                      )}
-                    </small>
-                    <p className="w-full">{review?.comments}</p>
-                  </Space>
-                  {/* rating */}
-                  <div>
-                    <Rate disabled value={review?.rating} />
-                  </div>
-                </div>
-              ))}
-            </div>
-          ) : (
-            <Empty
-              style={{
-                margin: "20px",
-              }}
-              description="No review found yet!!"
-            />
-          )}
+      <div className="grid gap-8 grid-cols-12 mt-12 items-start">
+        <div className="col-span-7">
+          <div className="grid grid-cols-1 gap-6 my-2 md:my-4 lg:my-8">
+            {reviews?.map((review: any, index: number) => (
+              <TestimonialCard key={index} review={review} />
+            ))}
+          </div>
         </div>
 
-        <div className="col-span-5 shadow-xl min-h-screen">
-          <div className="mt-4">
+        <div className="col-span-5 shadow-xl min-h-screen my-2 md:my-4 lg:my-8">
+          <div>
             <Form submitHandler={onSubmit}>
               <div
                 style={{
-                  padding: "15px",
+                  padding: "0px 15px",
                 }}
               >
                 <p
@@ -212,6 +171,7 @@ const ServiceDetails = ({ item: service }: IProps) => {
                     fontSize: "20px",
                     marginBottom: "10px",
                   }}
+                  className="text-xl w-full text-center lg:text-2xl mt-4 text-primary font-medium"
                 >
                   Your Review Information
                 </p>

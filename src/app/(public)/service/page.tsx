@@ -19,7 +19,6 @@ const AllServicePage = () => {
   const { data, isLoading } = useGetAllServicesQuery({...query  });
   <Loading isLoading= {isLoading}/>
   const services = data?.services;
-  console.log(services);
   const { data: categoryData } = useGetAllCategoriesQuery({
     limit: 10,
     page: 1,

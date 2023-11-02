@@ -49,6 +49,7 @@ const Header = () => {
     getItem(<Link href="/contact-us">Contact us</Link>, "contact-us"),
     getItem(<Link href="/blog">Blog</Link>, "blog"),
     getItem(<Link href="/faq">FAQ</Link>, "faq"),
+    getItem(<Link href="/testimonials">Testimonial</Link>, "testimonial"),
     getItem(<Link href="/sign-up">Register</Link>, "sign-up"),
     getItem(<Link href="/cart">Cart</Link>, "cart", <ShoppingCartOutlined />),
     getItem(
@@ -69,7 +70,7 @@ const Header = () => {
           alt="logo image"
         />
       </div>
-      <div className="w-3/5 mx-auto">
+      <div className="w-4/5 mx-auto">
         <Menu
        
           className="font-semibold font-2xl bg-primary text-white rounded active:text-secondary"
