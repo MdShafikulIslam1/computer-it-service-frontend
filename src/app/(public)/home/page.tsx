@@ -1,38 +1,32 @@
 "use client";
+import { Swiper, SwiperSlide } from "swiper/react";
+
+import "swiper/css";
+import "swiper/css/pagination";
+import { Pagination,Autoplay,Navigation } from 'swiper/modules';
 import AboutUs from "@/components/HomePage/AboutUs/AboutUs";
 import FAQPage from "@/components/HomePage/FAQ/FAQ";
 import HeroSection from "@/components/HomePage/HeroSection/HeroSection";
 import { FloatButton } from "antd";
-
 import { useGetAllCategoriesQuery } from "@/redux/api/categoryApi";
-import Loading from "@/app/loading";
 import CategoryCard from "@/components/CategoryCard/CategoryCard";
 import PrimaryButton from "@/components/PrimaryButton/PrimaryButton";
 import TextWithUnderLine from "@/components/Divider/Divider";
+import { useGetAllReviewsQuery } from "@/redux/api/reviewApi";
+import Loading from "@/components/LoadingComponent/LoadingComponent";
+import TestimonialCard from "@/components/TestimonialCard/TestimonialCard";
 
 const HomePage = () => {
   const { data, isLoading } = useGetAllCategoriesQuery({ limit: 100, page: 1 });
-  if (isLoading) <Loading />;
   const categories = data?.categories;
+  const { data: reviewAndRatingData, isLoading: loading } =
+    useGetAllReviewsQuery({
+      limit: 100,
+      page: 1,
+    });
+  <Loading isLoading={loading} />;
+  const reviews = reviewAndRatingData?.reviews;
 
-  // const services = data?.services;
-  // const itServices = services?.filter(
-  //   (service: any) => service?.category?.title === "IT"
-  // );
-  // const softwareServices = services?.filter(
-  //   (service: any) => service?.category?.title === "Software"
-  // );
-  // const computerHardwareServices = services?.filter(
-  //   (service: any) => service?.category?.title === "Computer Hardware"
-  // );
-  // const laptopHardwareServices = services?.filter(
-  //   (service: any) => service?.category?.title === "Laptop Hardware"
-  // );
-  // const networkServices = services?.filter(
-  //   (service: any) => service?.category?.title === "Network"
-  // );
-
-  // const meta = data?.meta;
   return (
     <div className="bg-white">
       <HeroSection />
@@ -64,48 +58,37 @@ const HomePage = () => {
           </div>
         </div>
       </div>
-      {/* it services */}
-      {/* <div> */}
-      {/* <ServicePage
-          data={itServices}
-          title="IT service"
-          description="The kind of IT services we provide to your"
-        /> */}
-      {/* Software services */}
-      {/* <ServicePage
-          data={softwareServices}
-          title="Software service"
-          description="The kind of Software services we provide to your"
-        /> */}
-      {/* Computer services */}
-      {/* <ServicePage
-          data={computerHardwareServices}
-          title="Computer service"
-          description="The kind of Computer  services we provide to your"
-        /> */}
-      {/* Laptop services */}
-      {/* <ServicePage
-          data={laptopHardwareServices}
-          title="Laptop  service"
-          description="The kind of Laptop  services we provide to your"
-        /> */}
-      {/* Network services */}
-      {/* <ServicePage
-          data={networkServices}
-          title="Network service"
-          description="The kind of Network services we provide to your"
-        /> */}
-      {/* </div> */}
+
       <FAQPage />
-      <div className="group my-12 text-white bg-black rounded py-12 px-4">
+      <div className="group my-12  rounded py-12 px-4 bg-black text-white">
         <TextWithUnderLine title="Testimonials" />
         <div className="flex justify-evenly gap-10 my-4">
-          <h5 className="w-1/2 text-4xl font-semibold">What Says Our Happy Clients About us</h5>
+          <h5 className="w-1/2 text-4xl font-semibold">
+            What Says Our Happy Clients About us
+          </h5>
           <p className="w-auto text-xl font-normal">
             We value the experimentation, the reformation of the message, and
             the smart incentives. We offer a variety of services and solutions
             Worldwide and this is at the heart of how we approach our.
           </p>
+        </div>
+        <div>
+          <Swiper
+            slidesPerView={2}
+            spaceBetween={30}
+            navigation={true}
+            pagination={{
+              clickable: true,
+            }}
+            modules={[Pagination,Navigation]}
+            className="mySwiper "
+          >
+            {reviews?.map((review: any, index: number) => (
+              <SwiperSlide className="bg-white text-black" key={index}>
+                <TestimonialCard review={review} />
+              </SwiperSlide>
+            ))}
+          </Swiper>
         </div>
       </div>
       <FloatButton.BackTop style={{ color: "blue" }} />
