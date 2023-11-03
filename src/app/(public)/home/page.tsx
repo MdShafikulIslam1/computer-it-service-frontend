@@ -3,7 +3,8 @@ import { Swiper, SwiperSlide } from "swiper/react";
 
 import "swiper/css";
 import "swiper/css/pagination";
-import { Pagination,Autoplay,Navigation } from 'swiper/modules';
+import "swiper/css/navigation";
+import { Pagination, Navigation } from "swiper/modules";
 import AboutUs from "@/components/HomePage/AboutUs/AboutUs";
 import FAQPage from "@/components/HomePage/FAQ/FAQ";
 import HeroSection from "@/components/HomePage/HeroSection/HeroSection";
@@ -72,20 +73,25 @@ const HomePage = () => {
             Worldwide and this is at the heart of how we approach our.
           </p>
         </div>
-        <div>
+        <div className="w-full">
           <Swiper
-            slidesPerView={2}
-            spaceBetween={30}
+            slidesPerView={3}
+            spaceBetween={40}
+            centeredSlides={true}
+            loop={true}
             navigation={true}
             pagination={{
               clickable: true,
             }}
-            modules={[Pagination,Navigation]}
+            modules={[Navigation, Pagination]}
             className="mySwiper "
           >
             {reviews?.map((review: any, index: number) => (
-              <SwiperSlide className="bg-white text-black" key={index}>
-                <TestimonialCard review={review} />
+              <SwiperSlide
+                className="bg-white text-black rounded-xl"
+                key={index}
+              >
+                <TestimonialCard review={review} className={`rounded-full`} />
               </SwiperSlide>
             ))}
           </Swiper>

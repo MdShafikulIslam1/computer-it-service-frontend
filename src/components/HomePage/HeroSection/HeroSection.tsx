@@ -4,6 +4,13 @@ import slider1 from "../../../assests/images/slider1.jpg";
 import slider2 from "../../../assests/images/slider2.jpg";
 import slider3 from "../../../assests/images/slider3.jpg";
 import PrimaryButton from "@/components/PrimaryButton/PrimaryButton";
+import { Swiper, SwiperSlide } from "swiper/react";
+
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+import "swiper/css/effect-cube";
+import { Pagination, EffectFlip,EffectCube, Autoplay, Navigation } from "swiper/modules";
 
 const HeroSection = () => {
   return (
@@ -26,9 +33,18 @@ const HeroSection = () => {
           </div>
         </div>
       </div>
-      <div className="w-full lg:w-1/2">
-        <div>
-          <Carousel autoplay effect="fade">
+      <div className="w-full md:w-1/2">
+        <Swiper
+          effect="cube"
+          autoplay={{
+            delay: 2000,
+            disableOnInteraction: false,
+          }}
+          loop={true}
+          modules={[Autoplay, EffectCube]}
+          className="mySwiper "
+        >
+          <SwiperSlide>
             <div className="w-full p-4 h-96">
               <Image
                 src={slider1}
@@ -38,6 +54,8 @@ const HeroSection = () => {
                 height={600}
               />
             </div>
+          </SwiperSlide>
+          <SwiperSlide>
             <div className="w-full p-4 h-96">
               <Image
                 src={slider2}
@@ -47,6 +65,8 @@ const HeroSection = () => {
                 height={600}
               />
             </div>
+          </SwiperSlide>
+          <SwiperSlide>
             <div className="w-full p-4 h-96">
               <Image
                 src={slider3}
@@ -56,8 +76,8 @@ const HeroSection = () => {
                 height={600}
               />
             </div>
-          </Carousel>
-        </div>
+          </SwiperSlide>
+        </Swiper>
       </div>
     </div>
   );
