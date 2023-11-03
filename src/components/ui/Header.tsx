@@ -33,7 +33,7 @@ const Header = () => {
     {
       key: "0",
       label: !!role ? (
-        <Button style={{ fontWeight: "bold" }} onClick={handleLogOut} type="text" danger>
+        <Button onClick={handleLogOut} type="text" size="small" danger>
           logout
         </Button>
       ) : (
@@ -43,7 +43,7 @@ const Header = () => {
   ];
 
   const menuItems: MenuItem[] = [
-    getItem(<Link href="/home">Home</Link>, "home", <HomeOutlined />),
+    getItem(<Link href="/home">Home</Link>, "home"),
     getItem(<Link href="/service">Services</Link>, "service"),
     getItem(<Link href="/about">About</Link>, "about"),
     getItem(<Link href="/contact-us">Contact us</Link>, "contact-us"),
@@ -72,7 +72,6 @@ const Header = () => {
       </div>
       <div className="w-4/5 mx-auto">
         <Menu
-       
           className="font-semibold font-2xl bg-primary text-white rounded active:text-secondary"
           mode="horizontal"
           items={menuItems}
@@ -81,15 +80,15 @@ const Header = () => {
 
       <div>
         <Row justify={"end"} align={"middle"}>
-          <small className= " text-secondary mr-2">{loginUser?.name}</small>
+          <small className=" text-secondary mr-2">{loginUser?.name}</small>
           {/* <p className="text-secondary mr-2">{loginUser?.email}</p> */}
 
           <Dropdown menu={{ items }}>
             <Space wrap size={16}>
               {/* <Avatar size="large" icon={<UserOutlined />} /> */}
               <div className="flex justify-center items-center">
-                  <Avatar
-                  size={35}  
+                <Avatar
+                  size={35}
                   src={loginUser?.profileImage}
                   icon={<UserOutlined className="text-center" />}
                 />

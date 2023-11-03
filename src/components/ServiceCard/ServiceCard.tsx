@@ -22,20 +22,20 @@ const ServiceCard = ({ item }: IProps) => {
       </div>
       <h2 className="my-1 text-xl font-medium text-center ">{item?.name}</h2>
 
-      <p className="font-normal w-full text-slate-600">
-        {item?.description?.length > 40
-          ? `${item?.description?.substring(0, 40)}....`
+      <p className="font-normal w-full">
+        {item?.description?.length > 70
+          ? `${item?.description?.substring(0, 70)}....`
           : `${item?.description}`}
       </p>
-      <p className="font-normal mt-1">
+      <p className="font-normal">
         Service Fee:
-        <span className="ml-2 text-orange-500 text-lg font-medium">
-          ${item?.fee}{" "}
+        <span className="ml-2 text-primary text-lg font-semibold">
+          ${item?.fee}
         </span>
       </p>
-      <p className="font-normal mt-1">
+      <p className="font-normal">
         Estimate time:
-        <span className="ml-2 text-lg font-normal">
+        <span className="ml-2 text-secondary text-lg font-normal">
           {item?.durationInMinutes + ""}
         </span>
         <span className="text-md font-light"> minutes</span>

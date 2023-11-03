@@ -6,11 +6,14 @@ const SERVICE_URL = "/services";
 const serviceApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
     getAllServices: build.query({
-      query: (arg: Record<string, any>) => ({
-        url: SERVICE_URL,
-        method: "GET",
-        params: arg,
-      }),
+      query: (arg: Record<string, any>) => {
+        console.log("arg",arg);
+        return {
+          url: SERVICE_URL,
+          method: "GET",
+          params: arg,
+        };
+      },
       transformResponse: (response: any, meta: IMeta) => {
         return {
           services: response,

@@ -10,7 +10,13 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/effect-cube";
-import { Pagination, EffectFlip,EffectCube, Autoplay, Navigation } from "swiper/modules";
+import {
+  Pagination,
+  EffectFlip,
+  EffectCube,
+  Autoplay,
+  Navigation,
+} from "swiper/modules";
 
 const HeroSection = () => {
   return (
@@ -36,6 +42,12 @@ const HeroSection = () => {
       <div className="w-full md:w-1/2">
         <Swiper
           effect="cube"
+          cubeEffect={{
+            shadow: true,
+            slideShadows: false,
+            shadowOffset: 10,
+            shadowScale: 0.80,
+          }}
           autoplay={{
             delay: 2000,
             disableOnInteraction: false,
