@@ -33,9 +33,12 @@ const Header = () => {
     {
       key: "0",
       label: !!role ? (
-        <Button onClick={handleLogOut} type="text" size="small" danger>
-          logout
-        </Button>
+        <div className="flex flex-col gap-1">
+          <Button type="text" href="/profile">Profile</Button>
+          <Button onClick={handleLogOut} type="text" danger>
+            logout
+          </Button>
+        </div>
       ) : (
         <Link href="/login">Login</Link>
       ),
@@ -78,25 +81,28 @@ const Header = () => {
         />
       </div>
 
-      <div>
-        <Row justify={"end"} align={"middle"}>
-          <small className=" text-secondary mr-2">{loginUser?.name}</small>
-          {/* <p className="text-secondary mr-2">{loginUser?.email}</p> */}
+      <Row
+        style={{
+          height: "100%",
+        }}
+        justify={"end"}
+        align={"middle"}
+      >
+        {/* <span className="text-primary mr-2">{loginUser?.name}</span> */}
+        {/* <span className="text-secondary mr-2">{loginUser?.email}</span> */}
 
-          <Dropdown menu={{ items }}>
-            <Space wrap size={16}>
-              {/* <Avatar size="large" icon={<UserOutlined />} /> */}
-              <div className="flex justify-center items-center">
-                <Avatar
-                  size={35}
-                  src={loginUser?.profileImage}
-                  icon={<UserOutlined className="text-center" />}
-                />
-              </div>
-            </Space>
-          </Dropdown>
-        </Row>
-      </div>
+        <Dropdown menu={{ items }}>
+          <Space wrap size={16}>
+            <div className="flex justify-center items-center">
+              <Avatar
+                size={35}
+                src={loginUser?.profileImage}
+                icon={<UserOutlined className="text-center" />}
+              />
+            </div>
+          </Space>
+        </Dropdown>
+      </Row>
     </AntHeader>
   );
 };
