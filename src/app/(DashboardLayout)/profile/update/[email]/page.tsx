@@ -5,7 +5,6 @@ import { useGetSingleUserQuery, useUpdateUserMutation } from "@/redux/api/userAp
 import { useRouter } from "next/navigation";
 import Form from "@/components/Form/Form";
 import FormInput from "@/components/Form/FormInput";
-import FormTextArea from "@/components/Form/FormTextArea";
 import { Col, Row, message } from "antd";
 import FormDatePicker from "@/components/Form/FormDatePicker";
 import LoadingButton from "@/components/LoadingButton/LoadingButton";
@@ -50,6 +49,8 @@ const EditProfile = ({params}:any) => {
   };
   const defaultValues = {
     name: data?.name || "",
+    dateOfBirth: data?.dateOfBirth || "",
+    email: data?.email || "",
     address: data?.address || "",
     contactNo: data?.contactNo || "",
     emergencyContactNo: data?.emergencyContactNo || "",

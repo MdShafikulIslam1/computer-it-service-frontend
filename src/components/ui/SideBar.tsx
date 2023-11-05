@@ -11,6 +11,7 @@ const SideBar = () => {
   const { role } = getUserInfo() as any;
   return (
     <Sider
+    className="bg-primary "
       collapsible
       collapsed={collapsed}
       onCollapse={(value) => setCollapsed(value)}
@@ -33,13 +34,13 @@ const SideBar = () => {
           marginBottom: "1rem",
         }}
       >
-        <p className="text-green-300 text-md mt-4 -mb-4 md:tracking-widest">
+        <p className="text-white text-md mt-4 -mb-4 md:tracking-widest">
           C R I S
         </p>
-        <span className="w-full text-xs">Computer Repair And IT Service</span>
+        <span className="w-full text-xs text-secondary">Computer Repair And IT Service</span>
       </div>
       <Menu
-        theme="dark"
+      className="bg-primary text-white"
         defaultSelectedKeys={["1"]}
         mode="inline"
         items={SideBarItems(role)}

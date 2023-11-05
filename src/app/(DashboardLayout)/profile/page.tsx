@@ -1,27 +1,24 @@
 /* eslint-disable react/no-unescaped-entities */
 "use client";
-import {
-  useGetSingleUserQuery,
-} from "@/redux/api/userApi";
+import { useGetSingleUserQuery } from "@/redux/api/userApi";
 import { getUserInfo } from "@/service/authentication.service";
-import { EditFilled, UserOutlined } from "@ant-design/icons";
-import Image from "next/image";
 import {
-  Avatar,
-  Button,
-  Card,
-  Col,
-  Row,
-  Space,
-  Typography,
-  message,
-} from "antd";
-import { useState } from "react";
+  EditFilled,
+  UserOutlined,
+  PhoneFilled,
+  MailFilled,
+  CalendarFilled,
+  FlagFilled,
+  CheckCircleFilled,
+} from "@ant-design/icons";
+import Image from "next/image";
+import { Avatar, Button, Card, Col, Row, Space, Typography } from "antd";
 import dayjs from "dayjs";
 const ProfilePage = () => {
-   const user = getUserInfo() as any;
+  const user = getUserInfo() as any;
   const { role, email } = user;
   const { data } = useGetSingleUserQuery(email);
+  console.log(data);
 
   return (
     <div>
@@ -71,21 +68,60 @@ const ProfilePage = () => {
           </p>
         </Col>
         <Col span={18}>
-          <div className="p-4">
-            <Card title="User Profile" extra={<Button href={`/profile/update/${email}`} type="primary" icon={<EditFilled />}>Edit profile</Button>}>
-              <Space direction="vertical">
-                <Typography.Text strong>Name : <span className="font-normal ml-2">{data?.name}</span></Typography.Text>
-                <Typography.Text strong>Email : <span className="font-normal ml-2">{data?.email}</span></Typography.Text>
-                <Typography.Text strong>Contact No : <span className="font-normal ml-2">{data?.contactNo}</span></Typography.Text>
-                <Typography.Text strong>Emergency Contact No : <span className="font-normal ml-2">{data?.emergencyContactNo}</span></Typography.Text>
-                <Typography.Text strong>Date Of Birth : <span className="font-normal ml-2">{data?.dateOfBirth}</span></Typography.Text>
-                <Typography.Text strong>Nationality : <span className="font-normal ml-2">{data?.nationality}</span></Typography.Text>
-                <Typography.Text strong>Availability : <span className="font-normal ml-2">{data?.availability}</span></Typography.Text>            
-                            
+          <div className="p-4 ">
+            <Card
+              title="User Profile"
+              extra={
+                <Button
+                  href={`/profile/update/${email}`}
+                  type="primary"
+                  icon={<EditFilled />}
+                >
+                  Edit profile
+                </Button>
+              }
+            >
+              <Space size="large" direction="vertical">
+                <Typography.Text strong className="md:text-xl">
+                  <UserOutlined className="text-primary me-2" /> Name :{" "}
+                  <span className="font-normal ml-2">{data?.name}</span>
+                </Typography.Text>
+                <Typography.Text strong className="md:text-xl">
+                  <MailFilled className="text-primary me-2" /> Email :{" "}
+                  <span className="font-normal ml-2">{data?.email}</span>
+                </Typography.Text>
+                <Typography.Text strong className="md:text-xl">
+                  <PhoneFilled className="text-primary me-2" /> Contact No :{" "}
+                  <span className="font-normal ml-2">{data?.contactNo}</span>
+                </Typography.Text>
+                <Typography.Text strong className="md:text-xl">
+                  <PhoneFilled className="text-primary me-2" /> Emergency
+                  Contact No :{" "}
+                  <span className="font-normal ml-2">
+                    {data?.emergencyContactNo}
+                  </span>
+                </Typography.Text>
+                <Typography.Text strong className="md:text-xl">
+                  <CalendarFilled className="text-primary me-2" /> Date Of Birth
+                  :{" "}
+                  <span className="font-normal ml-2">{data?.dateOfBirth}</span>
+                </Typography.Text>
+                <Typography.Text strong className="md:text-xl">
+                  {" "}
+                  <FlagFilled className="text-primary me-2 " /> Nationality :{" "}
+                  <span className="font-normal ml-2">{data?.nationality}</span>
+                </Typography.Text>
+                <Typography.Text strong className="md:text-xl">
+                  <CheckCircleFilled className="text-primary me-2 " />{" "}
+                  Status :{" "}
+                  <span className="font-normal ml-2">
+                    {data?.availability ? <span className="text-secondary font-medium">Active</span> : <span className="text-secondary font-medium">Blocked</span>}
+                  </span>
+                </Typography.Text>
               </Space>
             </Card>
           </div>
-          </Col>
+        </Col>
       </Row>
     </div>
   );
