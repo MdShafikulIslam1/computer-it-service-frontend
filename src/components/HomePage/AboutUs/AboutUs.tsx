@@ -1,6 +1,6 @@
 import Image from "next/image";
 import aboutUs from "../../../assests/images/about.jpg";
-import {  Space } from "antd";
+import { Space } from "antd";
 import { BsCloudArrowDownFill } from "react-icons/bs";
 import { GiTeamIdea } from "react-icons/gi";
 import TextWithUnderLine from "@/components/Divider/Divider";
@@ -10,11 +10,11 @@ import { usePathname } from "next/navigation";
 const AboutUs = () => {
   const pathname = usePathname();
   return (
-    <div className="flex group justify-evenly my-24">
-      <div className="w-full lg:w-1/2  px-8 py-10">
+    <div className="flex group flex-col md:flex-row justify-evenly my-24">
+      <div className="w-full md:w-1/2 lg:w-1/2  px-8 py-10">
         <Space direction="vertical">
           <TextWithUnderLine title="About Us" />
-          <h2 className="w-1/2 text-2xl">
+          <h2 className="w-1/2 text-lg  md:text-2xl">
             We Team of Experience
             <br />
             <span className=""> IT Specialties</span>
@@ -28,7 +28,9 @@ const AboutUs = () => {
               <BsCloudArrowDownFill className="text-center text-secondary text-7xl" />
             </div>
             <Space direction="vertical">
-              <h1>Cloud Based Services Free Spaces</h1>
+              <h1 className=" text-lg  md:text-2xl">
+                Cloud Based Services Free Spaces
+              </h1>
               <p className="w-full">
                 We understand the importance of approaching each work integrally
                 and believe in the power of simple and easy communication.
@@ -40,7 +42,7 @@ const AboutUs = () => {
               <GiTeamIdea className="text-center text-secondary text-7xl" />
             </div>
             <Space direction="vertical">
-              <h1>Expert Team Member</h1>
+              <h1 className="text-lg  md:text-2xl">Expert Team Member</h1>
               <p className="w-full">
                 What separates theme from all other web design agencies is the
                 ability to offer the most Friendly Experience you can imagine.
@@ -60,7 +62,7 @@ const AboutUs = () => {
           </div>
         </Space>
       </div>
-      <div className="w-4/5 p-4 h-96 lg:w-1/2 relative mt-16">
+      <div className="w-auto p-4 h-96 lg:w-1/2 relative mt-16">
         {!!aboutUs && (
           <Image
             src={aboutUs}

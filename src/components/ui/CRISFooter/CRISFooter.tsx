@@ -12,29 +12,32 @@ import {
 const CRISFooter = () => {
   return (
     <>
-      <div className="w-full flex justify-center items-start gap-2  text-white py-16 px-20">
-        <div>
+      <div className="w-full flex flex-col md:flex-row justify-center items-start gap-2  text-white py-16 px-20">
+        <div className="sm:w-full">
           <div className="-mt-10">
             <Image src={logo} width={170} height={170} alt="logo image" />
           </div>
-          <h4 className="w-2/5 text-gray-100 -mt-10">
+          <h4 className="w-2/5 text-gray-100 -mt-10 hidden md:block">
             We work with a passion of taking challenges and creating new ones in
             advertising sector.
           </h4>
           <div className="mt-8">
             <Space>
-              <Button style={{ fontWeight: "bold" }}
+              <Button
+                style={{ fontWeight: "bold" }}
                 href="https://www.facebook.com/profile.php?id=100013695768823"
                 shape="circle"
                 type="primary"
                 icon={<FacebookFilled />}
               />
-              <Button style={{ fontWeight: "bold" }}
+              <Button
+                style={{ fontWeight: "bold" }}
                 shape="circle"
                 type="primary"
                 icon={<TwitterCircleFilled />}
               />
-              <Button style={{ fontWeight: "bold" }}
+              <Button
+                style={{ fontWeight: "bold" }}
                 href="https://www.youtube.com/channel/UCQPoKuyEOG6t2WJJHtz74Rg"
                 shape="circle"
                 type="primary"
@@ -43,7 +46,7 @@ const CRISFooter = () => {
             </Space>
           </div>
         </div>
-        <div className="space-y-4">
+        <div className="w-full md:w-auto space-y-2 md:space-y-4">
           <h2>Official Info</h2>
           <Space direction="vertical">
             <Space>
@@ -61,10 +64,10 @@ const CRISFooter = () => {
           </Space>
         </div>
       </div>
-      <h1 className="text-white text-center">
-        © 2023 <span className="text-blue-400 font-normal">C R I S</span> –
+      <p className="text-white text-center w-auto">
+        © 2023 <span className="text-secondary font-normal">C R I S</span> –
         CaseThemes. All rights reserved.
-      </h1>
+      </p>
     </>
   );
 };

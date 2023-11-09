@@ -45,7 +45,7 @@ const HomePage = () => {
           </h2>
           <h2 className="font-semibold text-3xl">Solutions Services</h2>
         </div>
-        <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-4 md:gap-6 my-4 md:my-12">
+        <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-6 md:gap-8 my-4 md:my-12">
           {categories?.map((category: any, index: number) => (
             <CategoryCard key={index} category={category} />
           ))}
@@ -61,10 +61,10 @@ const HomePage = () => {
       </div>
 
       <FAQPage />
-      <div className="group my-12  rounded py-12 px-4 bg-black text-white">
+      <div className="group my-12 hidden md:block rounded py-12 px-4 bg-black text-white">
         <TextWithUnderLine title="Testimonials" />
-        <div className="flex justify-evenly gap-10 my-4">
-          <h5 className="w-1/2 text-4xl font-semibold">
+        <div className="flex flex-col md:flex-row justify-evenly gap-10 my-4">
+          <h5 className="w-full md:w-1/2 text-4xl font-semibold">
             What Says Our Happy Clients About us
           </h5>
           <p className="w-auto text-xl font-normal">
@@ -73,7 +73,7 @@ const HomePage = () => {
             Worldwide and this is at the heart of how we approach our.
           </p>
         </div>
-        <div className="w-full">
+        <div className="w-auto">
           <Swiper
             slidesPerView={3}
             spaceBetween={40}
@@ -84,20 +84,22 @@ const HomePage = () => {
               clickable: true,
             }}
             modules={[Navigation, Pagination]}
-            className="mySwiper "
+            className="mySwiper"
           >
-            {reviews?.map((review: any, index: number) => (
-              <SwiperSlide
-                className="bg-white text-black rounded-xl"
-                key={index}
-              >
-                <TestimonialCard review={review} className={`rounded-full`} />
-              </SwiperSlide>
-            ))}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+              {reviews?.map((review: any, index: number) => (
+                <SwiperSlide
+                  className="bg-white text-black rounded-xl"
+                  key={index}
+                >
+                  <TestimonialCard review={review} className={`rounded-full`} />
+                </SwiperSlide>
+              ))}
+            </div>
           </Swiper>
         </div>
       </div>
-      <FloatButton.BackTop style={{ color: "blue" }} />
+      <FloatButton.BackTop  style={{ color: "blue" }} />
     </div>
   );
 };

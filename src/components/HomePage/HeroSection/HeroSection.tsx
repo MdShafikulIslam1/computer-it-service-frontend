@@ -10,19 +10,14 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/effect-cube";
-import {
-  Pagination,
-  EffectFlip,
-  EffectCube,
-  Autoplay,
-  Navigation,
-} from "swiper/modules";
+import { EffectCube, Autoplay } from "swiper/modules";
 
 const HeroSection = () => {
   return (
-    <div className="p-2 flex my-16 bg-white group">
-      <div className="w-1\2 lg:w-1/2 py-8 px-6">
-        <div className="space-y-10">
+    <div className="p-2 flex flex-col md:flex-row lg:flex-row my-16 bg-white group">
+      {/* info div */}
+      <div className="w-full md:w-1/2 lg:w-1/2 py-8 px-6">
+        <div className="space-y-2 md:space-y-4 lg:space-y-10">
           <h5 className="text-xl md:text-2xl lg:text-3xl font-medium text-primary group-hover:tracking-widest ease-linear duration-500">
             We are creative
           </h5>
@@ -33,20 +28,21 @@ const HeroSection = () => {
             </p>
             <p>Company</p>
           </div>
-          <div className="flex gap-10">
-            <PrimaryButton href="/about us" title="About Us " size="large" />
-            <PrimaryButton href="/service" title="Our Services " size="large" />
+          <div className="flex gap-10 ">
+            <PrimaryButton href="/about us" title="About Us " size="large" className="my-8" />
+            <PrimaryButton href="/service" title="Our Services " size="large" className="my-8" />
           </div>
         </div>
       </div>
-      <div className="w-full md:w-1/2">
+      {/* slider div */}
+      <div className="w-full md:w-1/2 lg:1/2">
         <Swiper
           effect="cube"
           cubeEffect={{
             shadow: true,
             slideShadows: false,
             shadowOffset: 10,
-            shadowScale: 0.80,
+            shadowScale: 0.8,
           }}
           autoplay={{
             delay: 2000,

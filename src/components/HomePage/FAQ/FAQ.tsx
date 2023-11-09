@@ -21,8 +21,8 @@ const FAQPage = () => {
     }
   };
   return (
-    <div className="flex group justify-between items-start gap-4 my-24">
-      <div className="w-full lg:w-1/2 py-2 px-6">
+    <div className="flex flex-col md:flex-row group justify-between items-start gap-4 my-24">
+      <div className="w-full md:w-1/2 py-2 px-6">
         <TextWithUnderLine title="FAQs"/> 
         <h1>Frequently Asked Question</h1>
         <div>
@@ -34,7 +34,7 @@ const FAQPage = () => {
           margin: "10px",
           padding: "15px",
         }}
-        className="w-full lg:w-1/2 "
+        className="w-full md:w-1/2 m-2 p-4"
       >
         <Space direction="vertical" size="large">
           <h1 className="text-blue-500">Give Feedback</h1>
