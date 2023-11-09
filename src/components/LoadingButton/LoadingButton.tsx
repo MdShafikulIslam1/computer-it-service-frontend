@@ -34,6 +34,8 @@ const LoadingButton = ({
       block={isBlock}
       size={size}
       className={`${className}`}
+      icon={icon}
+      href={href}
     >
       {isLoading ? `${disableTitle}....` : title}
     </Button>

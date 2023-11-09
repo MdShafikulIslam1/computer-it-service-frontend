@@ -1,10 +1,10 @@
 "use client";
-import DeletePromptButton from "@/components/DeletePromptButton/DeletePromptButton";
 import UMTable from "@/components/Table/UMTable";
 import Tooltip from "@/components/Tooltip/Tooltip";
 import dayjs from "dayjs";
 
 import {
+  DeleteOutlined,
   EditOutlined,
   ReloadOutlined,
   SearchOutlined,
@@ -19,6 +19,7 @@ import {
 } from "@/redux/api/servicesApi";
 import { ICategory } from "@/types/globalType";
 import Loading from "@/components/LoadingComponent/LoadingComponent";
+import CRISModal from "@/components/Modal/Modal";
 
 const ManageServicePage = () => {
   const query: Record<string, unknown> = {};
@@ -51,21 +52,22 @@ const ManageServicePage = () => {
     setSortOrder(order === "ascend" ? "asc" : "desc");
   };
   //common code for filtering(END)
-
+  const [open, setOpen] = useState<boolean>(false);
+  const [deletedId, setDeletedId] = useState<string>("");
   const { data, isLoading } = useGetAllServicesQuery({ ...query });
   <Loading isLoading={isLoading} />;
-
   const services = data?.services;
-  console.log(services);
   const meta = data?.meta;
   const [deleteService] = useDeleteServiceMutation();
 
   const deleteHandler = async (id: string) => {
     message.loading("Deleting ...");
     try {
-      message.success("pore implement korbo");
-      //   await deleteService(id);
-      //   message.success("Deleted Successfully");
+      const res = await deleteService(id).unwrap();
+      if (!!res?.id) {
+        message.success("Deleted Successfully");
+        setOpen(false);
+      }
     } catch (error: any) {
       message.error(error?.message);
     }
@@ -124,7 +126,14 @@ const ManageServicePage = () => {
                 </Button>
               </Link>
             </Tooltip>
-            <DeletePromptButton data={data} deleteHandler={deleteHandler} />
+            <Button type="primary" onClick={() => {
+                setOpen(true);
+                setDeletedId(data?.id);
+              }}
+              danger
+              style={{ marginLeft: "3px" }}>
+              <DeleteOutlined/>
+            </Button>
           </>
         );
       },
@@ -195,6 +204,14 @@ const ManageServicePage = () => {
         onTableChange={onTableChange}
         showSizeChanger={true}
       />
+      <CRISModal
+        title="Remove admin"
+        isOpen={open}
+        closeModal={() => setOpen(false)}
+        handleOk={() => deleteHandler(deletedId)}
+      >
+        <p className="my-5">Do you want to remove this Service?</p>
+      </CRISModal>
     </div>
   );
 };

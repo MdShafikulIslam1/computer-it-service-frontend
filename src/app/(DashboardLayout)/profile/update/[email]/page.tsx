@@ -93,6 +93,24 @@ const EditProfile = ({params}:any) => {
                       />
                     </div>
                   </Col>
+                  {/* email */}
+                  <Col
+                    className="gutter-row"
+                    span={12}
+                    style={{
+                      marginBottom: "10px",
+                    }}
+                  >
+                    <div>
+                      <FormInput
+                        type="email"
+                        name="email"
+                        label="Email"
+                        placeHolder="Enter Your Email"
+                        required={true}
+                      />
+                    </div>
+                  </Col>
                   {/* address */}
                   <Col
                     className="gutter-row"

@@ -1,10 +1,9 @@
 "use client";
-import DeletePromptButton from "@/components/DeletePromptButton/DeletePromptButton";
 import UMTable from "@/components/Table/UMTable";
 import Tooltip from "@/components/Tooltip/Tooltip";
 import dayjs from "dayjs";
-
 import {
+  DeleteOutlined,
   EditOutlined,
   ReloadOutlined,
   SearchOutlined,
@@ -17,6 +16,7 @@ import {
   useDeleteCategoryMutation,
   useGetAllCategoriesQuery,
 } from "@/redux/api/categoryApi";
+import CRISModal from "@/components/Modal/Modal";
 
 const ManageCategoryPage = () => {
   const query: Record<string, unknown> = {};
@@ -49,6 +49,8 @@ const ManageCategoryPage = () => {
     setSortOrder(order === "ascend" ? "asc" : "desc");
   };
   //common code for filtering(END)
+  const [open, setOpen] = useState<boolean>(false);
+  const [deletedId, setDeletedId] = useState<string>("");
 
   const { data, isLoading } = useGetAllCategoriesQuery({
     role: "admin",
@@ -64,6 +66,7 @@ const ManageCategoryPage = () => {
       const res = await deleteCategory(id).unwrap();
       if (res?.id) {
         message.success("Deleted Successfully");
+        setOpen(false)
       }
     } catch (error: any) {
       message.error(error?.message);
@@ -102,7 +105,14 @@ const ManageCategoryPage = () => {
                 </Button>
               </Link>
             </Tooltip>
-            <DeletePromptButton data={data} deleteHandler={deleteHandler} />
+            <Button type="primary" onClick={() => {
+                setOpen(true);
+                setDeletedId(data?.id);
+              }}
+              danger
+              style={{ marginLeft: "3px" }}>
+              <DeleteOutlined/>
+            </Button>
           </>
         );
       },
@@ -173,6 +183,14 @@ const ManageCategoryPage = () => {
         onTableChange={onTableChange}
         showSizeChanger={true}
       />
+       <CRISModal
+        title="Remove admin"
+        isOpen={open}
+        closeModal={() => setOpen(false)}
+        handleOk={() => deleteHandler(deletedId)}
+      >
+        <p className="my-5">Do you want to remove this Category?</p>
+      </CRISModal>
     </div>
   );
 };
