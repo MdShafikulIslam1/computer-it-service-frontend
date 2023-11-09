@@ -45,18 +45,18 @@ const HomePage = () => {
           </h2>
           <h2 className="font-semibold text-3xl">Solutions Services</h2>
         </div>
-        <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-6 mb-6">
+        <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-4 md:gap-6 my-4 md:my-12">
           {categories?.map((category: any, index: number) => (
             <CategoryCard key={index} category={category} />
           ))}
-          <div className="text-center mt-6">
-            <PrimaryButton
-              size="large"
-              title="Our All Services"
-              type="primary"
-              href="/service"
-            />
-          </div>
+        </div>
+        <div className="text-center mt-6">
+          <PrimaryButton
+            size="large"
+            title="Our All Services"
+            type="primary"
+            href="/service"
+          />
         </div>
       </div>
 
