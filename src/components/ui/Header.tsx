@@ -13,18 +13,13 @@ import {
 } from "antd";
 import {
   DashboardOutlined,
-  HomeOutlined,
   MenuOutlined,
   ShoppingCartOutlined,
   UserOutlined,
 } from "@ant-design/icons";
 import Link from "next/link";
 import type { MenuProps } from "antd";
-import {
-  getUserInfo,
-  isLogIn,
-  removeUserInfo,
-} from "@/service/authentication.service";
+import { getUserInfo, removeUserInfo } from "@/service/authentication.service";
 import { authKey } from "@/constant/keys/authKey";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
@@ -132,7 +127,7 @@ const Header = () => {
   };
 
   return (
-    <AntHeader className="bg-primary h-24 flex  justify-between items-center rounded rounded-t-none">
+    <AntHeader className="bg-primary h-24 flex justify-between items-center rounded rounded-t-none">
       <div className="text-white hidden md:block">
         <Image
           className="mt-4"
@@ -150,11 +145,7 @@ const Header = () => {
         />
       </div>
       <div>
-        <Button
-          type="primary"
-          className="xs:block sm:block md:hidden lg:hidden"
-          onClick={showDrawer}
-        >
+        <Button type="primary" className=" md:hidden" onClick={showDrawer}>
           <MenuOutlined />
         </Button>
         <Drawer
@@ -173,29 +164,40 @@ const Header = () => {
         </Drawer>
       </div>
 
-      <Row
+      {/* <Row
         style={{
           height: "100%",
         }}
         justify={"end"}
         align={"middle"}
-        className="md:block hidden"
+        className="hidden md:block "
       >
-        {/* <span className="text-primary mr-2">{loginUser?.name}</span> */}
-        {/* <span className="text-secondary mr-2">{loginUser?.email}</span> */}
-
         <Dropdown menu={{ items }}>
           <Space wrap size={16}>
             <div className="flex justify-center items-center">
               <Avatar
-                size={35}
+                size={40}
                 src={loginUser?.profileImage}
                 icon={<UserOutlined className="text-center" />}
               />
             </div>
           </Space>
         </Dropdown>
-      </Row>
+      </Row> */}
+      <div className="flex justify-center items-center">
+        <Dropdown menu={{ items }}>
+          <Space wrap size={16}>
+            <div className="flex justify-center items-center">
+              <Avatar
+                size={40}
+                src={loginUser?.profileImage}
+                icon={<UserOutlined className="text-center" />}
+              />
+              
+            </div>
+          </Space>
+        </Dropdown>
+      </div>
     </AntHeader>
   );
 };

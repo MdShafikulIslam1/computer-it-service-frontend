@@ -87,8 +87,8 @@ const ServiceDetails = ({ item: service }: IProps) => {
   return (
     <div className="my-8  bg-white">
       {/* service details start */}
-      <div className="flex gap-10 justify-evenly">
-        <div className="w-full p-4 h-96 lg:w-1/2">
+      <div className="flex flex-col md:flex-row gap-10 justify-evenly">
+        <div className="w-full p-4 h-96 md:w-1/2">
           {service?.imageUrl && (
             <Image
               src={service?.imageUrl}
@@ -99,7 +99,7 @@ const ServiceDetails = ({ item: service }: IProps) => {
             />
           )}
         </div>
-        <div className="w-full lg:w-1/2 ">
+        <div className="w-full md:w-1/2 ">
           <div className="border border-green-700 space-y-2">
             <h2 className="text-3xl font-bold">{service?.name}</h2>
             {/* TODO:REVIEW dynamically  */}
@@ -150,7 +150,7 @@ const ServiceDetails = ({ item: service }: IProps) => {
       {/* service details end */}
 
       <div className="grid gap-8 grid-cols-12 mt-12 items-start">
-        <div className="col-span-7">
+        <div className="col-span-12 md:col-span-7">
           <div className="grid grid-cols-1 gap-6 my-2 md:my-4 lg:my-8">
             {reviews?.map((review: any, index: number) => (
               <TestimonialCard key={index} review={review} />
@@ -158,7 +158,7 @@ const ServiceDetails = ({ item: service }: IProps) => {
           </div>
         </div>
 
-        <div className="col-span-5 shadow-xl min-h-screen my-2 md:my-4 lg:my-8">
+        <div className="col-span-12 md:col-span-5 shadow-xl h-full md:min-h-screen my-2 md:my-4 lg:my-8">
           <div>
             <Form submitHandler={onSubmit}>
               <div

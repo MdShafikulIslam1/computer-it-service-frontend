@@ -7,7 +7,7 @@ interface IProps {
 }
 const Overlay = ({ heading, currentPageTitle }: IProps) => {
   return (
-    <div className="relative w-full h-80">
+    <div className="relative w-full h-80 -mt-2">
       <div
         className="absolute top-0 left-0 w-full h-full"
         style={{

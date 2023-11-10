@@ -14,7 +14,7 @@ interface IInput {
   mode?: "multiple";
   options: ISelectOptions[];
   handleChange?: (el: any) => void;
-  required: boolean;
+  required?: boolean;
 }
 
 const FormSelectField = ({

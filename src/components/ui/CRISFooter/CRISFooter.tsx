@@ -17,7 +17,7 @@ const CRISFooter = () => {
           <div className="-mt-10">
             <Image src={logo} width={170} height={170} alt="logo image" />
           </div>
-          <h4 className="w-2/5 text-gray-100 -mt-10 hidden md:block">
+          <h4 className="w-2/5 -mt-10 hidden md:block">
             We work with a passion of taking challenges and creating new ones in
             advertising sector.
           </h4>
@@ -46,8 +46,8 @@ const CRISFooter = () => {
             </Space>
           </div>
         </div>
-        <div className="w-full md:w-auto space-y-2 md:space-y-4">
-          <h2>Official Info</h2>
+        <div className="w-full md:w-auto space-y-4 md:space-y-6 mt-4">
+          <h2 className="text-base md:text-2xl">Official Info</h2>
           <Space direction="vertical">
             <Space>
               <PhoneTwoTone />{" "}

@@ -10,36 +10,40 @@ interface IProps {
 }
 const ServiceCard = ({ item }: IProps) => {
   return (
-    <div className="relative p-2 m-2 overflow-hidden rounded-lg  w-72 h-96 shadow-xl hover:shadow-primary transition-all duration-500 ease-in-out">
+    <div className="relative p-1 my-4 overflow-hidden rounded-lg w-full md:w-72 h-96 shadow-xl hover:shadow-primary transition-all duration-500 ease-in-out">
       <div className="flex items-center justify-center h-44">
-       {item?.imageUrl && <Image
-          src={item?.imageUrl}
-          alt="service image"
-          width={500}
-          height={500}
-          className="object-center w-full h-full rounded-xl"
-        />}
+        {item?.imageUrl && (
+          <Image
+            src={item?.imageUrl}
+            alt="service image"
+            width={500}
+            height={500}
+            className="object-center w-full h-full rounded-xl"
+          />
+        )}
       </div>
-      <h2 className="my-1 text-xl font-medium text-center ">{item?.name}</h2>
+      <div className="px-2">
+        <h2 className="my-1 text-xl font-medium text-center ">{item?.name}</h2>
 
-      <p className="font-normal w-full">
-        {item?.description?.length > 70
-          ? `${item?.description?.substring(0, 70)}....`
-          : `${item?.description}`}
-      </p>
-      <p className="font-normal">
-        Service Fee:
-        <span className="ml-2 text-primary text-lg font-semibold">
-          ${item?.fee}
-        </span>
-      </p>
-      <p className="font-normal">
-        Estimate time:
-        <span className="ml-2 text-secondary text-lg font-normal">
-          {item?.durationInMinutes + ""}
-        </span>
-        <span className="text-md font-light"> minutes</span>
-      </p>
+        <p className="font-normal w-full">
+          {item?.description?.length > 70
+            ? `${item?.description?.substring(0, 70)}....`
+            : `${item?.description}`}
+        </p>
+        <p className="font-medium">
+          Service Fee:
+          <span className="ml-2 text-primary text-lg font-semibold">
+            ${item?.fee}
+          </span>
+        </p>
+        <p className="font-medium">
+          Estimate time:
+          <span className="ml-2 text-secondary text-lg font-normal">
+            {item?.durationInMinutes + ""}
+          </span>
+          <span className="text-md font-light"> minutes</span>
+        </p>
+      </div>
 
       <Link href={`/service/${item?.id}`}>
         <div className="text-center">
