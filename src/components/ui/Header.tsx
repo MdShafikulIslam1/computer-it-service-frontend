@@ -149,29 +149,21 @@ const Header = () => {
           <MenuOutlined />
         </Button>
         <Drawer
-          className="bg-secondary w-full"
+          className="bg-primary text-white w-full"
           title="Menu"
           placement="right"
           onClose={onClose}
           open={open}
         >
           <Menu
-            className="bg-secondary"
+            className="bg-primary text-white"
             mode="vertical"
             style={{ borderRight: 0 }}
             items={menuItems}
           ></Menu>
         </Drawer>
       </div>
-
-      {/* <Row
-        style={{
-          height: "100%",
-        }}
-        justify={"end"}
-        align={"middle"}
-        className="hidden md:block "
-      >
+      <div className="md:flex justify-center items-center hidden">
         <Dropdown menu={{ items }}>
           <Space wrap size={16}>
             <div className="flex justify-center items-center">
@@ -180,20 +172,6 @@ const Header = () => {
                 src={loginUser?.profileImage}
                 icon={<UserOutlined className="text-center" />}
               />
-            </div>
-          </Space>
-        </Dropdown>
-      </Row> */}
-      <div className="flex justify-center items-center">
-        <Dropdown menu={{ items }}>
-          <Space wrap size={16}>
-            <div className="flex justify-center items-center">
-              <Avatar
-                size={40}
-                src={loginUser?.profileImage}
-                icon={<UserOutlined className="text-center" />}
-              />
-              
             </div>
           </Space>
         </Dropdown>
