@@ -6,7 +6,7 @@ import dayjs, { Dayjs } from "dayjs";
 import { useEffect, useState } from "react";
 
 interface IFormDatePicker {
-  onChange?: (value1: Dayjs | null, value2: string) => void;
+  onChange?: (value1: Dayjs | null, value2: string| string[]) => void;
   name: string;
   size?: "large" | "small";
   label?: string;
