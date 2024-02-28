@@ -5,12 +5,10 @@ import FormTextArea from "@/components/Form/FormTextArea";
 import UMTable from "@/components/Table/UMTable";
 import { useCreateBookingMutation } from "@/redux/api/bookingApi";
 import { useGetAllCartsQuery } from "@/redux/api/cartApi";
-import { useCreateCategoryMutation } from "@/redux/api/categoryApi";
 import { useGetSingleUserQuery } from "@/redux/api/userApi";
 import { getUserInfo } from "@/service/authentication.service";
 import { Button, Col, Row, Space, Spin, message } from "antd";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
 import { SubmitHandler } from "react-hook-form";
 
 const CheckOutPage = () => {
@@ -47,24 +45,19 @@ const CheckOutPage = () => {
         </Row>
       );
     }
-    // const bookingData = {
-    //   userId: currentUserData.id,
-    //   address: values?.address,
-    //   emergencyContactNo: values?.emergencyContactNo,
-    //   additionalInfo: values?.additionalInfo,
-    //   price: totalPrice,
-    //   bookingItems: carts?.map((cart: any) => {
-    //     return {
-    //       cartId: cart?.id,
-    //       serviceId: cart?.service?.id,
-    //       quantity: cart?.quantity,
-    //     };
-    //   }),
-    // };
-    const paymentData = {
+    const bookingData = {
       userId: currentUserData.id,
-      serviceId: cart?.service?.id,
-      amount: totalPrice,
+      address: values?.address,
+      emergencyContactNo: values?.emergencyContactNo,
+      additionalInfo: values?.additionalInfo,
+      price: totalPrice,
+      bookingItems: carts?.map((cart: any) => {
+        return {
+          cartId: cart?.id,
+          serviceId: cart?.service?.id,
+          quantity: cart?.quantity,
+        };
+      }),
     };
 
     if (bookingData?.bookingItems?.length < 1) {
@@ -72,11 +65,11 @@ const CheckOutPage = () => {
     }
     message.loading("Creating ....");
     try {
-      // const res = await createBooking(bookingData).unwrap();
-      // if (res?.id) {
-      //   message.success("Your booking has been taken successfully");
-      //   // router.push("/admin/manage-category");
-      // }
+      const res = await createBooking(bookingData).unwrap();
+      if (res?.id) {
+        message.success("Your booking has been taken successfully");
+        router.push("/admin/manage-category");
+      }
     } catch (error: any) {
       message.error(error.message);
     }
