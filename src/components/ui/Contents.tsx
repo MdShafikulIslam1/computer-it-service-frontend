@@ -5,7 +5,9 @@ const { Content } = Layout;
 const Contents = ({ children }: { children: React.ReactNode }) => {
   return (
     <Content style={{ minHeight: "100vh" }}>
-     <DashboardHeader/>
+      <div className="print:hidden">
+        <DashboardHeader />
+      </div>
       {/* <UMBreadCrumb
         items={[
           {

@@ -22,6 +22,7 @@ import {
 } from "@/redux/api/bookingApi";
 import { getUserInfo } from "@/service/authentication.service";
 import { useGetSingleUserQuery } from "@/redux/api/userApi";
+import { usePaymentInitializeMutation } from "@/redux/api/paymentApi";
 
 const MyBookingPage = () => {
   const query: Record<string, unknown> = {};
@@ -60,9 +61,10 @@ const MyBookingPage = () => {
     ...query,
     userId: user?.id,
   });
-  const bookings = data?.bookings
+  const bookings = data?.bookings;
   const meta = data?.meta;
   const [deleteService] = useDeleteServiceMutation();
+  const [paymentInitialize] = usePaymentInitializeMutation();
 
   const deleteHandler = async (id: string) => {
     message.loading("Deleting ...");
@@ -91,6 +93,15 @@ const MyBookingPage = () => {
     }
   };
 
+  const handlePayment = async (data: any) => {
+    console.log("booking", data);
+    const { url } = await paymentInitialize({
+      bookingId: data?.id,
+      amount: data?.price,
+    }).unwrap();
+    window.location.href = url;
+  };
+
   const columns = [
     {
       title: "Name",
@@ -104,16 +115,16 @@ const MyBookingPage = () => {
       title: "Email",
       dataIndex: "user",
       key: "email",
-      render: function (params: any) {
-        return params && params?.email;
+      render: function (data: any) {
+        return data && data?.email;
       },
     },
     {
       title: "ContactNo",
       dataIndex: "user",
       key: "contactNo",
-      render: function (params: any) {
-        return params && params?.contactNo;
+      render: function (data: any) {
+        return data && data?.contactNo;
       },
     },
     {
@@ -121,35 +132,48 @@ const MyBookingPage = () => {
       dataIndex: "price",
       key: "price",
     },
-    {
-      title: "Status",
-      dataIndex: "status",
-      key: "status",
-    },
-    {
-      title: "Booking Cancel",
-      render: function (params: any) {
-        return (
-          <div>
-            <Button
-              style={{ fontWeight: "bold" }}
-              onClick={() => cancelBooking(params?.id)}
-              disabled={params?.status === "CANCEL"}
-            >
-              Cancel
-            </Button>
-          </div>
-        );
-      },
-    },
+
+    // {
+    //   title: "Booking Cancel",
+    //   render: function (data: any) {
+    //     return (
+    //       <div>
+    //         <Button
+    //           style={{ fontWeight: "bold" }}
+    //           onClick={() => cancelBooking(data?.id)}
+    //           disabled={data?.status === "CANCEL"}
+    //         >
+    //           Cancel
+    //         </Button>
+    //       </div>
+    //     );
+    //   },
+    // },
     {
       title: "CreatedAt",
       dataIndex: "createdAt",
       key: "createdAt",
       render: function (data: any) {
-        return data && dayjs(data).format("MMM D, YYYY hh:mm A");
+        return data && dayjs(data).format("MMM D, YYYY");
       },
       sorter: true,
+    },
+    {
+      title: "Status",
+      key: "status",
+      render: function (data: any) {
+        return (
+          <div>
+            <Button
+              className="bg-secondary text-white font-bold"
+              onClick={() => handlePayment(data)}
+              disabled={data?.status === "PAID"}
+            >
+              {data?.status === "PAY" ? "PAY" : data.status}
+            </Button>
+          </div>
+        );
+      },
     },
     {
       title: "Action",
