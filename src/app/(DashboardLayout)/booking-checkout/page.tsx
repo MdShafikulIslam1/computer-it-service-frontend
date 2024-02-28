@@ -47,30 +47,36 @@ const CheckOutPage = () => {
         </Row>
       );
     }
-    const bookingData = {
+    // const bookingData = {
+    //   userId: currentUserData.id,
+    //   address: values?.address,
+    //   emergencyContactNo: values?.emergencyContactNo,
+    //   additionalInfo: values?.additionalInfo,
+    //   price: totalPrice,
+    //   bookingItems: carts?.map((cart: any) => {
+    //     return {
+    //       cartId: cart?.id,
+    //       serviceId: cart?.service?.id,
+    //       quantity: cart?.quantity,
+    //     };
+    //   }),
+    // };
+    const paymentData = {
       userId: currentUserData.id,
-      address: values?.address,
-      emergencyContactNo: values?.emergencyContactNo,
-      additionalInfo: values?.additionalInfo,
-      price: totalPrice,
-      bookingItems: carts?.map((cart: any) => {
-        return {
-          cartId: cart?.id,
-          serviceId: cart?.service?.id,
-          quantity: cart?.quantity,
-        };
-      }),
+      serviceId: cart?.service?.id,
+      amount: totalPrice,
     };
+
     if (bookingData?.bookingItems?.length < 1) {
       return message.error("Add at least one booking item in your cart");
     }
     message.loading("Creating ....");
     try {
-      const res = await createBooking(bookingData).unwrap();
-      if (res?.id) {
-        message.success("Your booking has been taken successfully");
-        // router.push("/admin/manage-category");
-      }
+      // const res = await createBooking(bookingData).unwrap();
+      // if (res?.id) {
+      //   message.success("Your booking has been taken successfully");
+      //   // router.push("/admin/manage-category");
+      // }
     } catch (error: any) {
       message.error(error.message);
     }
@@ -229,7 +235,11 @@ const CheckOutPage = () => {
                     </div>
                   </Col>
                 </Row>
-                <Button style={{ fontWeight: "bold" }} htmlType="submit" type="primary">
+                <Button
+                  style={{ fontWeight: "bold" }}
+                  htmlType="submit"
+                  type="primary"
+                >
                   Place order
                 </Button>
               </div>
