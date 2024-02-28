@@ -39,12 +39,14 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
   }
 
   return (
-   <div className="max-w-[1500px] mx-auto bg-white">
-     <Layout hasSider>
-      <SideBar />
-      <Contents>{children}</Contents>
-    </Layout>
-   </div>
+    <div className="max-w-[1500px] mx-auto bg-white ">
+      <Layout hasSider>
+        <div className="print:hidden">
+          <SideBar />
+        </div>
+        <Contents>{children}</Contents>
+      </Layout>
+    </div>
   );
 };
 
