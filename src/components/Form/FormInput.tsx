@@ -27,23 +27,25 @@ const FormInput = ({
   prefix,
   allowClear,
   required = false,
-  disabled=false
+  disabled = false,
 }: IInput) => {
   const { control } = useFormContext();
   return (
     <>
-      {label ? label : null}
-      {required ? (
-        <span className="text-green-500"> * </span>
-      ) : (
-        <span className="text-green-500">(optional)</span>
-      )}
+      {label ? (
+        <p className="mb-1">
+          {label}
+          {required && <span className="text-green-500"> * </span>}{" "}
+        </p>
+      ) : null}
+
       <Controller
         control={control}
         name={name}
         render={({ field }) =>
           type === "password" ? (
             <Input.Password
+              required={required}
               type={type}
               size={size}
               {...field}
@@ -54,6 +56,7 @@ const FormInput = ({
             />
           ) : (
             <Input
+              required={required}
               type={type}
               size={size}
               {...field}

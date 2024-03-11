@@ -1,7 +1,7 @@
 "use client";
 import { UserOutlined } from "@ant-design/icons";
 import { SubmitHandler } from "react-hook-form";
-import { Row, Col, Button, message } from "antd";
+import { Row, Col, Button, message, Divider } from "antd";
 import Image from "next/image";
 import loginImage from "../../assests/images/login-image.png";
 import Form from "@/components/Form/Form";
@@ -56,11 +56,7 @@ const LoginPage = () => {
               />
             </div>
 
-            <div
-              style={{
-                margin: "1rem 0rem",
-              }}
-            >
+            <div className="my-2">
               <FormInput
                 name="password"
                 type="password"
@@ -69,6 +65,9 @@ const LoginPage = () => {
                 size="large"
                 required={true}
               />
+            </div>
+            <div className="mb-2 text-end font-lg">
+              <Link href="/home">forget password?</Link>
             </div>
 
             <Button
@@ -79,16 +78,9 @@ const LoginPage = () => {
             >
               Login
             </Button>
-            <div className="my-1 md:my-4 text-start font-lg">
-              <Link href="/home">forget password?</Link>
-            </div>
-            <hr />
-            <div className="my-1 md:my-4">
-              <Link href="/sign-up">
-                <Button style={{ fontWeight: "bold" }} block>
-                  Create An Account
-                </Button>
-              </Link>
+            <div className="flex justify-between  mt-2 text-xl">
+              <p>Are you new here ? </p>
+              <Link href="/sign-up">Create an account</Link>
             </div>
           </Form>
         </div>
