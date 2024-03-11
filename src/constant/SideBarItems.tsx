@@ -22,21 +22,15 @@ const SideBarItems = (role: string) => {
       // ),
     ]),
   ];
-  // const commonAdminSidebarItems: MenuItem[] = [
-  //   getItem(
-  //     <Link href={`/${role}/manage-student`}>Manage Students</Link>,
-  //     `/${role}/manage-student`,
-  //     <TableOutlined />
-  //   ),
-  //   getItem(
-  //     <Link href={`/${role}/manage-faculty`}>Manage Faculty</Link>,
-  //     `/${role}/manage-faculty`,
-  //     <TableOutlined />
-  //   ),
-  // ];
+
   const adminSidebarItems: MenuItem[] = [
     ...defaultSidebarItems,
 
+    getItem(
+      <Link href={`/${role}/overview`}>OverView</Link>,
+      `/${role}/overview`,
+      <AppstoreOutlined />
+    ),
     getItem(
       <Link href={`/${role}/manage-service`}>Manage Services</Link>,
       `/${role}/manage-service`,

@@ -52,7 +52,7 @@ const AllServicePage = () => {
         </Form>
       </div>
       {<Loading isLoading={isLoading} />}
-      <div className="grid grid-cols-1 gap-8 md:grid-cols-3 lg:grid-cols-4">
+      <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
         {services?.length > 0 ? (
           services.map((item: any, index: number) => (
             <ServiceCard key={index} item={item} />

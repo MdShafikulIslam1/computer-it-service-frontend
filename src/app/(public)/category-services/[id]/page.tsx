@@ -14,8 +14,7 @@ const CategoryBasedServices = ({ params }: any) => {
   return (
     <div>
      <Overlay heading="Category Based Services" currentPageTitle="category based products"/>
-
-      <div className="grid grid-cols-1 gap-6 md:grid-cols-3 lg:grid-cols-4">
+      <div className="grid grid-cols-1 gap-6 md:grid-cols-3 lg:grid-cols-4 justify-center items-center">
         {services?.map((item: any, index: number) => (
           <ServiceCard key={index} item={item} />
         ))}

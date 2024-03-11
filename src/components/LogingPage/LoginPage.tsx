@@ -27,6 +27,7 @@ const LoginPage = () => {
       }
       storeUserInfo({ accessToken: res?.accessToken });
     } catch (error: any) {
+      message.error("Email or password is incorrect");
       console.error(error.message);
     }
   };

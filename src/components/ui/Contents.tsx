@@ -8,18 +8,6 @@ const Contents = ({ children }: { children: React.ReactNode }) => {
       <div className="print:hidden">
         <DashboardHeader />
       </div>
-      {/* <UMBreadCrumb
-        items={[
-          {
-            label: `${base}`,
-            link: `/${base}`,
-          },
-          {
-            label: "student",
-            link: `/${base}/student`,
-          },
-        ]}
-      /> */}
       <div style={{ margin: "10px" }}>{children}</div>
     </Content>
   );

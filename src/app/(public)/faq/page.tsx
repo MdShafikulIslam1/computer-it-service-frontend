@@ -15,3 +15,6 @@ const FAQPages = () => {
 };
 
 export default FAQPages;
+
+
+

@@ -1,6 +1,5 @@
 import { IMeta } from "@/types/globalType";
 import type { BaseQueryFn } from "@reduxjs/toolkit/query";
-
 import type { AxiosRequestConfig, AxiosError } from "axios";
 import { instance } from "./axiosInstance";
 

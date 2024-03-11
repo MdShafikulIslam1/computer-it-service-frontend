@@ -16,14 +16,13 @@ const PrimaryButton = ({
   isBlock = false,
   size = "large",
   title,
-  icon = <RightCircleFilled />,
+  icon ,
   href,
   className,
 }: IButtonProps) => {
   return (
     <Button
       href={href}
-      style={{ fontWeight: "bold" }}
       type={type}
       block={isBlock}
       size={size}

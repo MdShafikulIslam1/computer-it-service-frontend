@@ -111,11 +111,11 @@ const ServiceDetails = ({ item: service }: IProps) => {
             <p>Category:{service?.category?.title}</p>
             {service?.warranty && (
               <p className="font-bold">
-                warranty: <span>{service?.warranty}</span>{" "}
+                warranty: <span className="font-medium">{service?.warranty} months</span>{" "}
               </p>
             )}
             <p className="font-bold">
-              Repair Time : <span>{service?.durationInMinutes} Minutes</span>{" "}
+              Repair Time : <span className="font-medium">{service?.durationInMinutes} Minutes</span>{" "}
             </p>
             <p className="font-medium w-4/5 mb-8">{service?.description}</p>
             <div className="flex mt-16 gap-4 items-center">

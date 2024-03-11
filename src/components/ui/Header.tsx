@@ -79,29 +79,17 @@ const Header = () => {
       </Link>,
       "contact-us"
     ),
-    getItem(
-      <Link href="/blog" onClick={() => setOpen(false)}>
-        Blog
-      </Link>,
-      "blog"
-    ),
+    // getItem(
+    //   <Link href="/blog" onClick={() => setOpen(false)}>
+    //     Blog
+    //   </Link>,
+    //   "blog"
+    // ),
     getItem(
       <Link href="/faq" onClick={() => setOpen(false)}>
         FAQ
       </Link>,
       "faq"
-    ),
-    getItem(
-      <Link href="/testimonials" onClick={() => setOpen(false)}>
-        Testimonial
-      </Link>,
-      "testimonial"
-    ),
-    getItem(
-      <Link href="/sign-up" onClick={() => setOpen(false)}>
-        Register
-      </Link>,
-      "sign-up"
     ),
     getItem(
       <Link href="/cart" onClick={() => setOpen(false)}>
@@ -137,12 +125,14 @@ const Header = () => {
           alt="logo image"
         />
       </div>
-      <div className="w-4/5 mx-auto">
-        <Menu
-          className="font-semibold font-2xl bg-primary text-white w-full hidden md:block rounded active:text-secondary"
-          mode="horizontal"
-          items={menuItems}
-        />
+      <div className="flex flex-col items-center justify-center w-auto">
+        <div>
+          <Menu
+            className="font-semibold font-2xl bg-primary text-white w-full hidden md:block rounded active:text-secondary"
+            mode="horizontal"
+            items={menuItems}
+          />
+        </div>
       </div>
       <div>
         <Button type="primary" className=" md:hidden" onClick={showDrawer}>
@@ -166,10 +156,10 @@ const Header = () => {
       <div className="md:flex justify-center items-center hidden">
         <Dropdown menu={{ items }}>
           <Space wrap size={16}>
-            <div className="flex justify-center items-center">
+            <div className="flex justify-center items-center ring-2 ring-secondary rounded-full">
               <Avatar
-                size={40}
-                src={loginUser?.profileImage}
+                size={45}
+                src={loginUser?.profileImage || "/default_avatar.png"}
                 icon={<UserOutlined className="text-center" />}
               />
             </div>

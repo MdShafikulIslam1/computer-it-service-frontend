@@ -43,17 +43,15 @@ const Header = () => {
         justify={"end"}
         align={"middle"}
       >
-  
-          <span className="text-primary mr-2">{loginUser?.name}</span>
-          {/* <span className="text-secondary mr-2">{loginUser?.email}</span> */}
-       
+        <span className="text-primary mr-2">{loginUser?.name}</span>
+        {/* <span className="text-secondary mr-2">{loginUser?.email}</span> */}
 
         <Dropdown menu={{ items }}>
           <Space wrap size={16}>
-            <div className="flex justify-center items-center">
+            <div className="flex justify-center items-center bg-primary rounded-full overflow-hidden ring-2 ring-offset-secondary">
               <Avatar
-                size={35}
-                src={loginUser?.profileImage}
+                size={40}
+                src={loginUser?.profileImage || "/default_avatar.png"}
                 icon={<UserOutlined className="text-center" />}
               />
             </div>

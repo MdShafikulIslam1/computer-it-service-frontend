@@ -165,7 +165,13 @@ const MyBookingPage = () => {
         return (
           <div>
             <Button
-              className="bg-secondary text-white font-bold"
+              className={`${
+                data?.status === "PAY"
+                  ? "bg-secondary"
+                  : data.status === "PAID"
+                  ? "bg-primary"
+                  : "bg-white text-black"
+              } text-white font-bold`}
               onClick={() => handlePayment(data)}
               disabled={data?.status === "PAID"}
             >

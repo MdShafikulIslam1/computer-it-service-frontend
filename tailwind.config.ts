@@ -7,13 +7,13 @@ const config: Config = {
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
-    colors: {
-      primary: "#60a5fa",
-      secondary: "#fb923c",
-      white: "#ffffff",
-      black:"#000000"
-    },
     extend: {
+      colors: {
+        primary: "#60a5fa",
+        secondary: "#fb923c",
+        white: "#ffffff",
+        black: "#000000",
+      },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":
@@ -21,9 +21,9 @@ const config: Config = {
       },
     },
   },
-  corePlugins: {
-    preflight: false,
-  },
+  // corePlugins: {
+  //   preflight: false,
+  // },
   important: true,
   plugins: [],
 };

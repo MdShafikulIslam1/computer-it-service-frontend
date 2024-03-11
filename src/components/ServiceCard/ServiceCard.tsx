@@ -10,7 +10,7 @@ interface IProps {
 }
 const ServiceCard = ({ item }: IProps) => {
   return (
-    <div className="relative p-1 my-4 overflow-hidden rounded-lg w-full md:w-72 h-96 shadow-xl hover:shadow-primary transition-all duration-500 ease-in-out">
+    <div className="relative p-1 my-4 overflow-hidden rounded-lg w-full md:w-96 h-96 shadow-xl hover:shadow transition-all duration-500 ease-in-out">
       <div className="flex items-center justify-center h-44">
         {item?.imageUrl && (
           <Image
@@ -23,18 +23,11 @@ const ServiceCard = ({ item }: IProps) => {
         )}
       </div>
       <div className="px-2">
-        <h2 className="my-1 text-xl font-medium text-center ">{item?.name}</h2>
-
+        <h2 className="my-2 text-xl font-medium text-center ">{item?.name}</h2>
         <p className="font-normal w-full">
           {item?.description?.length > 70
             ? `${item?.description?.substring(0, 70)}....`
             : `${item?.description}`}
-        </p>
-        <p className="font-medium">
-          Service Fee:
-          <span className="ml-2 text-primary text-lg font-semibold">
-            ${item?.fee}
-          </span>
         </p>
         <p className="font-medium">
           Estimate time:
@@ -43,6 +36,21 @@ const ServiceCard = ({ item }: IProps) => {
           </span>
           <span className="text-md font-light"> minutes</span>
         </p>
+        <div className="flex justify-between items-center ">
+          <p className="font-medium">
+            Service Fee:
+            <span className="ml-2 text-primary text-lg font-semibold">
+              ${item?.fee}
+            </span>
+          </p>
+          <p className="font-medium">
+            Warranty:
+            <span className="ml-2 text-primary text-md font-semibold">
+              {item?.warranty}
+            </span>
+            <span className="text-md font-light"> months</span>
+          </p>
+        </div>
       </div>
 
       <Link href={`/service/${item?.id}`}>
