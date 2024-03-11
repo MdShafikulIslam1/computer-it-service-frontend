@@ -108,10 +108,10 @@ const HeroSection = () => {
           We offer repair many different type of devices including computer
           ,laptop and IT service
         </p>
-        <div className="flex gap-2">
+        <div className="flex gap-2 md:gap-4">
           <Link
             href="/service"
-            className="bg-yellow-400 text-gray-900 hover:bg-yellow-300 py-2 px-6 rounded-full text-lg font-semibold transition duration-300 ease-in-out transform hover:scale-105 hover:shadow-lg"
+            className="bg-primary text-gray-900 hover:bg-yellow-300 py-2 px-6 rounded-full text-lg font-semibold transition duration-300 ease-in-out transform hover:scale-105 hover:shadow-lg"
           >
             Services
           </Link>
