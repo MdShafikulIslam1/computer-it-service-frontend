@@ -1,6 +1,9 @@
 /* eslint-disable react/no-unescaped-entities */
 "use client";
-import { useGetSingleUserQuery } from "@/redux/api/userApi";
+import {
+  useGetSingleUserQuery,
+  useUpdateUserMutation,
+} from "@/redux/api/userApi";
 import { getUserInfo } from "@/service/authentication.service";
 import {
   EditFilled,
@@ -10,14 +13,70 @@ import {
   CalendarFilled,
   FlagFilled,
   CheckCircleFilled,
+  CameraFilled,
 } from "@ant-design/icons";
 import Image from "next/image";
-import { Avatar, Button, Card, Col, Row, Space, Typography } from "antd";
+import {
+  Avatar,
+  Button,
+  Card,
+  Col,
+  Row,
+  Space,
+  Typography,
+  message,
+} from "antd";
 import dayjs from "dayjs";
+import Loading from "@/components/LoadingComponent/LoadingComponent";
+import { useRef, useState } from "react";
+import { useRouter } from "next/navigation";
+import axios from "axios";
+
 const ProfilePage = () => {
   const user = getUserInfo() as any;
-  const { role, email } = user;
-  const { data } = useGetSingleUserQuery(email);
+  const inputRef = useRef<HTMLInputElement>(null);
+  const { email } = user;
+  const { data, isLoading } = useGetSingleUserQuery(email);
+  const [updateUser] = useUpdateUserMutation();
+  if (isLoading) {
+    return <Loading isLoading={isLoading} />;
+  }
+
+  const handleChange = async (e: any) => {
+    e.preventDefault();
+    const img = e.target.files[0];
+    const formData = new FormData();
+    formData.append("image", img);
+
+    try {
+      const config = {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      };
+
+      const imgBbResponse = await axios.post(
+        "https://api.imgbb.com/1/upload?key=d8d155d2a61be26503f341a20114e2ad",
+        formData,
+        config
+      );
+
+      if (imgBbResponse?.data.status === 200) {
+        const updateData = {
+          profileImage: imgBbResponse?.data?.data?.url,
+        };
+        const res: any = await updateUser({
+          id: data?.id,
+          data: updateData,
+        }).unwrap();
+        if (res?.id) {
+          message.success("Profile photo updated successfully");
+        }
+      }
+    } catch (error) {
+      console.error("Error uploading image:", error);
+    }
+  };
 
   return (
     <div className="flex gap-2">
@@ -31,19 +90,42 @@ const ProfilePage = () => {
               fill
             />
           </div>
-          <div className="mx-auto w-32 h-32 relative -mt-16 border-4 border-white rounded-full overflow-hidden">
+
+          <div className="mx-auto w-32 h-32 relative -mt-16 border-4 border-white rounded-full overflow-hidden z-0">
             <Image
-              className="object-cover object-center h-32"
-              src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&ixid=eyJhcHBfaWQiOjE0NTg5fQ"
-              alt="Woman looking front"
+              className="object-cover object-center h-32 bg-secondary -z-0"
+              src={data?.profileImage || "/default_avatar.png"}
+              alt="user profile"
               fill
             />
+            <input
+              type="file"
+              name=""
+              id=""
+              hidden
+              ref={inputRef}
+              onChange={(e) => handleChange(e)}
+            />
+            <div className="absolute right-4 bottom-2 rounded-full bg-white w-10 h-10">
+              <Button
+                onClick={() => inputRef.current?.click()}
+                className="w-full object-cover"
+                icon={<CameraFilled />}
+              ></Button>
+            </div>
           </div>
+
           <div className="text-center mt-2">
-            <h2 className="font-semibold">Sarah Smith</h2>
-            <p className="text-gray-500">Freelance Web Designer</p>
+            <h2 className="font-semibold">{data?.name}</h2>
+            <p className="text-gray-500">{data?.email}</p>
+            <p className="mt-4">
+              Member since:{" "}
+              <span className="text-secondary text-md">
+                {dayjs(`${data?.createdAt}`).format("MMM D, YYYY")}
+              </span>
+            </p>
           </div>
-          <ul className="py-4 mt-2 text-gray-700 flex items-center justify-around">
+          {/* <ul className="py-4 mt-2 text-gray-700 flex items-center justify-around">
             <li className="flex flex-col items-center justify-around">
               <svg
                 className="w-4 fill-current text-blue-900"
@@ -74,70 +156,15 @@ const ProfilePage = () => {
               </svg>
               <div>15</div>
             </li>
-          </ul>
-          <div className="p-4 border-t mx-8 mt-2">
-            <Button className="w-1/2 block mx-auto rounded-full bg-gray-900 hover:shadow-lg font-semibold px-6 py-2">
+          </ul> */}
+          <div className="p-4 border-t mx-8 mt-2 ">
+            {/* <Button className="w-1/2 block mx-auto rounded-full bg-primary hover:shadow-lg font-semibold px-6 py-2">
               Follow
-            </Button>
+            </Button> */}
           </div>
         </div>
       </div>
       <div className="w-full">
-        {/* <div className="">
-          <Card
-            title="User Profile"
-            extra={
-              <Button
-                href={`/profile/update/${email}`}
-                type="primary"
-                icon={<EditFilled />}
-              >
-                Edit profile
-              </Button>
-            }
-          >
-            <Space size="large" direction="vertical">
-              <Typography.Text strong className="md:text-xl">
-                <UserOutlined className="text-primary me-2" /> Name :{" "}
-                <span className="font-normal ml-2">{data?.name}</span>
-              </Typography.Text>
-              <Typography.Text strong className="md:text-xl">
-                <MailFilled className="text-primary me-2" /> Email :{" "}
-                <span className="font-normal ml-2">{data?.email}</span>
-              </Typography.Text>
-              <Typography.Text strong className="md:text-xl">
-                <PhoneFilled className="text-primary me-2" /> Contact No :{" "}
-                <span className="font-normal ml-2">{data?.contactNo}</span>
-              </Typography.Text>
-              <Typography.Text strong className="md:text-xl">
-                <PhoneFilled className="text-primary me-2" /> Emergency Contact
-                No :{" "}
-                <span className="font-normal ml-2">
-                  {data?.emergencyContactNo}
-                </span>
-              </Typography.Text>
-              <Typography.Text strong className="md:text-xl">
-                <CalendarFilled className="text-primary me-2" /> Date Of Birth :{" "}
-                <span className="font-normal ml-2">{data?.dateOfBirth}</span>
-              </Typography.Text>
-              <Typography.Text strong className="md:text-xl">
-                {" "}
-                <FlagFilled className="text-primary me-2 " /> Nationality :{" "}
-                <span className="font-normal ml-2">{data?.nationality}</span>
-              </Typography.Text>
-              <Typography.Text strong className="md:text-xl">
-                <CheckCircleFilled className="text-primary me-2 " /> Status :{" "}
-                <span className="font-normal ml-2">
-                  {data?.availability ? (
-                    <span className="text-secondary font-medium">Active</span>
-                  ) : (
-                    <span className="text-secondary font-medium">Blocked</span>
-                  )}
-                </span>
-              </Typography.Text>
-            </Space>
-          </Card>
-        </div> */}
         <div className="bg-white overflow-hidden rounded-lg border">
           <div className="px-4 py-5 sm:px-6 flex justify-between">
             <div>
@@ -158,12 +185,6 @@ const ProfilePage = () => {
               </Button>
             </div>
           </div>
-          {/* <Card
-            title="User Profile"
-            extra={
-             
-            }
-          /> */}
           <div className="border-t border-primary px-4 py-5 sm:p-0">
             <dl className="sm:divide-y divide-gray-200">
               <div className="py-3 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
@@ -177,23 +198,55 @@ const ProfilePage = () => {
                   Email address
                 </dt>
                 <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                  johndoe@example.com
+                  {data?.email}
                 </dd>
               </div>
               <div className="py-3 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                 <dt className="text-sm font-medium text-gray-500">
-                  Phone number
+                  Primary Phone number
                 </dt>
                 <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                  (123) 456-7890
+                  {data?.contactNo || "null"}
+                </dd>
+              </div>
+              <div className="py-3 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                <dt className="text-sm font-medium text-gray-500">
+                  Emergency Phone number
+                </dt>
+                <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                  {data?.emergencyContactNo || "null"}
+                </dd>
+              </div>
+              <div className="py-3 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                <dt className="text-sm font-medium text-gray-500">
+                  Date of Birth
+                </dt>
+                <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                  {data?.dateOfBirth || "null"}
+                </dd>
+              </div>
+              <div className="py-3 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                <dt className="text-sm font-medium text-gray-500">
+                  Nationality
+                </dt>
+                <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                  {data?.nationality || "Bangladeshi"}
+                </dd>
+              </div>
+              <div className="py-3 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                <dt className="text-sm font-medium text-gray-500">Status</dt>
+                <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                  {data?.availability ? (
+                    <span className="text-secondary font-medium">Active</span>
+                  ) : (
+                    <span className="text-red-500 font-medium">Blocked</span>
+                  )}
                 </dd>
               </div>
               <div className="py-3 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                 <dt className="text-sm font-medium text-gray-500">Address</dt>
                 <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                  123 Main St
-                  <br />
-                  Anytown, USA 12345
+                  {data?.address || "null"}
                 </dd>
               </div>
             </dl>

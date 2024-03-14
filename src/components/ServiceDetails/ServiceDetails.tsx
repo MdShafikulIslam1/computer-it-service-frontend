@@ -100,22 +100,26 @@ const ServiceDetails = ({ item: service }: IProps) => {
           )}
         </div>
         <div className="w-full md:w-1/2 ">
-          <div className="border border-green-700 space-y-2">
+          <div className="space-y-2">
             <h2 className="text-3xl font-bold">{service?.name}</h2>
             {/* TODO:REVIEW dynamically  */}
             <p>5 star (1 user review)</p>
-            <p className="font-bold text-[#0F67F6] text-xl">
+            <p className="font-bold text-[#247891] text-xl">
               $ {service?.fee}{" "}
             </p>
             {/* @ts-ignore */}
             <p>Category:{service?.category?.title}</p>
             {service?.warranty && (
               <p className="font-bold">
-                warranty: <span className="font-medium">{service?.warranty} months</span>{" "}
+                warranty:{" "}
+                <span className="font-medium">{service?.warranty} months</span>{" "}
               </p>
             )}
             <p className="font-bold">
-              Repair Time : <span className="font-medium">{service?.durationInMinutes} Minutes</span>{" "}
+              Repair Time :{" "}
+              <span className="font-medium">
+                {service?.durationInMinutes} Minutes
+              </span>{" "}
             </p>
             <p className="font-medium w-4/5 mb-8">{service?.description}</p>
             <div className="flex mt-16 gap-4 items-center">
@@ -123,7 +127,6 @@ const ServiceDetails = ({ item: service }: IProps) => {
                 <Button
                   style={{ fontWeight: "bold" }}
                   onClick={() => dispatch(decrement())}
-          
                 >
                   -
                 </Button>
@@ -136,12 +139,12 @@ const ServiceDetails = ({ item: service }: IProps) => {
                 </Button>
               </div>
               <Button
-                style={{ fontWeight: "bold" }}
                 onClick={() => handleAddToCart()}
                 type="primary"
-                className="text-white"
+                className="text-white bg-primary"
+                icon={<ShoppingCartOutlined className="text-white" />}
               >
-                <ShoppingCartOutlined className="text-white" /> Add to cart
+                Add to cart
               </Button>
             </div>
           </div>

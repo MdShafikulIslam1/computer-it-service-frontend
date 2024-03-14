@@ -65,8 +65,8 @@ const CRISFooter = () => {
         </div>
       </div>
       <p className="text-white text-center w-auto">
-        © 2023 <span className="text-secondary font-normal">C R I S</span> –
-        CaseThemes. All rights reserved.
+        © 2024 <span className="text-secondary font-normal">C R I S</span> –
+        Shofikul Islam. All rights reserved.
       </p>
     </>
   );

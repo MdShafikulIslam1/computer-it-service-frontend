@@ -115,7 +115,7 @@ const Header = () => {
   };
 
   return (
-    <AntHeader className="bg-primary h-24 flex justify-between items-center rounded rounded-t-none">
+    <AntHeader className="bg-secondary h-24 flex justify-between items-center rounded rounded-t-none">
       <div className="text-white hidden md:block">
         <Image
           className="mt-4"
@@ -128,7 +128,7 @@ const Header = () => {
       <div className="flex flex-col items-center justify-center w-auto">
         <div>
           <Menu
-            className="font-semibold font-2xl bg-primary text-white w-full hidden md:block rounded active:text-secondary"
+            className="font-semibold font-2xl bg-secondary text-white w-full hidden md:block rounded active:text-secondary"
             mode="horizontal"
             items={menuItems}
           />
@@ -139,14 +139,14 @@ const Header = () => {
           <MenuOutlined />
         </Button>
         <Drawer
-          className="bg-primary text-white w-full"
+          className="bg-secondary text-white w-full"
           title="Menu"
           placement="right"
           onClose={onClose}
           open={open}
         >
           <Menu
-            className="bg-primary text-white"
+            className="bg-secondary text-white"
             mode="vertical"
             style={{ borderRight: 0 }}
             items={menuItems}

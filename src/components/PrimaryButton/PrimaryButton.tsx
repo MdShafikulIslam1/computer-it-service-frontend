@@ -10,15 +10,17 @@ type IButtonProps = {
   size?: "large" | "middle" | "small";
   href?: string;
   className?: string;
+  alignIcon?: "before" | "after";
 };
 const PrimaryButton = ({
   type = "primary",
   isBlock = false,
   size = "large",
   title,
-  icon ,
+  icon,
   href,
   className,
+  alignIcon,
 }: IButtonProps) => {
   return (
     <Button
@@ -26,9 +28,10 @@ const PrimaryButton = ({
       type={type}
       block={isBlock}
       size={size}
-      className={`${className}`}
+      className={`${className} bg-primary`}
+      icon={alignIcon == "before" && icon}
     >
-      {title} {icon}
+      {title} {alignIcon === "after" && icon}
     </Button>
   );
 };

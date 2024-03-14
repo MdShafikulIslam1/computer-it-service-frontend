@@ -16,6 +16,7 @@ import TextWithUnderLine from "@/components/Divider/Divider";
 import { useGetAllReviewsQuery } from "@/redux/api/reviewApi";
 import Loading from "@/components/LoadingComponent/LoadingComponent";
 import TestimonialCard from "@/components/TestimonialCard/TestimonialCard";
+import Banner from "@/components/HomePage/Banner/Banner";
 
 const HomePage = () => {
   const { data, isLoading } = useGetAllCategoriesQuery({ limit: 100, page: 1 });
@@ -29,11 +30,12 @@ const HomePage = () => {
   const reviews = reviewAndRatingData?.reviews;
 
   return (
-    <div className="bg-white">
-      <HeroSection />
-      <AboutUs />
+    <div className="bg-gray-50">
+      {/* <HeroSection /> */}
+      <Banner />
+      {/* <ShortFeature /> */}
       {/* Service page */}
-      <div>
+      <div className="mt-10">
         <div className="flex flex-col items-center justify-center">
           <h4 className="text-primary uppercase tracking-widest font-normal mb-4 text-2xl">
             Latest Services
@@ -45,7 +47,7 @@ const HomePage = () => {
           </h2>
           <h2 className="font-semibold text-3xl">Solutions Services</h2>
         </div>
-        <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-6 md:gap-8 my-4 md:my-12">
+        <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-6 md:gap-8 my-6">
           {categories?.map((category: any, index: number) => (
             <CategoryCard key={index} category={category} />
           ))}
@@ -59,6 +61,8 @@ const HomePage = () => {
           />
         </div>
       </div>
+
+      <AboutUs />
 
       <FAQPage />
       <div className="group my-12 hidden md:block rounded py-12 px-4 bg-black text-white">
@@ -99,7 +103,7 @@ const HomePage = () => {
           </Swiper>
         </div>
       </div>
-      <FloatButton.BackTop  style={{ color: "blue" }} />
+      <FloatButton.BackTop style={{ color: "blue" }} />
     </div>
   );
 };

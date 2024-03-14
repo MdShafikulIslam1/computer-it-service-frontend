@@ -6,10 +6,7 @@ import signupImage from "../../assests/images/signup-image.png";
 import Form from "@/components/Form/Form";
 import FormInput from "@/components/Form/FormInput";
 import { useRouter } from "next/navigation";
-import {
-  useLoginUserMutation,
-  useSignupUserMutation,
-} from "@/redux/api/authApi";
+import { useSignupUserMutation } from "@/redux/api/authApi";
 import Link from "next/link";
 
 interface IFormValues {
@@ -82,7 +79,7 @@ const SignUpPage = () => {
             </div>
 
             <Button
-              style={{ fontWeight: "bold" }}
+              className="bg-primary text-white"
               block
               type="primary"
               htmlType="submit"

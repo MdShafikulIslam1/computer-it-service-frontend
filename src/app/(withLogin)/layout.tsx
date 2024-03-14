@@ -1,5 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 "use client";
+import PublicHeader from "@/components/PublicHeader/PublicHeader";
 import Header from "@/components/ui/Header";
 import { isLogIn } from "@/service/authentication.service";
 import { Layout, Row, Space, Spin } from "antd";
@@ -36,12 +37,15 @@ const WithLoginLayout = ({ children }: { children: React.ReactNode }) => {
     );
   }
   return (
-    <div  className="w-[1400px] mx-auto bg-white">
+    <div className="w-[1400px] mx-auto bg-white">
       <Layout>
-        <Header  />
-       <div style={{background:"white"}}>
-       {children}
-       </div>
+        <div className="block md:hidden">
+          <Header />
+        </div>
+        <div className="hidden md:block">
+          <PublicHeader />
+        </div>
+        <div style={{ background: "white" }}>{children}</div>
       </Layout>
     </div>
   );

@@ -9,7 +9,7 @@ const ServiceDetailsPage = ({ params }: any) => {
   const { data, isLoading } = useGetSingleServiceQuery(id);
   <Loading isLoading={isLoading} />;
   return (
-    <div style={{ background: "white" }}>
+    <div>
       <ServiceDetails item={data} />
     </div>
   );

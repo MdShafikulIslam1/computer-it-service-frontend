@@ -71,7 +71,7 @@ const LoginPage = () => {
             </div>
 
             <Button
-              style={{ fontWeight: "bold" }}
+              className="bg-primary text-white"
               block
               type="primary"
               htmlType="submit"
