@@ -190,6 +190,7 @@ const MyBookingPage = () => {
               <Link href={`/admin/manage-booking/view/${data?.id}`}>
                 <Button
                   style={{ fontWeight: "bold", margin: "0px 5px" }}
+                  className="bg-primary"
                   onClick={() => console.log(data)}
                   type="primary"
                 >

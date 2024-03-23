@@ -26,7 +26,6 @@ const LoadingButton = ({
 }: IProps) => {
   return (
     <Button
-      style={{ fontWeight: "bold" }}
       htmlType="submit"
       type={type}
       loading={isLoading}

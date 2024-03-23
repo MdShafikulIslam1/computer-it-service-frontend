@@ -17,7 +17,7 @@
 }
 
 #banner-part .img3 {
-  background-image: url(../../../assests/images/slider1.jpg);
+  background-image: url(../../../assests/images/3.jpg);
   background-size: cover;
   background-repeat: no-repeat;
   padding: 400px 0;
@@ -85,5 +85,5 @@
   height: 100%;
   top: 0;
   left: 0;
-  background-color: rgba(0, 0, 0, 0.4);
+  background-color: rgba(0, 0, 0, 0.5);
 }

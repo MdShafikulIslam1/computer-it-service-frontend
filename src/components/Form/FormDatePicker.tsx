@@ -1,60 +1,45 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-import type { DatePickerProps } from "antd";
-import { DatePicker, Input } from "antd";
+import { DatePicker, DatePickerProps, Input } from "antd";
 import { Controller, useFormContext } from "react-hook-form";
 import dayjs, { Dayjs } from "dayjs";
-import { useEffect, useState } from "react";
 
-interface IFormDatePicker {
-  onChange?: (value1: Dayjs | null, value2: string| string[]) => void;
+type UMDatePikerProps = {
+  onChange?: (valOne: Dayjs | null, valTwo: string) => void;
   name: string;
-  size?: "large" | "small";
   label?: string;
-  required?: boolean;
-}
+  value?: Dayjs;
+  size?: "large" | "small";
+};
 
 const FormDatePicker = ({
   name,
-  size = "large",
   label,
   onChange,
-  required = false,
-}: IFormDatePicker) => {
-  // const [initDate, setInitDate] = useState(Date.now());
-  // console.log(new Date(Date.now()));
-
-  // console.log(Date.now());
+  size = "large",
+}: UMDatePikerProps) => {
   const { control, setValue } = useFormContext();
-  // useEffect(() => {
-  //   setValue(name, initDate);
-  // }, []);
+
   const handleOnChange: DatePickerProps["onChange"] = (date, dateString) => {
-    onChange ? onChange(date, dateString) : "";
-    setValue(name, dateString);
+    onChange ? onChange(date, dateString.toString()) : null;
+    setValue(name, date);
   };
+
   return (
-    <>
+    <div>
       {label ? label : null}
-      {required ? (
-        <span className="text-green-500"> * </span>
-      ) : (
-        <span className="text-green-500">(optional)</span>
-      )}
+      <br />
       <Controller
-        control={control}
         name={name}
+        control={control}
         render={({ field }) => (
           <DatePicker
-            defaultValue={dayjs(field.value) || Date.now()}
+            defaultValue={dayjs(Date.now())}
             size={size}
             onChange={handleOnChange}
-            style={{
-              width: "100%",
-            }}
+            style={{ width: "100%" }}
           />
         )}
       />
-    </>
+    </div>
   );
 };
 
