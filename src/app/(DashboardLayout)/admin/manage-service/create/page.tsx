@@ -26,6 +26,7 @@ const CreateServicePage = () => {
   });
 
   const [createService] = useCreateServiceMutation();
+
   const onSubmit: SubmitHandler<IService> = async (values: any) => {
     if (!photoUrl) {
       return message.error("Please provide a service image");
@@ -70,7 +71,7 @@ const CreateServicePage = () => {
         router.push("/admin/manage-service");
       }
     } catch (error: any) {
-      message.error(error.message);
+      message.error("service creation failed", error.message);
     }
   };
   return (
