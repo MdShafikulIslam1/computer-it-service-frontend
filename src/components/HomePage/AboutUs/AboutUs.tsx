@@ -1,11 +1,11 @@
-import Image from "next/image";
-import aboutUs from "../../../assests/images/about.jpg";
-import { Space } from "antd";
-import { BsCloudArrowDownFill } from "react-icons/bs";
-import { GiTeamIdea } from "react-icons/gi";
 import TextWithUnderLine from "@/components/Divider/Divider";
 import PrimaryButton from "@/components/PrimaryButton/PrimaryButton";
+import { Space } from "antd";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
+import { BsCloudArrowDownFill } from "react-icons/bs";
+import { GiTeamIdea } from "react-icons/gi";
+import aboutUs from "../../../assests/images/about.jpg";
 
 const AboutUs = () => {
   const pathname = usePathname();
@@ -25,7 +25,7 @@ const AboutUs = () => {
           </p>
           <div className="flex gap-16 mt-4">
             <div>
-              <BsCloudArrowDownFill className="text-center text-secondary text-7xl" />
+              <BsCloudArrowDownFill className="text-center text-primary text-7xl" />
             </div>
             <Space direction="vertical">
               <h1 className=" text-lg  md:text-2xl">
@@ -39,7 +39,7 @@ const AboutUs = () => {
           </div>
           <div className="flex gap-16 mt-4">
             <div>
-              <GiTeamIdea className="text-center text-secondary text-7xl" />
+              <GiTeamIdea className="text-center text-primary text-7xl" />
             </div>
             <Space direction="vertical">
               <h1 className="text-lg  md:text-2xl">Expert Team Member</h1>

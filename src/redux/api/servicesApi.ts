@@ -1,13 +1,13 @@
 import { IMeta } from "@/types/globalType";
-import baseApi from "./baseApi";
 import { tagTypes } from "../tagTypes/tagTypes";
+import baseApi from "./baseApi";
 
 const SERVICE_URL = "/services";
 const serviceApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
     getAllServices: build.query({
       query: (arg: Record<string, any>) => {
-        console.log("arg",arg);
+        console.log("arg", arg);
         return {
           url: SERVICE_URL,
           method: "GET",
@@ -30,10 +30,11 @@ const serviceApi = baseApi.injectEndpoints({
       providesTags: [tagTypes.SERVICE],
     }),
     createService: build.mutation({
-      query: (data: any) => ({
+      query: (data) => ({
         url: `${SERVICE_URL}/create-service`,
         method: "POST",
         data,
+        contentType: "multipart/form-data",
       }),
       invalidatesTags: [tagTypes.SERVICE],
     }),

@@ -9,7 +9,7 @@ import { serviceStatusOptions } from "@/constant/global";
 import { useGetAllCategoriesQuery } from "@/redux/api/categoryApi";
 import { useCreateServiceMutation } from "@/redux/api/servicesApi";
 import { IService } from "@/types/globalType";
-import { Button, Col, Row, Space, message } from "antd";
+import { Button, Col, message, Row } from "antd";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { SubmitHandler } from "react-hook-form";
@@ -27,32 +27,44 @@ const CreateServicePage = () => {
 
   const [createService] = useCreateServiceMutation();
   const onSubmit: SubmitHandler<IService> = async (values: any) => {
+    if (!photoUrl) {
+      return message.error("Please provide a service image");
+    }
+
     values.fee = parseInt(values?.fee);
     values.durationInMinutes = parseInt(values?.durationInMinutes);
     values.warranty = parseInt(values?.fee);
+
+    const data = JSON.stringify(values);
     const formData = new FormData();
-    formData.append("file", photoUrl as unknown as Blob);
-    formData.append("upload_preset", "hsde6mhe");
-    const response = await fetch(
-      "https://api.cloudinary.com/v1_1/dr8smmidd/image/upload",
-      {
-        method: "POST",
-        body: formData,
-      }
-    );
+    formData.append("file", photoUrl as Blob);
+    formData.append("data", data);
 
-    if (response.ok) {
-      const data = await response.json();
-      const imageUrl = data.secure_url;
-      values.imageUrl = imageUrl;
-    } else {
-      message.error("Image upload failed.");
-    }
+    // const formData = new FormData();
+    // formData.append("file", photoUrl as Blob);
+    // formData.append("data", values);
+    // const formData = new FormData();
+    // formData.append("file", photoUrl as unknown as Blob);
+    // formData.append("upload_preset", "hsde6mhe");
+    // const response = await fetch(
+    //   "https://api.cloudinary.com/v1_1/dr8smmidd/image/upload",
+    //   {
+    //     method: "POST",
+    //     body: formData,
+    //   }
+    // );
 
-    message.loading("Creating ....");
+    // if (response.ok) {
+    //   const data = await response.json();
+    //   const imageUrl = data.secure_url;
+    //   values.imageUrl = imageUrl;
+    // } else {
+    //   message.error("Image upload failed.");
+    // }
+
+    // message.loading("Creating ....");
     try {
-      console.log(values)
-      const res = await createService(values).unwrap();
+      const res = await createService(formData).unwrap();
       if (res?.id) {
         message.success("Service Created successfully");
         router.push("/admin/manage-service");
@@ -222,7 +234,11 @@ const CreateServicePage = () => {
               </div>
             </Col>
           </Row>
-          <Button style={{ fontWeight: "bold" }} htmlType="submit" type="primary">
+          <Button
+            style={{ fontWeight: "bold" }}
+            htmlType="submit"
+            type="primary"
+          >
             Create
           </Button>
         </div>
